@@ -1,0 +1,493 @@
+
+
+
+
+
+-
+fonction membre avec const
+ne modifie pas l'instance courante
+-
+
+
+
+-
+_variable
+pour une variable privée
+-
+
+
+
+
+
+-
+un attribut ou une fonction peuvent être membres d'une classe
+
+variable d'instance
+fonction d'instance
+de base
+
+variable de classe
+fonction de classe
+avec static
+il n'y a pas de paramètre this passé de façon cachée à une fonction de classe
+-
+
+
+-
+pointeur sur attribut membre
+pointeur sur fonction membre
+-
+
+
+
+
+
+
+-
+notation préfixe
+dite notation fonctionnelle
+
++(1, 2)
+1.+(2)
+
+notation infixe
+1 + 1
+
+notation suffixe ou post fixe
+pour travailler avec une pile par exemple
+1 1 +
+-
+
+
+
+
+
+
+-
+méthode virtuelle
+
+on utilise le mot clé virtual pour que ça marche aussi avec les pointeurs
+
+ça indique qu'une méthode peut être redéfinie dans une classe dérivée
+
+depuis c++11, quand on redéfinie la méthode, on le fait avec le mot clé override pour que le compilateur vérifie qu'on écrase bien une méthode existante.
+
+pourquoi virtual est important avec un exemple :
+
+la classe animal donne la classe chien et la classe chat
+makeSound est une méthode virtuelle de animal qu'on redéfinit dans chien et chat
+
+Animal* a = new Dog();
+a->makeSound() appelle le makeSound de dog et non celui de animal
+si on avait pas mis virtual, on aurait appelé celui de animal
+-
+
+-
+polymorphisme
+
+utiliser un même nom de fonction pour appeler plusieurs fonctions différentes
+
+
+polymorphisme de fonction
+= polymorphisme statique
+= surcharge
+= overload
+= polymorphisme ad-hoc
+
+on identifie la bonne fonction lors de la compilation, selon le type des paramètres utilisés
+
+
+polymorphisme de classe
+= polymorphisme dynamique
+= redéfinition
+= overriding
+= polymorphisme par sous-typage
+
+mot clé : virtual (et override depuis c++11)
+
+on appelle la bonne méthode lors de l'exécution / du runtime, selon le type de l'instance
+
+on dit que la bonne méthode est appelée dynamiquement
+-
+
+-
+
+autre façon de faire une classe abstraite :
+mettre le constructeur en protected
+c'est pas vraiment une classe abstraite mais elle sera pas directement instanciable
+-
+
+-
+il faut toujours mettre virtual au destructeur d'une classe destinée à être dérivée pour que ça marche aussi avec les pointeurs
+
+exmple :
+
+dans animal on met :
+virtual ~Animal() {}
+
+dans le main on fait :
+Animal* a = new Dog();
+delete a;
+
+si on ne met pas virtual on appelle seulement le destructeur de animal 
+-
+
+
+
+-
+appeler le constructeur du parent
+
+Dog(const string& name) : Animal(name) {}
+-
+
+
+
+-
+héritage en diamant
+
+héritage virtuel
+
+class C : virtual class CC
+
+exemple :
+A → B 
+A → C
+B et C → D
+
+ça guarantit que les attributs de A ne seront présent qu'une seule fois dans D
+
+ça lève les ambiguïtés
+-
+
+
+
+
+
+
+
+-
+classe imbriquée
+-
+
+-
+exception
+
+try {} catch (std::exception e) {}
+mieux : catcher par référence
+
+throw std::exception();
+en théorie ça marche avec des int ou des strings mais c'est pas recommandé
+
+dans le catch on peut utiliser e.what()
+
+
+on peut faire sa propre exception avec :
+class monException : public std::exception
+
+dans la classe on peut redéfinir what :
+const char* what() const throw() {return "blabla";}
+
+le throw() à la fin de la définition de la méthode s'appelle le throw spécifieur.
+ici comme ya rien dedans ça veut dire qu'elle ne peut rien throw.
+ça se fait plus depuis C++11. maintenant on utilise noexcept si elle ne lève rien et rien sinon.
+
+catch spécifique dabord puis générique
+
+std::exception
+│
+├── std::logic_error
+│   ├── std::domain_error
+│   ├── std::invalid_argument
+│   ├── std::length_error
+│   ├── std::out_of_range
+│
+├── std::runtime_error
+│   ├── std::overflow_error
+│   ├── std::underflow_error
+│   ├── std::range_error
+│   ├── std::system_error (C++11)
+│
+├── std::bad_alloc
+├── std::bad_cast
+├── std::bad_typeid
+├── std::bad_exception
+
+-
+
+
+
+-
+plan
+
+
+C
+cast convertion de type
+réinterprétation de type
+réinterprétation du type qualifier
+
+C++
+...
+-
+
+
+-
+cast
+= conversion de type
+
+
+bonne pratique :
+cast implicite pour les promotions
+cast explicite pour les démotions (lorsqu'on perd de la précision)
+
+on peut rajouter un flag de compilation pour empecher les cast implicites
+-Wnoconvert ?
+
+
+réinterprétation
+avec les adresses
+cast purement identitaire
+la valeur en soit ne change pas
+
+le type void* est un type plus général que tous les types d'adresses
+par exemple, on peut passer implicitement de int* à void* 
+
+dans tous les autres cas, on ne peut pas faire de réinterprétation implicite. donc il faut passer explicitement de void* à int* ou de int* à double* par exemple.
+
+
+réinterprétation de qualificateur de type
+exemples de qualificateur de type : const, volatile
+
+on peut passer implicitement de int* à const int* par exemple
+
+on ne peut pas faire de réinterprétation implicite supprimant le const. donc il faut passer explicitement de const char* à char* par exemple
+-
+
+
+-
+upcast et downcast
+
+réinterpréter une classe :
+
+classe parente <-> classe fille
+-
+
+-
+downcast
+
+passer d'un pointeur sur classe parente
+à un pointeur sur une classe dérivée
+
+le compilateur veut pas le faire de façon implicitement
+-
+
+
+-
+style C++
+
+static_cast
+pour les valeurs simples et les upcast / downcast
+
+pour les upcast / downcast ça check que le cast a lieu entre classes qui ont un lien d'héritage
+-
+
+-
+dynamic cast
+au runtime exécution
+
+polymorphisme par sous typage seulement
+donc au moins une fonction virtuelle dans la classe
+
+uniquement pour les pointeurs / références
+
+notamment pour downcast donc passer d'un pointeur sur parent à un pointeur sur enfant
+→ NULL si ça a échoué
+
+exemple :
+
+parent -> child1
+parent -> child2
+
+
+a : adresse de child1
+b : pointeur sur parent
+
+b = a 
+
+dynamic cast de b en child1 -> ok
+dynamic cast de b en child2 -> NULL
+
+
+pour les références, comme on peut pas renvoyer null, on lève l'exception std::bad_cast
+-
+
+
+-
+reinterpret cast
+
+réinterprétation très permissive, le compilateur obéit
+
+upcast et downcast possible askip
+-
+
+
+-
+const cast
+
+pour les qualificateur de type
+
+pareil qu'en C, c'est pas ouf, c'est juste pour forcer
+
+-
+
+
+-
+type cast operator
+
+définir les conversion implicite qu'on peut faire avec une classe
+-
+
+
+-
+mot clé explicit 
+
+sur un constructeur
+
+pour interdire la construction implicite d'une instance
+-
+
+
+
+
+
+-
+template de fonction / classe
+
+
+template <typename T1, typename T2>
+
+T1, T2 sont des paramètres de type
+
+
+-
+d'abord on déclare la classe / fonction template :
+
+template<typename T>
+class Machin {
+public:
+    void afficher() const;
+};
+
+template<typename T> 
+T addition(T a, T b);
+
+dans un .hpp
+
+
+ensuite on implémente la classe / fonction template :
+
+template<typename T>
+void Machin<T>::afficher() const {
+    std::cout << "Machin d'un type !" << std::endl;
+}
+
+template<typename T>
+T addition(T a, T b) { 
+    return a + b;
+}
+
+dans un .tpp qui sera inclus à la fin d'un .hpp
+
+à 42, l'implémentation des fonctions peuvent se faire dans les hpp directement
+
+
+ensuite on instancie la classe / fonction template :
+
+Machin<int> m;
+m.afficher();
+
+double y = addition<double>(2.5, 4.3);
+
+dans un .cpp
+-
+
+
+-
+passer des valeurs par défaut aux variables de type
+
+exemple :
+template<typename T = float>
+float par défaut quand on met aucun type à l'instanciation
+-
+
+
+
+-
+spécialiser un template pour un type en particulier
+
+
+spécialisation partielle
+seulement une partie des variables de type est fixée
+
+template<typename A, typename B>
+class C<A, B> {};
+
+template<typename B>
+class C<int, B> {};
+
+
+spécialisation complète
+
+templace<>
+class C<bool, bool> {};
+-
+
+
+-
+[]
+opérateur d'indexation = subscript operator
+obj[i]
+TypeDeRetour& operator[](int index);
+on peut utiliser autre chose que int pour faire par exemple dico["pomme"]
+référence pour faire par exemple obj[5] = "blabla"
+-
+
+
+
+-
+STL
+standard template library
+
+
+conteneurs standard
+
+
+std::list<int> l;
+
+std::map<std::string, int> m;
+tableau associatif
+hash table
+dictionnaire
+string pas obligé
+
+std::vector<int> v;
+std::vector<int> v(4, 5); // 4 éléments de valeur : 5
+en gros c'est un tableau
+
+
+itérateur
+c'est un peu l'équivalent d'un pointeur pour les conteneurs
+
+std::list<int>::const_iterator i = l.begin();
+std::list<int>::const_iterator i_end = l.end();
+
+l.end() est déja en dehors donc on peut faire :
+for (it = l.begin() ; it != ite; ++it)
+
+on peut déréférencer un itérateur pour obtenir l'élément
+
+
+
+algos sur des collections (= conteneurs standard ou perso)
+
+for_each(itérateur de début, itérateur de fin, fonction)
+-
