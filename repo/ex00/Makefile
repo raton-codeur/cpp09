@@ -1,7 +1,8 @@
-NAME = easyfind
+NAME = btc
 FLAGS = -Wall -Wextra -Werror -std=c++98 -Iinc
 SRCS = $(addprefix src/, \
 	main.cpp \
+	BitcoinExchange.cpp \
 )
 OBJS = $(patsubst src/%.cpp, tmp/%.o, $(SRCS))
 
@@ -22,4 +23,7 @@ fclean : clean
 
 re : fclean all
 
-.PHONY: all clean fclean re
+test : re
+	./$(NAME) input.txt
+
+.PHONY: all clean fclean re test
