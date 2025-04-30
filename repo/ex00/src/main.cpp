@@ -4,7 +4,10 @@ int main(int argc, char **argv)
 {
 	try
 	{
-		BitcoinExchange be(argc, argv);
+		BitcoinExchange b(argc, argv);
+		b.parseData();
+		b.parseInput();
+		b.print();
 	}
 	catch (const std::exception& e)
 	{

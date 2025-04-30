@@ -3,10 +3,11 @@
 Date::Date()
 {}
 
-Date::Date(const Date& other)
-{
-	(void)other;
-}
+Date::Date(const Date& other) :
+	_year(other._year),
+	_month(other._month),
+	_day(other._day)
+{}
 
 Date& Date::operator=(const Date& other)
 {
@@ -16,6 +17,11 @@ Date& Date::operator=(const Date& other)
 
 Date::~Date()
 {}
+
+void Date::print() const
+{
+	std::cout << _year << "-" << (_month < 10 ? "0" : "") << _month << "-" << (_day < 10 ? "0" : "") << _day;
+}
 
 static bool isLeapYear(int year)
 {

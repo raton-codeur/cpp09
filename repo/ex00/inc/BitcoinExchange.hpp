@@ -24,8 +24,10 @@ class BitcoinExchange
 		BitcoinExchange(int argc, char **argv);
 		~BitcoinExchange();
 
-		void parseData();
-		// void	parseInput();
+		void	parseData();
+		void	parseInput();
+		
+		void print();
 		// void	parse_line(const std::string& line);
 
 };
