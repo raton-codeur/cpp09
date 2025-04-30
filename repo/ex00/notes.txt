@@ -1,0 +1,16 @@
+
+
+-
+a faire
+
+une classe imbriquée : date pour stocker une date
+year
+month
+day
+
+ajouter un attribut data dans la classe
+c'est un dictionnaire date -> valeur
+
+
+
+-

@@ -16,8 +16,8 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 
 BitcoinExchange::~BitcoinExchange()
 {
-	_f_arg.close();
-	_f_data.close();
+	_input.close();
+	_data.close();
 }
 
 BitcoinExchange::BitcoinExchange(int argc, char **argv)
@@ -25,18 +25,18 @@ BitcoinExchange::BitcoinExchange(int argc, char **argv)
 	if (argc != 2)
 		throw std::invalid_argument("wrong number of arguments");
 
-	_f_arg.open(argv[1]);
-	if (!_f_arg.is_open())
+	_input.open(argv[1]);
+	if (!_input.is_open())
 		throw std::invalid_argument("could not open input file");
 
-	_f_data.open("data.csv");
-	if (!_f_data.is_open())
+	_data.open("data.csv");
+	if (!_data.is_open())
 		throw std::invalid_argument("could not open \"data.csv\"");
-	
+
 	std::string first_line;
-	if (!std::getline(_f_arg, first_line))
+	if (!std::getline(_input, first_line))
 	{
-		if (_f_arg.eof())
+		if (_input.eof())
 			throw std::invalid_argument("empty input file");
 		throw std::runtime_error("getline failed to read header");
 	}
@@ -44,52 +44,103 @@ BitcoinExchange::BitcoinExchange(int argc, char **argv)
 		throw std::invalid_argument("wrong header in input file : expecting \"date | value\"");
 }
 
-void f(const std::string& line)
+void check_format(const std::string& line)
 {
+	const char* s = line.c_str();
 	size_t i = 0, j;
 
-	for (j = 0; j < 4; ++i, ++j)
+	for (j = 0; j < 4; ++j)
 	{
-		if (i == line.size() || !std::isdigit(line[i]))
-			throw std::logic_error("wrong date : \"" + line + "\"");
+		if (!std::isdigit(s[i++]))
+			throw std::logic_error("invalid format");
 	}
-	if (line[i++] != '-')
-		throw std::logic_error("wrong date : \"" + line + "\"");
-	for (j = 0; j < 2; ++i, ++j)
+	if (s[i++] != '-')
+		throw std::logic_error("invalid format");
+	for (j = 0; j < 2; ++j)
 	{
-		if (i == line.size() || !std::isdigit(line[i]))
-		throw std::logic_error("wrong date : \"" + line + "\"");
+		if (!std::isdigit(s[i++]))
+			throw std::logic_error("invalid format");
 	}
-	if (line[i++] != '-')
-		throw std::logic_error("wrong date : \"" + line + "\"");
-	for (j = 0; j < 2; ++i, ++j)
+	if (s[i++] != '-')
+		throw std::logic_error("invalid format");
+	for (j = 0; j < 2; ++j)
 	{
-		if (i == line.size() || !std::isdigit(line[i]))
-			throw std::logic_error("wrong date : \"" + line + "\"");
+		if (!std::isdigit(s[i++]))
+			throw std::logic_error("invalid format");
 	}
+	if (s[i++] != ' ')
+		throw std::logic_error("invalid format");
+	if (s[i++] != '|')
+		throw std::logic_error("invalid format");
+	if (s[i++] != ' ')
+		throw std::logic_error("invalid format");
+	if (!std::isdigit(s[i++]))
+		throw std::logic_error("invalid format");
+	while (std::isdigit(s[i]))
+		++i;
+	if (s[i++] == '.')
+	{
+		if (!std::isdigit(s[i++]))
+			throw std::logic_error("invalid format");
+		while (std::isdigit(s[i]))
+			++i;
+		if (s[i] != '\0')
+			throw std::logic_error("invalid format");
+	}
+}
 
-
-
-	std::cout << "line : \"" << line << '"' << std::endl;
+void BitcoinExchange::parse_line(const std::string& line)
+{
+	check_format(line);
+	_year = std::stoi(line.substr(0, 4));
+	_month = std::stoi(line.substr(5, 2));
+	_day = std::stoi(line.substr(8, 2));
+	_s_value = line.substr(13);
+	if (_s_value.find('.') != != std::string::npos)
+	{
+		std::cout << "float : \"" << s_value << '"' << std::endl;
+	}
+	else
+	{
+		std::cout << "int : \"" << s_value << '"' << std::endl;
+	}
+	// std::string s_value;
+	// if (_month < 1 || _month > 12)
+	// 	throw std::logic_error("invalid date");
+	// if (_day < 1 || _day > 31)
+	// 	throw std::logic_error("invalid date");
+	// if isLeapYear(_year)
+	// {
+	// 	if (_month == 2 && _day > 29)
+	// 		throw std::logic_error("invalid date");
+	// }
+	// else
+	// {
+	// 	if (_month == 2 && _day > 28)
+	// 		throw std::logic_error("invalid date");
+	// }
+	// s_value = std::string(s + i_value);
+	// std::cout << "value found : \"" << std::string(s + i_value) << '"' << std::endl;
+	// std::cout << "line : \"" << line << '"' << std::endl;
 }
 
 void BitcoinExchange::parseInput()
 {
 	std::string line;
 
-	while (std::getline(_f_arg, line))
+	while (std::getline(_input, line))
 	{
 		if (line.empty())
 			continue;
 		try
 		{
-			f(line);
+			parseLine(line);
 		}
 		catch (const std::exception& e)
 		{
-			std::cerr << "error : " << e.what() << std::endl;
+			std::cerr << RED << "error in \"" << line << "\" : " << e.what() << RESET << std::endl;
 		}
 	}
-	if (!_f_arg.eof())
+	if (!_input.eof())
 		throw std::runtime_error("getline failed");
 }
