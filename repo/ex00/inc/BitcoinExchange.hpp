@@ -17,6 +17,8 @@ class BitcoinExchange
 	public :
 		BitcoinExchange(int argc, char **argv);
 		~BitcoinExchange();
+
+		void parseInput();
 };
 
 #endif
