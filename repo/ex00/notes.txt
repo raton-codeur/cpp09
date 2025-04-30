@@ -1,7 +1,7 @@
 
 
 -
-a faire
+a faire idée classe ibriquée
 
 une classe imbriquée : date pour stocker une date
 year
@@ -10,7 +10,15 @@ day
 
 ajouter un attribut data dans la classe
 c'est un dictionnaire date -> valeur
-
-
+-
 
 -
+a faire idée par nombre de jours
+
+une fonction pour trouver l'index d'un jour par rapport au premier jour dans la base de données
+
+une map pour index d'un jour (int) -> prix dans la data (float)
+
+
+
+

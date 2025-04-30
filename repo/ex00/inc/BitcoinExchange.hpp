@@ -3,20 +3,18 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <map>
 #define RED "\033[31m"
 #define RESET "\033[0m"
+#include "Date.hpp"
 
 class BitcoinExchange
 {
 	private :
-		std::ifstream	_input;
-		std::ifstream	_data;
-
-		std::map<Date, float>	
-		int				_year;
-		int				_month;
-		int				_day;
-		std::string		_s_value;
+		std::ifstream			_inputStream;
+		std::ifstream			_dataStream;
+		std::map<Date, float>	_data;
+		std::map<Date, float>	_input;
 
 							BitcoinExchange();
 							BitcoinExchange(const BitcoinExchange& other);
@@ -26,8 +24,10 @@ class BitcoinExchange
 		BitcoinExchange(int argc, char **argv);
 		~BitcoinExchange();
 
-		void	parseInput();
-		void	parse_line(const std::string& line);
+		void parseData();
+		// void	parseInput();
+		// void	parse_line(const std::string& line);
+
 };
 
 #endif
