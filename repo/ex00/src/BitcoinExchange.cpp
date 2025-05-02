@@ -120,7 +120,9 @@ void BitcoinExchange::parseInput()
 	int			year, month, day;
 	float		value, rate;
 	Date		date;
+	Date		dateLimit;
 
+	dateLimit = Date(2009, 1, 2);
 	if (!std::getline(_inputStream, line))
 	{
 		if (_inputStream.eof())
@@ -142,7 +144,7 @@ void BitcoinExchange::parseInput()
 			month = std::atoi(line.substr(5, 2).c_str());
 			day = std::atoi(line.substr(8, 2).c_str());
 			date = Date(year, month, day);
-			if (date < Date(2009, 1, 2))
+			if (date < dateLimit)
 				throw std::logic_error("invalid date : too old a date");
 
 			value = std::atof(line.substr(13).c_str());
@@ -161,16 +163,3 @@ void BitcoinExchange::parseInput()
 	if (!_inputStream.eof())
 		throw std::runtime_error("getline failed");
 }
-
-// void BitcoinExchange::print()
-// {
-// 	std::map<Date, float>::iterator it = _input.begin();
-
-// 	while (it != _input.end())
-// 	{
-// 		rate = it2->second * it->second;
-// 		it->first.print();
-// 		std::cout << " => " << rate << std::endl;
-// 		++it;
-// 	}
-// }
