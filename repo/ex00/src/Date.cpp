@@ -3,26 +3,6 @@
 Date::Date()
 {}
 
-Date::Date(const Date& other) :
-	_year(other._year),
-	_month(other._month),
-	_day(other._day)
-{}
-
-Date& Date::operator=(const Date& other)
-{
-	(void)other;
-	return *this;
-}
-
-Date::~Date()
-{}
-
-void Date::print() const
-{
-	std::cout << _year << "-" << (_month < 10 ? "0" : "") << _month << "-" << (_day < 10 ? "0" : "") << _day;
-}
-
 static bool isLeapYear(int year)
 {
 	return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
@@ -59,6 +39,31 @@ Date::Date(int year, int month, int day) :
 	}
 }
 
+Date::Date(const Date& other) :
+	_year(other._year),
+	_month(other._month),
+	_day(other._day)
+{}
+
+Date& Date::operator=(const Date& other)
+{
+	if (this != &other)
+	{
+		_year = other._year;
+		_month = other._month;
+		_day = other._day;
+	}
+	return *this;
+}
+
+Date::~Date()
+{}
+
+// void Date::print() const
+// {
+// 	std::cout << _year << "-" << (_month < 10 ? "0" : "") << _month << "-" << (_day < 10 ? "0" : "") << _day;
+// }
+
 bool Date::operator<(const Date& other) const
 {
 	if (_year != other._year)
@@ -67,4 +72,9 @@ bool Date::operator<(const Date& other) const
 		return _month < other._month;
 	else
 		return _day < other._day;
+}
+
+bool Date::operator==(const Date& other) const
+{
+	return _year == other._year && _month == other._month && _day == other._day;
 }

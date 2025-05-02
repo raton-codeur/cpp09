@@ -32,16 +32,6 @@ BitcoinExchange::BitcoinExchange(int argc, char **argv)
 	_dataStream.open("data.csv");
 	if (!_dataStream.is_open())
 		throw std::invalid_argument("could not open \"data.csv\"");
-
-	std::string first_line;
-	if (!std::getline(_inputStream, first_line))
-	{
-		if (_inputStream.eof())
-			throw std::invalid_argument("empty input file");
-		throw std::runtime_error("getline failed to read header");
-	}
-	if (first_line != "date | value")
-		throw std::invalid_argument("wrong header in input file : expecting \"date | value\"");
 }
 
 void BitcoinExchange::parseData()
@@ -54,10 +44,10 @@ void BitcoinExchange::parseData()
 		throw std::runtime_error("cannot read data header");
 	while (std::getline(_dataStream, line))
 	{
-		year = std::stoi(line.substr(0, 4));
-		month = std::stoi(line.substr(5, 2));
-		day = std::stoi(line.substr(8, 2));
-		rate = std::stof(line.substr(11));
+		year = std::atoi(line.substr(0, 4).c_str());
+		month = std::atoi(line.substr(5, 2).c_str());
+		day = std::atoi(line.substr(8, 2).c_str());
+		rate = std::atof(line.substr(11).c_str());
 		_data[Date(year, month, day)] = rate;
 	}
 	if (!_dataStream.eof())
@@ -98,15 +88,16 @@ void checkLineFormat(const std::string& line)
 		throw std::logic_error("invalid format");
 	while (std::isdigit(s[i]))
 		++i;
-	if (s[i++] == '.')
+	if (s[i] == '.')
 	{
+		++i;
 		if (!std::isdigit(s[i++]))
 			throw std::logic_error("invalid format");
 		while (std::isdigit(s[i]))
 			++i;
-		if (s[i] != '\0')
-			throw std::logic_error("invalid format");
-	}
+		}
+	if (s[i] != '\0')
+		throw std::logic_error("invalid format");
 }
 
 void BitcoinExchange::parseInput()
@@ -114,6 +105,16 @@ void BitcoinExchange::parseInput()
 	std::string line;
 	int			year, month, day;
 	float		value;
+	Date		date;
+
+	if (!std::getline(_inputStream, line))
+	{
+		if (_inputStream.eof())
+			throw std::invalid_argument("empty input file");
+		throw std::runtime_error("getline failed to read header");
+	}
+	if (line != "date | value")
+		throw std::invalid_argument("wrong header in input file : expecting \"date | value\"");
 
 	while (std::getline(_inputStream, line))
 	{
@@ -126,12 +127,13 @@ void BitcoinExchange::parseInput()
 			year = std::atoi(line.substr(0, 4).c_str());
 			month = std::atoi(line.substr(5, 2).c_str());
 			day = std::atoi(line.substr(8, 2).c_str());
+			data = Date(year, month, day);
+
 			value = std::atof(line.substr(13).c_str());
-
 			if (value > 1000)
-				throw std::logic_error("invalid value");
+				throw std::logic_error("invalid value : too large a number");
 
-			_input[Date(year, month, day)] = value;
+			
 		}
 		catch (const std::exception& e)
 		{
@@ -141,9 +143,6 @@ void BitcoinExchange::parseInput()
 	if (!_inputStream.eof())
 		throw std::runtime_error("getline failed");
 }
-
-
-
 
 void BitcoinExchange::print()
 {
@@ -157,7 +156,3 @@ void BitcoinExchange::print()
 		++it;
 	}
 }
-
-
-
-

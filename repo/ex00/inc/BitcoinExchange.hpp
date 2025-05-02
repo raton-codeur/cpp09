@@ -14,7 +14,6 @@ class BitcoinExchange
 		std::ifstream			_inputStream;
 		std::ifstream			_dataStream;
 		std::map<Date, float>	_data;
-		std::map<Date, float>	_input;
 
 							BitcoinExchange();
 							BitcoinExchange(const BitcoinExchange& other);

@@ -18,6 +18,27 @@ a faire idée par nombre de jours
 une fonction pour trouver l'index d'un jour par rapport au premier jour dans la base de données
 
 une map pour index d'un jour (int) -> prix dans la data (float)
+-
+
+
+
+-
+on a l'input dans un dictionnaire : date -> value
+on a la data dans un dictionnaire : data -> rate
+
+on veut parcourir l'input
+pour une pair i_input de l'input
+	parcourir les pairs de la data sous i_data
+		si la date de i_data == date de i_input
+		(ou : si i_data est la dernière valeur)
+		ou : si la date de i_data < date de i_input et date de i_data + 1 n'est pas < date de i_input
+			on veut le taux de change à i_data
+
+donc pour chaque i de l'input, on a : date, valeur, rate
+
+affichage en parcourant l'input avec i :
+	la date de i => value = value * rate
+-
 
 
 
