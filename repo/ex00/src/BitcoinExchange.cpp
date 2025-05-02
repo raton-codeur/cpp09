@@ -120,9 +120,8 @@ void BitcoinExchange::parseInput()
 	int			year, month, day;
 	float		value, rate;
 	Date		date;
-	Date		dateLimit;
+	const Date	dateLimit = Date(2009, 1, 2);
 
-	dateLimit = Date(2009, 1, 2);
 	if (!std::getline(_inputStream, line))
 	{
 		if (_inputStream.eof())
