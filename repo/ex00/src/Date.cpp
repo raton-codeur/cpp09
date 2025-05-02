@@ -1,6 +1,9 @@
 #include "Date.hpp"
 
-Date::Date()
+Date::Date() :
+	_year(0),
+	_month(0),
+	_day(0)
 {}
 
 static bool isLeapYear(int year)
@@ -13,8 +16,6 @@ Date::Date(int year, int month, int day) :
 	_month(month),
 	_day(day)
 {
-	if (year < 2009)
-		throw std::logic_error("invalid date");
 	if (month < 1 || month > 12)
 		throw std::logic_error("invalid date");
 	if (day < 1 || day > 31)
@@ -59,10 +60,10 @@ Date& Date::operator=(const Date& other)
 Date::~Date()
 {}
 
-// void Date::print() const
-// {
-// 	std::cout << _year << "-" << (_month < 10 ? "0" : "") << _month << "-" << (_day < 10 ? "0" : "") << _day;
-// }
+void Date::print() const
+{
+	std::cout << _year << "-" << (_month < 10 ? "0" : "") << _month << "-" << (_day < 10 ? "0" : "") << _day;
+}
 
 bool Date::operator<(const Date& other) const
 {
@@ -77,4 +78,9 @@ bool Date::operator<(const Date& other) const
 bool Date::operator==(const Date& other) const
 {
 	return _year == other._year && _month == other._month && _day == other._day;
+}
+
+bool Date::operator<=(const Date& other) const
+{
+	return (*this < other || *this == other);
 }

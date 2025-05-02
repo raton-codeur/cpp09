@@ -1,5 +1,5 @@
 NAME = btc
-FLAGS = -Wall -Wextra -Werror -std=c++98 -Iinc
+FLAGS = -Wall -Wextra -Werror -std=c++98 -Iinc -g3 -fsanitize=address
 SRCS = $(addprefix src/, \
 	main.cpp \
 	BitcoinExchange.cpp \

@@ -100,11 +100,25 @@ void checkLineFormat(const std::string& line)
 		throw std::logic_error("invalid format");
 }
 
+float BitcoinExchange::getRate(const Date& date) const
+{
+	float result;
+
+	for (std::map<Date, float>::const_reverse_iterator it = _data.rbegin(); it != _data.rend(); ++it)
+	{
+		if (date <= it->first)
+			result = it->second;
+		else
+			break;
+	}
+	return result;
+}
+
 void BitcoinExchange::parseInput()
 {
 	std::string line;
 	int			year, month, day;
-	float		value;
+	float		value, rate;
 	Date		date;
 
 	if (!std::getline(_inputStream, line))
@@ -127,13 +141,17 @@ void BitcoinExchange::parseInput()
 			year = std::atoi(line.substr(0, 4).c_str());
 			month = std::atoi(line.substr(5, 2).c_str());
 			day = std::atoi(line.substr(8, 2).c_str());
-			data = Date(year, month, day);
+			date = Date(year, month, day);
+			if (date < Date(2009, 1, 2))
+				throw std::logic_error("invalid date : too old a date");
 
 			value = std::atof(line.substr(13).c_str());
 			if (value > 1000)
 				throw std::logic_error("invalid value : too large a number");
 
-			
+			rate = getRate(date);
+			date.print();
+			std::cout << " => " << value << " = " << value * rate << std::endl;
 		}
 		catch (const std::exception& e)
 		{
@@ -144,15 +162,15 @@ void BitcoinExchange::parseInput()
 		throw std::runtime_error("getline failed");
 }
 
-void BitcoinExchange::print()
-{
-	std::map<Date, float>::iterator it = _input.begin();
+// void BitcoinExchange::print()
+// {
+// 	std::map<Date, float>::iterator it = _input.begin();
 
-	while (it != _input.end())
-	{
-		rate = it2->second * it->second;
-		it->first.print();
-		std::cout << " => " << rate << std::endl;
-		++it;
-	}
-}
+// 	while (it != _input.end())
+// 	{
+// 		rate = it2->second * it->second;
+// 		it->first.print();
+// 		std::cout << " => " << rate << std::endl;
+// 		++it;
+// 	}
+// }
