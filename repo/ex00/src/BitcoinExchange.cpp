@@ -62,21 +62,21 @@ void checkLineFormat(const std::string& line)
 	for (j = 0; j < 4; ++j)
 	{
 		if (!std::isdigit(s[i++]))
-			throw std::logic_error("invalid format");
+			throw std::logic_error("invalid format for the date");
 	}
 	if (s[i++] != '-')
-		throw std::logic_error("invalid format");
+		throw std::logic_error("invalid format for the date");
 	for (j = 0; j < 2; ++j)
 	{
 		if (!std::isdigit(s[i++]))
-			throw std::logic_error("invalid format");
+			throw std::logic_error("invalid format for the date");
 	}
 	if (s[i++] != '-')
-		throw std::logic_error("invalid format");
+		throw std::logic_error("invalid format for the date");
 	for (j = 0; j < 2; ++j)
 	{
 		if (!std::isdigit(s[i++]))
-			throw std::logic_error("invalid format");
+			throw std::logic_error("invalid format for the date");
 	}
 	if (s[i++] != ' ')
 		throw std::logic_error("invalid format");
@@ -85,19 +85,19 @@ void checkLineFormat(const std::string& line)
 	if (s[i++] != ' ')
 		throw std::logic_error("invalid format");
 	if (!std::isdigit(s[i++]))
-		throw std::logic_error("invalid format");
+		throw std::logic_error("invalid format : value : expecting a digit");
 	while (std::isdigit(s[i]))
 		++i;
 	if (s[i] == '.')
 	{
 		++i;
 		if (!std::isdigit(s[i++]))
-			throw std::logic_error("invalid format");
+			throw std::logic_error("invalid format : value : expecting a digit for the decimal part");
 		while (std::isdigit(s[i]))
 			++i;
 		}
 	if (s[i] != '\0')
-		throw std::logic_error("invalid format");
+		throw std::logic_error("invalid format : invalid character in value");
 }
 
 float BitcoinExchange::getRate(const Date& date) const
