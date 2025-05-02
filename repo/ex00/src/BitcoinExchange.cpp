@@ -101,13 +101,12 @@ float BitcoinExchange::getRate(const Date& date) const
 {
 	float result;
 
-	result = _data.end()->second;
 	for (std::map<Date, float>::const_reverse_iterator it = _data.rbegin(); it != _data.rend(); ++it)
 	{
-		if (date <= it->first)
-			result = it->second;
+		if (date > it->first)
+			continue;
 		else
-			break;
+			result = it->second;
 	}
 	return result;
 }
