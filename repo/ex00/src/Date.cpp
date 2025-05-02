@@ -80,7 +80,7 @@ bool Date::operator==(const Date& other) const
 	return _year == other._year && _month == other._month && _day == other._day;
 }
 
-bool Date::operator<=(const Date& other) const
+bool Date::operator>(const Date& other) const
 {
-	return (*this < other || *this == other);
+	return !(*this < other || *this == other);
 }

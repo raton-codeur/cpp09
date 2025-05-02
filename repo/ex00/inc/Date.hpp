@@ -20,8 +20,8 @@ class Date
 		void print() const;
 
 		bool operator<(const Date& other) const;
-		bool operator<=(const Date& other) const;
 		bool operator==(const Date& other) const;
+		bool operator>(const Date& other) const;
 };
 
 #endif

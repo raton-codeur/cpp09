@@ -99,16 +99,12 @@ void checkLineFormat(const std::string& line)
 
 float BitcoinExchange::getRate(const Date& date) const
 {
-	float result;
+	std::map<Date, float>::const_reverse_iterator it;
 
-	for (std::map<Date, float>::const_reverse_iterator it = _data.rbegin(); it != _data.rend(); ++it)
-	{
-		if (date > it->first)
-			continue;
-		else
-			result = it->second;
-	}
-	return result;
+	it = _data.rbegin();
+	while (it != _data.rend() && it->first > date)
+		++it;
+	return it->second;
 }
 
 void BitcoinExchange::parseInput()
