@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdlib>
 #include <map>
 #define RED "\033[31m"
 #define RESET "\033[0m"

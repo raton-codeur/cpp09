@@ -144,7 +144,6 @@ void BitcoinExchange::parseInput()
 				throw std::logic_error("invalid value : too large number");
 
 			rate = getRate(date);
-			std::cout << "rate : " << rate << " ";
 			date.print();
 			std::cout << " => " << value << " = " << value * rate << std::endl;
 		}
