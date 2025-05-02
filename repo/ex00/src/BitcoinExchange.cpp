@@ -15,10 +15,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 }
 
 BitcoinExchange::~BitcoinExchange()
-{
-	_inputStream.close();
-	_dataStream.close();
-}
+{}
 
 BitcoinExchange::BitcoinExchange(int argc, char **argv)
 {
@@ -62,21 +59,21 @@ void checkLineFormat(const std::string& line)
 	for (j = 0; j < 4; ++j)
 	{
 		if (!std::isdigit(s[i++]))
-			throw std::logic_error("invalid format for the date");
+			throw std::logic_error("invalid date format");
 	}
 	if (s[i++] != '-')
-		throw std::logic_error("invalid format for the date");
+		throw std::logic_error("invalid date format");
 	for (j = 0; j < 2; ++j)
 	{
 		if (!std::isdigit(s[i++]))
-			throw std::logic_error("invalid format for the date");
+			throw std::logic_error("invalid date format");
 	}
 	if (s[i++] != '-')
-		throw std::logic_error("invalid format for the date");
+		throw std::logic_error("invalid date format");
 	for (j = 0; j < 2; ++j)
 	{
 		if (!std::isdigit(s[i++]))
-			throw std::logic_error("invalid format for the date");
+			throw std::logic_error("invalid date format");
 	}
 	if (s[i++] != ' ')
 		throw std::logic_error("invalid format");
@@ -85,25 +82,26 @@ void checkLineFormat(const std::string& line)
 	if (s[i++] != ' ')
 		throw std::logic_error("invalid format");
 	if (!std::isdigit(s[i++]))
-		throw std::logic_error("invalid format : value : expecting a digit");
+		throw std::logic_error("invalid value format : expecting a digit");
 	while (std::isdigit(s[i]))
 		++i;
 	if (s[i] == '.')
 	{
 		++i;
 		if (!std::isdigit(s[i++]))
-			throw std::logic_error("invalid format : value : expecting a digit for the decimal part");
+			throw std::logic_error("invalid value format : expecting a digit after the decimal point");
 		while (std::isdigit(s[i]))
 			++i;
 		}
 	if (s[i] != '\0')
-		throw std::logic_error("invalid format : invalid character in value");
+		throw std::logic_error("invalid value : unexpected character");
 }
 
 float BitcoinExchange::getRate(const Date& date) const
 {
 	float result;
 
+	result = _data.end()->second;
 	for (std::map<Date, float>::const_reverse_iterator it = _data.rbegin(); it != _data.rend(); ++it)
 	{
 		if (date <= it->first)
@@ -120,7 +118,7 @@ void BitcoinExchange::parseInput()
 	int			year, month, day;
 	float		value, rate;
 	Date		date;
-	const Date	dateLimit = Date(2009, 1, 2);
+	const Date	firstDataDate = Date(2009, 1, 2);
 
 	if (!std::getline(_inputStream, line))
 	{
@@ -143,14 +141,15 @@ void BitcoinExchange::parseInput()
 			month = std::atoi(line.substr(5, 2).c_str());
 			day = std::atoi(line.substr(8, 2).c_str());
 			date = Date(year, month, day);
-			if (date < dateLimit)
-				throw std::logic_error("invalid date : too old a date");
+			if (date < firstDataDate)
+				throw std::logic_error("invalid date : too old");
 
 			value = std::atof(line.substr(13).c_str());
 			if (value > 1000)
-				throw std::logic_error("invalid value : too large a number");
+				throw std::logic_error("invalid value : too large number");
 
 			rate = getRate(date);
+			std::cout << "rate : " << rate << " ";
 			date.print();
 			std::cout << " => " << value << " = " << value * rate << std::endl;
 		}

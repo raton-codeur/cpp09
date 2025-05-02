@@ -26,10 +26,6 @@ class BitcoinExchange
 		void	parseData();
 		void	parseInput();
 		float	getRate(const Date& date) const;
-		
-		// void print();
-		// void	parse_line(const std::string& line);
-
 };
 
 #endif

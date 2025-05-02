@@ -9,7 +9,7 @@ class Date
 		int	_year;
 		int	_month;
 		int	_day;
-		
+
 	public :
 				Date();
 				Date(int year, int month, int day);
@@ -17,7 +17,7 @@ class Date
 		Date&	operator=(const Date& other);
 				~Date();
 
-		void	print() const;
+		void print() const;
 
 		bool operator<(const Date& other) const;
 		bool operator<=(const Date& other) const;
