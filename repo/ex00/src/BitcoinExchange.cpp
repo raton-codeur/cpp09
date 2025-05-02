@@ -104,6 +104,8 @@ float BitcoinExchange::getRate(const Date& date) const
 	it = _data.rbegin();
 	while (it != _data.rend() && it->first > date)
 		++it;
+	if (it == _data.rend())
+		it = _data.begin();
 	return it->second;
 }
 
