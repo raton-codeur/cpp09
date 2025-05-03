@@ -24,6 +24,6 @@ fclean : clean
 re : fclean all
 
 test : re
-	./$(NAME) input.txt
+	read arg ; ./$(NAME) "$$arg"
 
 .PHONY: all clean fclean re test
