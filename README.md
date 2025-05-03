@@ -1,5 +1,7 @@
 # comprendre le tri par fusion-insertion
 
+algorithme en 5 étapes.
+
 on veut trier un tableau de n nombres
 
 1. faire des paires d'éléments
@@ -21,7 +23,7 @@ on commence par insérer b1 dans une liste vide de c, ce qui nécessite 0 compar
 
 <img src="img/b.png" height="150px" />
 
-1. continuer l'insertion dans c
+5. continuer l'insertion dans c
 
 le nombre d'éléments de type c détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les b dans l'ordre croissant. petit exemple pour comprendre cela :
 
