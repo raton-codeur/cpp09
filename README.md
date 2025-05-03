@@ -71,14 +71,27 @@ une fois b4 et b5 inséré, on est dans la configuration :
 
 <img src="img/f.png" height="150px" />
 
-et là, pour une taille de 10, il va d'abord falloir insérer b11, puis b10, b9, b8, b7, b6... ainsi, on aura, pour toutes ces insertions, au plus 4 comparaisons à faire.
+et là, pour une taille de 10, il va d'abord falloir insérer b11, puis b10, b9, b8, b7, et b6. ainsi, on aura, pour toutes ces insertions, au plus 4 comparaisons à faire.
 
-## généralisation du raisonnement
+## comprendre et trouver l'ordre des insertions
 
-combien de comparaisons sont nécessaires pour insérer une valeur b dans un tableau trié de n éléments ?
+### généraliser la recherche dichotomique
 
-pour n = 2, c'est 2
-pour n = 3, c'est 2
-pour n = 4, 5, 6, 7, c'est 3
-à partir de 8, c'est 4
-à partir de 16, c'est 5
+on cherche le nombre de comparaisons nécessaires pour insérer une valeur b dans un tableau trié de n éléments.
+
+on l'a vu, pour n = 2, c'est 2. pour n = 3, c'est 2 aussi. pour n = 4, 5, 6, 7, c'est 3. à partir de 8, c'est 4. à partir de 16, c'est 5.
+
+on en déduit que, pour une taille n, c'est floor ( log2 (n) ) + 1.
+
+### lien avec la suite de jacobsthal
+
+pas vraiment besoin d'utiliser la taille de la liste c. on a juste besoin de retrouver la suite :
+
+0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, ...
+
+elle nous donne l'indice des éléments b qui initient une série d'insertion. d'où le fait qu'il faille d'abord insérer :
+- b3 + tout ce qui lui est inférieur, donc b2
+- b5, b4
+- b11, b10, b9, b8, b7, b6
+- b21, b20, ..., b12
+
