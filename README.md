@@ -17,11 +17,11 @@ en parcourant les paires, on obtient la liste d'éléments :
 
 un élément a ou b devient de type c lorsqu'il est inséré. on insère toujours devant le premier a.
 
-on commence par insérer b1 dans une liste vide de c, ce qui nécessite 0 comparaison. on obtient les 2 premiers c qui sont les anciens b1 et a1 :
+on commence par insérer b1 dans une liste vide de c, ce qui nécessite 0 comparaison. c'est la fin de cette série d'insertion. à la fin de chaque série d'insertion, le premier a devient automatiquement le dernier c (il se trie tout seul, si on veut). on obtient les 2 premiers c, qui sont les anciens b1 et a1 :
 
 <img src="img/b.png" height="150px" />
 
-5. continuer l'insertion dans c
+1. continuer l'insertion dans c
 
 le nombre d'éléments de type c détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les b dans l'ordre croissant. petit exemple pour comprendre cela :
 
