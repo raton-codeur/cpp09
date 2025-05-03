@@ -1,0 +1,61 @@
+
+
+-
+exemple
+
+faire les premières paires
+(6 14) (5 12) (1 3) (7 13) (8 2) (11 15) (4 10) (9 16)
+
+trier les éléments au sein des paires
+(6 14) (5 12) (1 3) (7 13) (2 8) (11 15) (4 10) (9 16)
+
+trier les paires par ordre croissant sur les grands (utiliser le meme algo)
+(1 3) (2 8) (4 10) (5 12) (7 13) (6 14) (11 15) (9 16)
+
+séparer les grands et les petits
+les grands sont forcément triés
+H = 3 8 10 12 13 14 15 16 = a1 a2 a3...
+L = 1 2 4 5 7 6 11 9 = b1 b2 b3...
+
+insérer b1 dans le tableau résultat :
+result = b1 a1 a2 = 1 3 8
+
+il reste :
+H = a3 a4 a5... = 10 12 13 14 15 16
+L = b2 b3 ... = 2 4 5 7 6 11 9
+
+on veut s'assurer de faire au plus 3 comparaisons pour insérer les 2 prochains éléments
+
+il faut d'abord insérer b3 puis b2 :
+avec b3 :
+result = 1 3 4 8
+avec b2 :
+result = 1 2 3 4 8
+
+il reste :
+a3 a4 a5... = 10 12 13 14 15 16
+b4 b5 b6 … = 5 7 6 11 9
+
+on met a3 et a4 à la fin du result :
+result = 1 2 3 4 8 10 12
+
+il reste :
+a5 a6 a7... = 13 14 15 16
+b4 b5 b6... = 5 7 6 11 9
+
+on veut s'assurer de faire au plus 7 comparaisons pour insérer les 2 prochains éléments, donc il faut d'abord insérer b5 puis b4. on obtient :
+result = 1 2 3 4 5 7 8 10 12
+
+il reste : 
+a5 a6 a7... = 13 14 15 16
+b6 b7 b8... = 6 11 9
+
+on insère les 2 prochains de a, a5 et a6,c à la fin :
+result : 1 2 3 4 5 7 8 10 12 13 14
+
+il reste :
+a7 a8 = 15 16
+b6 b7 b8... = 6 11 9
+
+
+
