@@ -11,5 +11,5 @@ on obtient une liste d'éléments en parcourant les paires :
 
 3. trier les paires par ordre croissant selon les éléments haut. on obtient :
 
-<img src="img/a.png" height="50px" />
+<img src="img/a.png" height="150px" />
 
