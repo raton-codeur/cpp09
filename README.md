@@ -59,7 +59,7 @@ donc on va vouloir insérer b2 dans un tableau trié [c1, c2, c3], ce qui ne co�
 
 donc, si on insère b3 avant b2, ça nous coûte, au pire, 4 comparaisons.
 
-on se retrouve dans cette configuration :
+après ça, on se retrouvera dans cette configuration :
 
 <img src="img/e.png" height="150px" />
 
