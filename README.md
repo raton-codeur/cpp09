@@ -25,7 +25,7 @@ on commence par insérer b1 dans une liste vide de c, ce qui nécessite 0 compar
 
 5. continuer l'insertion dans c
 
-le nombre d'éléments de type c détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les b dans l'ordre croissant. petit exemple pour comprendre cela :
+le nombre d'éléments de type c détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les b dans l'ordre des paires. petit exemple pour comprendre cela :
 
 ## si on insère b2 puis b3
 
