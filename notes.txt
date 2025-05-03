@@ -311,3 +311,11 @@ operateur [] en gros pareil que .at()
 
 
 
+
+-
+tri par fusion-insertion
+= algorithme de Ford-Johnson
+1959
+LR Ford Jr. et Selmer M. Johnson
+
+https://dev.to/emuminov/human-explanation-and-step-by-step-visualisation-of-the-ford-johnson-algorithm-5g91
