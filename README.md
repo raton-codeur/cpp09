@@ -23,7 +23,7 @@ on commence par insérer b1 dans une liste vide de c, ce qui nécessite 0 compar
 
 5. continuer l'insertion dans c
 
-le nombre d'éléments de type c détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les b dans l'ordre croissant. petit exemple pour voir cela :
+le nombre d'éléments de type c détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les b dans l'ordre croissant. petit exemple pour comprendre cela :
 
 ## si on insère b2 puis b3
 
@@ -41,17 +41,33 @@ on veut insérer b3 dans un tableau trié [c1, c2, c3, c4].
 
 comme on trie par dichotomie, on sait que ça va nous coûter au plus 3 comparaisons (une avec c3, une autre avec c2 ou c4, et potentiellement, une 3e avec c1).
 
-au final, ça nous aurait coûter, au pire, 5 comparaisons.
+au final, si on insère b2 avant b3, ça nous coûte, au pire, 5 comparaisons.
 
-## mais si on insère b3 puis b2
+## si on insère b3 puis b2
 
-on va insérer b3 dans un tableau trié [c1, c2], donc c'est comme avant, ça va nous coûter au plus 2 comparaisons.
+on veut insérer b3 dans un tableau trié [c1, c2]. donc, comme on l'a vu juste avant, ça va nous coûter, au plus, 2 comparaisons.
 
-et là, miracle, lorsqu'on va vouloir insérer b2 on sera dans cette configuration :
+et là, miracle, lorsqu'on va vouloir insérer b2, on sera dans cette configuration :
 
 <img src="img/d.png" height="150px" />
 
-donc on va vouloir insérer b2 dans un tableau trié [c1, c2, c3], ce qui ne coûte toujours que 2 comparaisons, et non 3.
+donc on va vouloir insérer b2 dans un tableau trié [c1, c2, c3], ce qui ne coûte toujours que 2 comparaisons, et non 3 (une avec c2, et une autre avec c1 ou c3).
+
+donc, si on insère b3 avant b2, ça nous coûte, au pire, 4 comparaisons.
+
+on se retrouve dans cette configuration :
+
+<img src="img/e.png" height="150px" />
+
+et là, quel élément faut-il insérer ? encore une fois, cela dépend de la taille de c
+
+pour une taille de 6, il faut d'abord insérer b5, puis b4. ainsi, on aura, au pire, pour l'un et pour l'autre, seulement 3 comparaisons à faire.
+
+une fois b4 et b5 inséré, on est dans la configuration :
+
+<img src="img/f.png" height="150px" />
+
+et là, pour une taille de 10, il va d'abord falloir insérer b11, puis b10, b9, b8, b7, b6... ainsi, on aura, pour toutes ces insertions, au plus 4 comparaisons à faire.
 
 ## généralisation du raisonnement
 
