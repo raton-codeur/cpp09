@@ -47,6 +47,8 @@ au final, si on insère b2 avant b3, ça nous coûte, au pire, 5 comparaisons.
 
 ## si on insère b3 puis b2
 
+<img src="img/b.png" height="150px" />
+
 on veut insérer b3 dans un tableau trié [c1, c2]. donc, comme on l'a vu juste avant, ça va nous coûter, au plus, 2 comparaisons.
 
 et là, miracle, lorsqu'on va vouloir insérer b2, on sera dans cette configuration :
