@@ -101,7 +101,7 @@ on cherche le nombre de comparaisons nécessaires pour insérer une valeur `b` d
 petit récap de ce qu'on a vu + généralisation :
 
 n | nb_compare(n)
-- | -
+-- | --
 2 | 2
 3 | 2
 
