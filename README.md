@@ -22,11 +22,13 @@ cela se fait par récurrence, selon le même algorithme. on va obtenir :
 
 on dit qu'un élément de type `a` ou `b` devient de type `c` lorsqu'il est inséré dans la liste finale. cette liste de `c` est donc triée à tout moment.
 
-l'algorithme consiste à faire des série d'insertion d'éléments de type `b` dans la liste finale, et 
+l'algorithme consiste à faire des série d'insertions d'éléments de type `b` dans la liste finale, ce qui au passage va aussi insérer les éléments de type `a` qui leur sont associés.
 
-rien ne va changer durant cette étape, à part la notation.
+pour cette première série d'insertion, rien ne va changer, à part la notation. en effet, on va juste insérer `b1`, qui est déjà bien placé, et `a1`, qui est déjà bien placé.
 
-on va faire la première série d'insertion . cette série se résume à insérer un seul élément, `b1`, qui est déjà bien placé, dans une liste vide de `c`, devant le premier `a`. ce qui nécessite 0 comparaison. c'est la fin de cette série d'insertion. à la fin de chaque série d'insertion, le premier `a` devient automatiquement le dernier `c` (il se trie tout seul, si on veut). on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
+à noter que pour une liste de `c` vide, la série d'insertion aura nécessité 0 comparaison.
+
+on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
 
 <img src="img/b.png" height="150px" />
 
