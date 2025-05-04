@@ -131,7 +131,7 @@ c'est un algorithme récursif. appelons-le `recherche_indice`. il prend en argum
   - si `T[i]` > `b`, alors on a trouvé l'indice où insérer : c'est `i`. ainsi, on va insérer `b` juste avant `T[i]`. 
 - pour un sous tableau `T[i:j]` de taille `j - i` > 1, on compare `b` à l'élément central de `T[i:j]`. appelons `c` l'indice de cet élément central. on l'obtient en faisant : `i + (j - i) / 2`.
   - si `b` < `T[c]`, on renvoie `recherche_indice(T[i:c], b)` 
-  - si `b` > `T[c]`, on renvoie `recherche_indice(T[c + 1:j], b)`
+  - si `b` > `T[c]`, on renvoie `recherche_indice(T[c:j], b)`
 
 ## exemple simple
 
@@ -160,21 +160,13 @@ recherche_indice(T[0:4], 10)
 	T[2] = 13
 	10 < 13 donc on renvoie recherche_indice(T[0:2], 10)
 	recherche_indice(T[0:2], 10)
-		taille de T[]
-
-
+		taille de T[0:2] = 2
+		c = 1
+		T[1] = 9
+		10 > 9 donc on renvoie recherche_indice(T[1:2], 10)
+		recherche_indice(T[1:2], 10)
+			taille de T[1:2] = 1
+			(cas de base)
+			T[1] = 9
+			9 < 10 donc on renvoie 2
 ```
-
-   tableau de taille 1 car, pour un appel donné, il va se relancer sur un tableau  . pour prenons n = 4 pour comprendre.
-
-au premier niveau, on lance l'algo sur T tout entier. la longueur du tableau est de 4, 4 / 2 = 2, donc on compare `b` à `a_2`. 
-
-si `b` > `a2`, alors on sait qu'il faut l'insérer après `a_2`. on relance l'algo sur T de l'indice 2 + 1 à... 3
-
-
-
- tout entier. on prend l'indice du milieu de T, soit n / 2
-
-et limiter ce nombre de  à  en utilisant une recherche dichotomique.
-
-la  est possible sur un tableau trié.
