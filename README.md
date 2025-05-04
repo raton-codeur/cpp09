@@ -4,15 +4,17 @@ on veut trier un tableau de n nombres.
 
 algorithme en 5 étapes.
 
-**étape 1** : faire des paires d'éléments
+**étape 1** : faire des paires d'éléments.
 
-**étape 2** : ordonner les 2 éléments qui composent chaque paire
+**étape 2** : ordonner les 2 éléments qui composent chaque paire.
 
-en parcourant les paires, on obtient la liste d'éléments :
-- a1 a2 a3... : la liste des éléments haut
-- b1 b2 b3... : la liste des éléments bas
+on dit que l'élément le plus grand d'une paire donnée est de type `a`, et l'autre de type `b`.
 
-**étape 3** : trier les paires par ordre croissant selon les éléments haut. on obtient :
+la notation `b -> a` signifie `b` < `a`. dans la paire d'indice `n`, on a : `b`<sub>`n`</sub>` -> `a`<sub>`n`</sub>
+
+**étape 3** : trier les paires par ordre croissant selon les éléments de type `a`.
+
+cela se fait par récurrence, selon le même algorithme. on va obtenir :
 
 <img src="img/a.png" height="150px" />
 
