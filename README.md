@@ -4,18 +4,19 @@ algorithme en 5 étapes.
 
 on veut trier un tableau de n nombres
 
-*étape 1* : faire des paires d'éléments
-1. ordonner les 2 éléments qui composent chaque paire
+**étape 1** : faire des paires d'éléments
+
+**étape 2** : ordonner les 2 éléments qui composent chaque paire
 
 en parcourant les paires, on obtient la liste d'éléments :
 - a1 a2 a3... : la liste des éléments haut
 - b1 b2 b3... : la liste des éléments bas
 
-3. trier les paires par ordre croissant selon les éléments haut. on obtient :
+**étape 3** : trier les paires par ordre croissant selon les éléments haut. on obtient :
 
 <img src="img/a.png" height="150px" />
 
-4. commencer l'insertion
+**étape 4** : commencer l'insertion
 
 un élément a ou b devient de type c lorsqu'il est inséré. on insère toujours devant le premier a.
 
@@ -23,7 +24,7 @@ on commence par insérer b1 dans une liste vide de c, ce qui nécessite 0 compar
 
 <img src="img/b.png" height="150px" />
 
-5. continuer l'insertion dans c
+**étape 5** : continuer l'insertion dans c
 
 le nombre d'éléments de type c détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les b dans l'ordre des paires. petit exemple pour comprendre cela :
 
