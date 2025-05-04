@@ -26,7 +26,7 @@ l'algorithme consiste à faire des série d'insertions d'éléments de type `b` 
 
 pour cette première série d'insertion, rien ne va changer à part la notation. en effet, on veut juste insérer `b1` (et, de ce fait, le `a1` qui lui est associé). or, `b1` est déjà bien placé, donc on ne fait rien.
 
-on remarque que, pour insérer un élément dans cette liste vide de `c`, 0 comparaisons ont été nécessaires.
+on remarque que, pour insérer un élément dans cette liste vide de `c`, 0 comparaisons sont nécessaires.
 
 on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
 
@@ -70,7 +70,7 @@ donc, si on insère `b3` avant `b2`, ça nous coûte, au pire, **4** comparaison
 
 ## les prochaines séries d'insertion
 
-la 2e série d'insertion a permis d'insérer 2 éléments de type `b` dans la liste finale (et automatiquement les 2 éléments de type `a` qui leur étaient associés), en utilisant, pour chaque insertion, le même nombre maximal de comparaisons.
+la 2e série d'insertion a donc permis d'insérer 2 éléments de type `b` dans la liste finale (et automatiquement les 2 éléments de type `a` qui leur étaient associés), en utilisant, pour chaque insertion, le même nombre maximal de comparaisons.
 
 on se retrouve dans cette configuration :
 
@@ -80,7 +80,7 @@ quel élément faut-il insérer ensuite ? encore une fois, cela dépend de la ta
 
 pour une taille de 6, il faut d'abord insérer `b5`, puis `b4`. ainsi, on aura, pour l'une et l'autre insertion, seulement 3 comparaisons maximum à faire.
 
-une fois `b4` et `b5` inséré, on est dans la configuration :
+une fois `b4` et `b5` insérés, on est dans la configuration :
 
 <img src="img/f.png" height="150px" />
 
@@ -136,7 +136,7 @@ on avait ensuite n = 6 car on a inséré 2 éléments de type `b` et 2 élément
 
 ensuite, on avait n = 10 (= 6 + 2 * 2), cmp(n) = 4 jusqu'à ce que n = 16. 16 - 10 = 6 et c'est pourquoi on avait une série de taille 6.
 
-### trouver l'indice sachant l'indice précédent et la prochaine taille
+### trouver l'indice d'une série sachant l'indice précédent et la taille
 
 au début de l'étape 5, on avait n = 2, indice = 1, taille = 2. donc prochain indice = 1 + 2 = 3.
 
