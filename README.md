@@ -148,16 +148,11 @@ k | 2^k | taille de c | taille de la série | indice du premier b à insérer
 6 | 64 | 22 + 2 * 10 = 42 | 64 - 42 = 22 | 21 + 22 = 43
 ... | ... | ... | ...
 
- k | 2^k | indice du premier b à insérer
---  | -- | --
-1 | 2 | 1
-2 | 4 | 3
-3 | 8 | 3 + (8 - (2 + 2 * 2)) = 5
-4 | 16 | 5 + (16 - ) = 11
-5 | 32 | 11 + 2 * 5 = 21
-6 | 64 | 21 + 2 * 11 = 43
-... | ... | ... 
+remarques :
 
+taille de c = 2 * indice précédent
+
+taille de la série = 2 * indice précédent précédent
 
 ### la suite de jacobsthal
 
