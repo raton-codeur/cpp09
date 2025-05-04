@@ -20,21 +20,25 @@ cela se fait par récurrence, selon le même algorithme. on va obtenir :
 
 **étape 4** : initialiser l'insertion.
 
-on dit qu'un élément de type `a` ou `b` devient de type `c` lorsqu'il est inséré. on insère toujours devant le premier `a`.
+on dit qu'un élément de type `a` ou `b` devient de type `c` lorsqu'il est inséré dans la liste finale. cette liste de `c` est donc triée à tout moment.
 
-on commence par insérer `b1` dans une liste vide de `c`, ce qui nécessite 0 comparaison. c'est la fin de cette série d'insertion. à la fin de chaque série d'insertion, le premier `a` devient automatiquement le dernier `c` (il se trie tout seul, si on veut). on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
+l'algorithme consiste à faire des série d'insertion d'éléments de type `b` dans la liste finale, et 
+
+rien ne va changer durant cette étape, à part la notation.
+
+on va faire la première série d'insertion . cette série se résume à insérer un seul élément, `b1`, qui est déjà bien placé, dans une liste vide de `c`, devant le premier `a`. ce qui nécessite 0 comparaison. c'est la fin de cette série d'insertion. à la fin de chaque série d'insertion, le premier `a` devient automatiquement le dernier `c` (il se trie tout seul, si on veut). on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
 
 <img src="img/b.png" height="150px" />
 
-**étape 5** : continuer l'insertion dans c
+**étape 5** : continuer l'insertion dans `c`
 
-le nombre d'éléments de type c détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les b dans l'ordre des paires. petit exemple pour comprendre cela :
+le nombre d'éléments de type `c` détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les `b` dans l'ordre des paires. petit exemple pour comprendre cela :
 
 ## si on insère b2 puis b3
 
 ### pour b2
 
-on veut insérer b2 dans un tableau trié [c1, c2]. ça va nous couter au plus 2 comparaisons (une avec c2, et, si on a pas de chance, une autre avec c1).
+on veut insérer `b2` dans un tableau trié [`c1`, `c2`]. ça va nous couter au plus 2 comparaisons (une avec `c2`, et, si on a pas de chance, une autre avec `c1`).
 
 on se retrouve avec une configuration :
 
@@ -42,39 +46,45 @@ on se retrouve avec une configuration :
 
 ### pour b3
 
-on veut insérer b3 dans un tableau trié [c1, c2, c3, c4].
+on veut insérer `b3` dans un tableau trié [`c1`, `c2`, `c3`, `c4`].
 
-comme on trie par dichotomie, on sait que ça va nous coûter au plus 3 comparaisons (une avec c3, une autre avec c2 ou c4, et potentiellement, une 3e avec c1).
+comme on trie par dichotomie, on sait que ça va nous coûter au plus 3 comparaisons (une avec `c3`, une autre avec `c2` ou `c4`, et potentiellement, une 3e avec `c1`).
 
-au final, si on insère b2 avant b3, ça nous coûte, au pire, 5 comparaisons.
+au final, si on insère `b2` avant `b3`, ça nous coûte, au pire, **5** comparaisons.
 
 ## si on insère b3 puis b2
 
 <img src="img/b.png" height="150px" />
 
-on veut insérer b3 dans un tableau trié [c1, c2]. donc, comme on l'a vu juste avant, ça va nous coûter, au plus, 2 comparaisons.
+on veut insérer `b3` dans un tableau trié [`c1`, `c2`]. donc, comme on l'a vu juste avant, ça va nous coûter, au plus, 2 comparaisons.
 
-et là, miracle, lorsqu'on va vouloir insérer b2, on sera dans cette configuration :
+et là, miracle, lorsqu'on va vouloir insérer `b2`, on sera dans cette configuration :
 
 <img src="img/d.png" height="150px" />
 
-donc on va vouloir insérer b2 dans un tableau trié [c1, c2, c3], ce qui ne coûte toujours que 2 comparaisons, et non 3 (une avec c2, et une autre avec c1 ou c3).
+donc on va vouloir insérer `b2` dans un tableau trié [`c1`, `c2`, `c3`], ce qui ne coûte toujours que 2 comparaisons, et non 3 (une avec `c2`, et une autre avec `c1` ou `c3`).
 
-donc, si on insère b3 avant b2, ça nous coûte, au pire, 4 comparaisons.
+donc, si on insère `b3` avant `b2`, ça nous coûte, au pire, **4** comparaisons. c'est mieux que si on insère `b2` avant `b3` et ce sera encore plus marquant pour de grandes tailles de `c`.
 
-après ça, on se retrouvera dans cette configuration :
+## les prochaines séries d'insertion
+
+la 2e série d'insertion a permis d'insérer 2 éléments de type `b` dans la liste finale (et automatiquement les 2 éléments de type `a` qui leur était associé), en utilisant, pour chaque insertion, le même nombre maximal de comparaisons.
+
+on se retrouve dans cette configuration :
 
 <img src="img/e.png" height="150px" />
 
-et là, quel élément faut-il insérer ? encore une fois, cela dépend de la taille de c
+quel élément faut-il insérer ensuite ? encore une fois, cela dépend de la taille de `c`.
 
-pour une taille de 6, il faut d'abord insérer b5, puis b4. ainsi, on aura, au pire, pour l'un et pour l'autre, seulement 3 comparaisons à faire.
+pour une taille de 6, il faut d'abord insérer `b5`, puis `b4`. ainsi, on aura, au pire, pour l'une et pour l'autre insertion, seulement 3 comparaisons à faire.
 
-une fois b4 et b5 inséré, on est dans la configuration :
+une fois `b4` et `b5` inséré, on est dans la configuration :
 
 <img src="img/f.png" height="150px" />
 
-et là, pour une taille de 10, il va d'abord falloir insérer b11, puis b10, b9, b8, b7, et b6. ainsi, on aura, pour toutes ces insertions, au plus 4 comparaisons à faire.
+(changer `d` en `c`)
+
+là, pour une taille de 10, la prochaine série consiste à insérer `b11`, puis `b10`, `b9`, `b8`, `b7`, et `b6` (et donc automatique les éléments de type `a` qui leur sont associés). ainsi, on aura, pour toutes ces insertions, au plus 4 comparaisons à faire.
 
 ## comprendre et trouver l'ordre des insertions
 
