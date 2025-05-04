@@ -152,10 +152,10 @@ première série d'insertion (début de l'étape 4) | 0 | 1 | 1
 --  | -- | -- | --
 1re série |  | 1 | 1
 2e série  |  | 2 | 3
-3e série  |  | 2 | 5
-4e série  |  | 6 | 11
-5e série  |  | 10 | 21
-6e série  |  | 22 | 43
+3e série  |  | 2 | 3 + 2 * 1 = 5
+4e série  |  | 6 | 5 + 2 * 3 = 11
+5e série  |  | 10 | 11 + 2 * 5 = 21
+6e série  |  | 22 | 21 + 2 * 11 = 43
 ... | ... | ... | ...
 
 
