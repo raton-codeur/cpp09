@@ -138,22 +138,22 @@ ensuite, on avait n = 10 (= 6 + 2 * 2), cmp(n) = 4 jusqu'à ce que n = 16. 16 - 
 
 ### trouver l'indice d'une série sachant l'indice précédent et la taille
 
-| | taille de c | taille de la série | indice du premier b à insérer
---  | -- | -- | --
-première série d'insertion (début de l'étape 4) | 0 | 1 | 1
-2e série (début de l'étape 5) | 0 + 2 * 1 = 2 | 4 - 2 = 2 | 1 + 2 = 3
-3e série | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 3 + 2 = 5
-4e série | 6 + 2 * 2 = 10 | 16 - 10 = 6 | 5 + 6 = 11
-5e série | 10 + 2 * 6 = 22 | 32 - 22 = 10 | 11 + 10 = 21
-6e série | 22 + 2 * 10 = 42 | 64 - 42 = 22 | 21 + 22 = 43
+k | 2^k | taille de c | taille de la série | indice du premier b à insérer
+--  | -- | -- | -- | --
+1 | 2 | 0 | 1 | 1
+2 | 4 | 0 + 2 * 1 = 2 | 4 - 2 = 2 | 1 + 2 = 3
+3 | 8 | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 3 + 2 = 5
+4 | 16 | 6 + 2 * 2 = 10 | 16 - 10 = 6 | 5 + 6 = 11
+5 | 32 | 10 + 2 * 6 = 22 | 32 - 22 = 10 | 11 + 10 = 21
+6 | 64 | 22 + 2 * 10 = 42 | 64 - 42 = 22 | 21 + 22 = 43
 ... | ... | ... | ...
 
  k | 2^k | indice du premier b à insérer
 --  | -- | --
 1 | 2 | 1
 2 | 4 | 3
-3 | 8 | 3 + 2 * 1 = 5
-4 | 16 | 5 + 2 * 3 = 11
+3 | 8 | 3 + (8 - (2 + 2 * 2)) = 5
+4 | 16 | 5 + (16 - ) = 11
 5 | 32 | 11 + 2 * 5 = 21
 6 | 64 | 21 + 2 * 11 = 43
 ... | ... | ... 
