@@ -146,8 +146,7 @@ première série d'insertion (début de l'étape 4) | 0 | 1 | 1
 4e série | 6 + 2 * 2 = 10 | 16 - 10 = 6 | 5 + 6 = 11
 5e série | 10 + 2 * 6 = 22 | 32 - 22 = 10 | 11 + 10 = 21
 6e série | 22 + 2 * 10 = 42 | 64 - 42 = 22 | 21 + 22 = 43
-
-...
+... | | |
 
 ### la suite de jacobsthal
 
