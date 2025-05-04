@@ -96,14 +96,25 @@ on peut préciser maintenant ce qu'on étend par série d'insertion d'indice `k`
 
 ### généraliser le nombre de comparaisons d'une recherche dichotomique
 
-on cherche le nombre de comparaisons nécessaires pour insérer une valeur `b` dans un tableau trié de n éléments. appelons ça nb_compare(n).
+on cherche le nombre de comparaisons maximales nécessaires pour insérer une valeur `b` dans un tableau trié de n éléments. appelons ça cmp(n).
 
 petit récap de ce qu'on a vu + généralisation :
 
-n | nb_compare(n)
+n | cmp(n)
 -- | --
 2 | 2
 3 | 2
+4 | 3
+5 | 3
+6 | 3
+7 | 3
+8 | 4
+9 | 4
+... | 4
+15 | 4
+16 | 5
+17 | 5
+... | ...
 
 
 on l'a vu, pour n = 2, c'est 2. pour n = 3, c'est 2 aussi. pour n = 4, 5, 6, 7, c'est 3. à partir de 8, c'est 4. à partir de 16, c'est 5.
