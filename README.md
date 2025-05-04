@@ -90,25 +90,35 @@ là, pour une taille de `c` de 10, la prochaine série consiste à insérer `b11
 
 on peut préciser maintenant ce qu'on étend par série d'insertion d'indice `k` : c'est le fait d'insérer tous les éléments de type `b` qui sont d'indice `k` ou moins, du plus grand au plus petit.
 
-à ce stade on a donc réalisé les séries d'insertions d'indice 1, 3, 5, 
+à ce stade on a donc réalisé les 4 premières séries d'insertions, d'indices : 1, 3, 5 et 11.
 
-## comprendre et trouver l'ordre des insertions
+## comprendre et trouver les indices des séries d'insertions
 
-### généraliser la recherche dichotomique
+### généraliser le nombre de comparaisons d'une recherche dichotomique
 
-on cherche le nombre de comparaisons nécessaires pour insérer une valeur b dans un tableau trié de n éléments.
+on cherche le nombre de comparaisons nécessaires pour insérer une valeur `b` dans un tableau trié de n éléments. appelons ça nb_compare(n).
+
+petit récap de ce qu'on a vu + généralisation :
+
+n | nb_compare(n)
+- | -
+2 | 2
+3 | 2
+
 
 on l'a vu, pour n = 2, c'est 2. pour n = 3, c'est 2 aussi. pour n = 4, 5, 6, 7, c'est 3. à partir de 8, c'est 4. à partir de 16, c'est 5.
 
 on en déduit que, pour une taille n, c'est floor ( log2 (n) ) + 1.
 
+les indices des séries d'insertions sont donc les n tels que doivent donc être les plus grand n tel que n + 1 
+
 ### lien avec la suite de jacobsthal
 
-pas vraiment besoin d'utiliser la taille de la liste c. on a juste besoin de retrouver la suite :
+au final, on a pas vraiment besoin d'utiliser la taille de la liste `c`. on a juste besoin de retrouver la suite :
 
-0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, ...
+1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, ...
 
-elle nous donne l'indice des éléments b qui initient une série d'insertion. d'où le fait qu'il faille d'abord insérer :
+elle nous donne pile poil les indices succéssifs des   du plus grand élément de `b` qui initient une série d'insertion réalisant au plus `floor ( log2 (n) ) + 1` comparaisons, c'est à dire, . d'où le fait qu'il faille d'abord insérer :
 - b3 + tout ce qui lui est inférieur, donc b2
 - b5, b4
 - b11, b10, b9, b8, b7, b6
