@@ -140,7 +140,7 @@ ensuite, on avait n = 10 (= 6 + 2 * 2), cmp(n) = 4 jusqu'à ce que n = 16. 16 - 
 
 | | taille de c | taille de la série | indice du premier b
 --  | -- | -- | --
-première série d'insertion (étape 4) | 0 | 2 | 1
+première série d'insertion (début de l'étape 4) | 0 | 2 | 1
 2e série (début de l'étape 5) | 0 + 2 * 2 = 2 | 2 | 3
 
 au début de l'étape 5, on avait n = 2, indice = 1, taille = 2. donc prochain indice = 1 + 2 = 3.
