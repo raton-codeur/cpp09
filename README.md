@@ -8,9 +8,9 @@ algorithme en 5 étapes.
 
 **étape 2** : ordonner les 2 éléments qui composent chaque paire.
 
-on dit que l'élément le plus grand d'une paire donnée est de type `a`, et l'autre de type `b`.
+on dit que l'élément le plus grand d'une paire donnée est de type `a`, et l'autre est de type `b`.
 
-la notation `b -> a` signifie `b` < `a`. dans la paire d'indice `n`, on a : `b_n -> a_n`.
+la notation `b -> a` signifie b < a. dans la paire d'indice `n`, on a donc : `b_n -> a_n`.
 
 **étape 3** : trier les paires par ordre croissant selon les éléments de type `a`.
 
@@ -24,9 +24,9 @@ on dit qu'un élément de type `a` ou `b` devient de type `c` lorsqu'il est ins�
 
 l'algorithme consiste à faire des série d'insertions d'éléments de type `b` dans la liste finale, ce qui au passage va aussi insérer les éléments de type `a` qui leur sont associés.
 
-pour cette première série d'insertion, rien ne va changer à part la notation. en effet, on veut juste insérer `b1` (et automatiquement le `a1` qui lui est associé). or, `b1` est déjà bien placé, donc on ne fait rien.
+pour cette première série d'insertion, rien ne va changer à part la notation. en effet, on veut juste insérer `b1` (et, de ce fait, le `a1` qui lui est associé). or, `b1` est déjà bien placé, donc on ne fait rien.
 
-à noter que pour insérer un élément dans cette liste vide de `c`, 0 comparaisons auront été nécessaires.
+on remarque que, pour insérer un élément dans cette liste vide de `c`, 0 comparaisons ont été nécessaires.
 
 on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
 
@@ -34,7 +34,7 @@ on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
 
 **étape 5** : continuer les séries d'insertions.
 
-le nombre d'éléments de type `c` détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les `b` dans l'ordre des paires. petit exemple pour comprendre cela :
+le nombre d'éléments de type `c` détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les `b` dans l'ordre des paires. petit exemple pour comprendre pourquoi :
 
 ## si on insère b2 puis b3
 
@@ -70,7 +70,7 @@ donc, si on insère `b3` avant `b2`, ça nous coûte, au pire, **4** comparaison
 
 ## les prochaines séries d'insertion
 
-la 2e série d'insertion a permis d'insérer 2 éléments de type `b` dans la liste finale (et automatiquement les 2 éléments de type `a` qui leur était associé), en utilisant, pour chaque insertion, le même nombre maximal de comparaisons.
+la 2e série d'insertion a permis d'insérer 2 éléments de type `b` dans la liste finale (et automatiquement les 2 éléments de type `a` qui leur étaient associés), en utilisant, pour chaque insertion, le même nombre maximal de comparaisons.
 
 on se retrouve dans cette configuration :
 
@@ -78,7 +78,7 @@ on se retrouve dans cette configuration :
 
 quel élément faut-il insérer ensuite ? encore une fois, cela dépend de la taille de `c`.
 
-pour une taille de 6, il faut d'abord insérer `b5`, puis `b4`. ainsi, on aura, au pire, pour l'une et pour l'autre insertion, seulement 3 comparaisons à faire.
+pour une taille de 6, il faut d'abord insérer `b5`, puis `b4`. ainsi, on aura, pour l'une et l'autre insertion, seulement 3 comparaisons maximum à faire.
 
 une fois `b4` et `b5` inséré, on est dans la configuration :
 
@@ -86,7 +86,11 @@ une fois `b4` et `b5` inséré, on est dans la configuration :
 
 (changer `d` en `c`)
 
-là, pour une taille de 10, la prochaine série consiste à insérer `b11`, puis `b10`, `b9`, `b8`, `b7`, et `b6` (et donc automatique les éléments de type `a` qui leur sont associés). ainsi, on aura, pour toutes ces insertions, au plus 4 comparaisons à faire.
+là, pour une taille de `c` de 10, la prochaine série consiste à insérer `b11`, puis `b10`, `b9`, `b8`, `b7`, et `b6` (et donc automatique les éléments de type `a` qui leur sont associés). ainsi, on aura, pour toutes ces insertions, au plus 4 comparaisons à faire.
+
+on peut préciser maintenant ce qu'on étend par série d'insertion d'indice `k` : c'est le fait d'insérer tous les éléments de type `b` qui sont d'indice `k` ou moins, du plus grand au plus petit.
+
+à ce stade on a donc réalisé les séries d'insertions d'indice 1, 3, 5, 
 
 ## comprendre et trouver l'ordre des insertions
 
