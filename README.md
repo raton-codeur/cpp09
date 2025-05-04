@@ -66,7 +66,7 @@ et là, miracle, lorsqu'on va vouloir insérer `b2`, on sera dans cette configur
 
 donc on va vouloir insérer `b2` dans un tableau trié [`c1`, `c2`, `c3`], ce qui ne coûte toujours que 2 comparaisons, et non 3 (une avec `c2`, et une autre avec `c1` ou `c3`).
 
-donc, si on insère `b3` avant `b2`, ça nous coûte, au pire, **4** comparaisons. c'est mieux que si on insère `b2` avant `b3` et ce sera encore plus marquant pour de grandes tailles de `c`.
+donc, si on insère `b3` avant `b2`, ça nous coûte, au pire, **4** comparaisons. c'est mieux que si on insère `b2` avant `b3` et ce serait encore plus marquant pour de grandes tailles de `c`.
 
 ## les prochaines séries d'insertion
 
@@ -94,7 +94,9 @@ on peut préciser maintenant ce qu'on étend par série d'insertion d'indice `k`
 
 ## comprendre et trouver les indices des séries d'insertions
 
-### généraliser le nombre de comparaisons d'une recherche dichotomique
+pour trouver l'indice d'une nouvelle série, sachant celle de la précédente, il faut qu'on trouve sa taille, c'est a dire, le nombre d'éléments de type `b` qui vont être insérés au cours de la série. en effet, l'indice d'une série c'est l'indice de la précédente série + la taille de la nouvelle série.
+
+### nombre de comparaisons d'une recherche dichotomique
 
 on cherche le nombre de comparaisons maximales nécessaires pour insérer une valeur `b` dans un tableau trié de n éléments. appelons ça cmp(n).
 
@@ -110,30 +112,51 @@ n | cmp(n)
 7 | 3
 8 | 4
 9 | 4
-... | 4
+10 | 4
+11 | 4
+12 | 4
+13 | 4
+14 | 4
 15 | 4
 16 | 5
 17 | 5
 ... | ...
 
+on remarque que cmp(n) change à chaque puissance de 2.
 
-on l'a vu, pour n = 2, c'est 2. pour n = 3, c'est 2 aussi. pour n = 4, 5, 6, 7, c'est 3. à partir de 8, c'est 4. à partir de 16, c'est 5.
+on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
-on en déduit que, pour une taille n, c'est floor ( log2 (n) ) + 1.
+### trouver la taille d'une série pour n donné
 
-les indices des séries d'insertions sont donc les n tels que doivent donc être les plus grand n tel que n + 1 
+pour une liste de `c` de taille `n` donnée, on sait que toutes les insertions de la prochaine série utiliseront des recherches dichotomiques à `cmp(n)` comparaisons maximales. la question revient donc à trouver le nombre de valeurs supérieurs ou égales à `n` qui donnent ce même `cmp(n)`.
 
-### lien avec la suite de jacobsthal
+par exemple, au début de l'étape 5, on avait n = 2. cmp(2) = 2 et, dans le tableau, on voit bien que cmp(n) reste à 2 jusqu'à la prochaine puissance de 2, qui est 4. c'est ce qui explique que la taille de la prochaine série devait être de 4 - 2 = 2.
 
-au final, on a pas vraiment besoin d'utiliser la taille de la liste `c`. on a juste besoin de retrouver la suite :
+on avait ensuite n = 6 car on a inséré 2 éléments de type `b` et 2 éléments de type `a` à une liste de taille `2`. cmp(6) = 3 et cmp(n) reste à 3 jusqu'à ce que n = 8. 8 - 6 = 2 donc on a encore eu une série de taille 2.
 
-1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, ...
+ensuite, on avait n = 10 (= 6 + 2 * 2), cmp(n) = 4 jusqu'à ce que n = 16. 16 - 10 = 6 et c'est pourquoi on avait une série de taille 6.
 
-elle nous donne pile poil les indices succéssifs des   du plus grand élément de `b` qui initient une série d'insertion réalisant au plus `floor ( log2 (n) ) + 1` comparaisons, c'est à dire, . d'où le fait qu'il faille d'abord insérer :
-- b3 + tout ce qui lui est inférieur, donc b2
-- b5, b4
-- b11, b10, b9, b8, b7, b6
-- b21, b20, ..., b12
+### trouver l'indice sachant l'indice précédent et la prochaine taille
+
+au début de l'étape 5, on avait n = 2, indice = 1, taille = 2. donc prochain indice = 1 + 2 = 3.
+
+pour la prochaine série, on a n = 2 + 2 * 2 = 6, indice = 3, taille = 2, prochain indice = 3 + 2 = 5.
+
+prochaine série : n = 6 + 2 * 2 = 10, indice = 5, taille = 16 - 10 = 6, prochain indice = 5 + 6 = 11.
+
+prochaine série : n = 10 + 2 * 6 = 22, indice = 11, taille = 32 - 22 = 10, prochain indice = 11 + 10 = 21
+
+prochaine série : n = 22 + 2 * 10 = 42, indice = 21, taille = 64 - 42 = 22, prochain indice = 21 + 22 = 43
+
+...
+
+### la suite de jacobsthal
+
+on peut remarquer que les indices suivent la suite de jacobsthal :
+
+J_n = J_(n - 1) + 2 * J_(n - 2)
+
+donc on pourra directement utiliser cette propriété.
 
 # annexe : trouver l'indice d'insertion grâce à la recherche dichotomique
 
