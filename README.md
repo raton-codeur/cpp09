@@ -20,13 +20,13 @@ cela se fait par récurrence, selon le même algorithme. on va obtenir :
 
 **étape 4** : initialiser l'insertion.
 
-on dit qu'un élément de type `a` ou `b` devient de type `c` lorsqu'il est inséré dans la liste finale. cette liste de `c` est donc triée à tout moment.
+on dit qu'un élément de type `a` ou `b` devient de type `c` lorsqu'il est inséré dans la liste finale. la liste des `c` en question est donc triée à tout moment et se situe avant les paires (voir sur les schémas).
 
 l'algorithme consiste à faire des série d'insertions d'éléments de type `b` dans la liste finale, ce qui au passage va aussi insérer les éléments de type `a` qui leur sont associés.
 
-pour cette première série d'insertion, rien ne va changer, à part la notation. en effet, on va juste insérer `b1`, qui est déjà bien placé, et `a1`, qui est déjà bien placé.
+pour cette première série d'insertion, rien ne va changer à part la notation. en effet, on veut juste insérer `b1` (et automatiquement le `a1` qui lui est associé). or, `b1` est déjà bien placé.
 
-à noter que pour une liste de `c` vide, la série d'insertion aura nécessité 0 comparaison.
+à noter que pour insérer un élément dans cette liste vide de `c`, 0 comparaisons auront été nécessaires.
 
 on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
 
