@@ -18,11 +18,11 @@ cela se fait par récurrence, selon le même algorithme. on va obtenir :
 
 <img src="img/a.png" height="150px" />
 
-**étape 4** : commencer l'insertion
+**étape 4** : initialiser l'insertion.
 
-un élément a ou b devient de type c lorsqu'il est inséré. on insère toujours devant le premier a.
+on dit qu'un élément de type `a` ou `b` devient de type `c` lorsqu'il est inséré. on insère toujours devant le premier `a`.
 
-on commence par insérer b1 dans une liste vide de c, ce qui nécessite 0 comparaison. c'est la fin de cette série d'insertion. à la fin de chaque série d'insertion, le premier a devient automatiquement le dernier c (il se trie tout seul, si on veut). on obtient les 2 premiers c, qui sont les anciens b1 et a1 :
+on commence par insérer `b1` dans une liste vide de `c`, ce qui nécessite 0 comparaison. c'est la fin de cette série d'insertion. à la fin de chaque série d'insertion, le premier `a` devient automatiquement le dernier `c` (il se trie tout seul, si on veut). on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
 
 <img src="img/b.png" height="150px" />
 
