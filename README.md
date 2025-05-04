@@ -10,7 +10,7 @@ algorithme en 5 étapes.
 
 on dit que l'élément le plus grand d'une paire donnée est de type `a`, et l'autre de type `b`.
 
-la notation `b -> a` signifie `b` < `a`. dans la paire d'indice `n`, on a : `b`<sub>`n`</sub>` -> `a`<sub>`n`</sub>
+la notation `b -> a` signifie `b` < `a`. dans la paire d'indice `n`, on a : `b_n -> a_n`.
 
 **étape 3** : trier les paires par ordre croissant selon les éléments de type `a`.
 
