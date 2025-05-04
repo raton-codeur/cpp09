@@ -1,8 +1,8 @@
 # comprendre le tri par fusion-insertion
 
-algorithme en 5 étapes.
+on veut trier un tableau de n nombres.
 
-on veut trier un tableau de n nombres
+algorithme en 5 étapes.
 
 **étape 1** : faire des paires d'éléments
 
