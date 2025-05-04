@@ -138,20 +138,14 @@ ensuite, on avait n = 10 (= 6 + 2 * 2), cmp(n) = 4 jusqu'à ce que n = 16. 16 - 
 
 ### trouver l'indice d'une série sachant l'indice précédent et la taille
 
-| | taille de c | taille de la série | indice du premier b
+| | taille de c | taille de la série | indice du premier b à insérer
 --  | -- | -- | --
-première série d'insertion (début de l'étape 4) | 0 | 2 | 1
-2e série (début de l'étape 5) | 0 + 2 * 2 = 2 | 2 | 3
-
-au début de l'étape 5, on avait n = 2, indice = 1, taille = 2. donc prochain indice = 1 + 2 = 3.
-
-pour la prochaine série, on a n = 2 + 2 * 2 = 6, indice = 3, taille = 2, prochain indice = 3 + 2 = 5.
-
-prochaine série : n = 6 + 2 * 2 = 10, indice = 5, taille = 16 - 10 = 6, prochain indice = 5 + 6 = 11.
-
-prochaine série : n = 10 + 2 * 6 = 22, indice = 11, taille = 32 - 22 = 10, prochain indice = 11 + 10 = 21
-
-prochaine série : n = 22 + 2 * 10 = 42, indice = 21, taille = 64 - 42 = 22, prochain indice = 21 + 22 = 43
+première série d'insertion (début de l'étape 4) | 0 | 1 | 1
+2e série (début de l'étape 5) | 0 + 2 * 1 = 2 | 4 - 2 = 2 | 1 + 2 = 3
+3e série | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 3 + 2 = 5
+4e série | 6 + 2 * 2 = 10 | 16 - 10 = 6 | 5 + 6 = 11
+5e série | 10 + 2 * 6 = 22 | 32 - 22 = 10 | 11 + 10 = 21
+6e série | 22 + 2 * 10 = 42 | 64 - 42 = 22 | 21 + 22 = 43
 
 ...
 
