@@ -148,15 +148,15 @@ première série d'insertion (début de l'étape 4) | 0 | 1 | 1
 6e série | 22 + 2 * 10 = 42 | 64 - 42 = 22 | 21 + 22 = 43
 ... | ... | ... | ...
 
-| | taille de c | taille de la série | indice du premier b à insérer
---  | -- | -- | --
-1re série |  |  | 1
-2e série  |  |  | 3
-3e série  |  |  | 3 + 2 * 1 = 5
-4e série  |  |  | 5 + 2 * 3 = 11
-5e série  |  |  | 11 + 2 * 5 = 21
-6e série  |  |  | 21 + 2 * 11 = 43
-... | ... | ... | ...
+ k | 2^k | indice du premier b à insérer
+--  | -- | --
+1 | 2 | 1
+2 | 4 | 3
+3 | 8 | 3 + 2 * 1 = 5
+4 | 16 | 5 + 2 * 3 = 11
+5 | 32 | 11 + 2 * 5 = 21
+6 | 64 | 21 + 2 * 11 = 43
+... | ... | ... 
 
 
 ### la suite de jacobsthal
