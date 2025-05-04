@@ -4,8 +4,8 @@ algorithme en 5 étapes.
 
 on veut trier un tableau de n nombres
 
-1. faire des paires d'éléments
-2. ordonner les 2 éléments qui composent chaque paire
+*étape 1* : faire des paires d'éléments
+1. ordonner les 2 éléments qui composent chaque paire
 
 en parcourant les paires, on obtient la liste d'éléments :
 - a1 a2 a3... : la liste des éléments haut
