@@ -138,7 +138,7 @@ ensuite, on avait n = 10 (= 6 + 2 * 2), cmp(n) = 4 jusqu'à ce que n = 16. 16 - 
 
 ### trouver l'indice d'une série sachant l'indice précédent et la taille
 
-| taille de c | taille de la série | indice du premier b
+ | taille de c | taille de la série | indice du premier b
 --  | -- | -- | --
 première série d'insertion (étape 4) | 0 | 2 | 1
 2e série (début de l'étape 5) | 0 + 2 * 2 = 2 | 2 | 3
