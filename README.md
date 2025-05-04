@@ -150,12 +150,12 @@ première série d'insertion (début de l'étape 4) | 0 | 1 | 1
 
 | | taille de c | taille de la série | indice du premier b à insérer
 --  | -- | -- | --
-première série d'insertion (début de l'étape 4) | 0 | 1 | 1
-2e série (début de l'étape 5) | 0 + 2 * 1 = 2 | 4 - 2 = 2 | 1 + 2 = 3
-3e série | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 3 + 2 = 5
-4e série | 6 + 2 * 2 = 10 | 16 - 10 = 6 | 5 + 6 = 11
-5e série | 10 + 2 * 6 = 22 | 32 - 22 = 10 | 11 + 10 = 21
-6e série | 22 + 2 * 10 = 42 | 64 - 42 = 22 | 21 + 22 = 43
+1re série |  | 1 | 1
+2e série  |  | 2 | 3
+3e série  |  | 2 | 5
+4e série  |  | 6 | 11
+5e série  |  | 10 | 21
+6e série  |  | 22 | 43
 ... | ... | ... | ...
 
 
