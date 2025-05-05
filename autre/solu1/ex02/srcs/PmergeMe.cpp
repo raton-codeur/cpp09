@@ -16,7 +16,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 
 PmergeMe::~PmergeMe() {}
 
-void PmergeMe::setData(const std::vector<int>& data)
+void PmergeMe::setData(const Vec& data)
 {
     m_data = data;
 }
@@ -26,7 +26,7 @@ void PmergeMe::setDeq(const std::deque<int>& deq)
     m_deq = deq;
 }
 
-std::vector<int>& PmergeMe::getData()
+Vec& PmergeMe::getData()
 {
     return m_data;
 }

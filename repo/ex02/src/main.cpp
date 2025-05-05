@@ -1,6 +1,15 @@
 #include "PmergeMe.hpp"
 
-int main()
+int main(int argc, char** argv)
 {
-	std::cout << "test" << std::endl;
+	try
+	{
+		PmergeMe p(argc, argv);
+		p.sort(1);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << RED << "error : " << e.what() << RESET << std::endl;
+		return 1;
+	}
 }

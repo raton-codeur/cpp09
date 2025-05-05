@@ -1,5 +1,5 @@
 NAME = PmergeMe
-FLAGS = -Wall -Wextra -Werror -std=c++98 -Iinc
+FLAGS = -Wall -Wextra -Werror -std=c++98 -Iinc -fsanitize=address -g3
 SRCS = $(addprefix src/, \
 	main.cpp \
 	PmergeMe.cpp \
@@ -24,6 +24,6 @@ fclean : clean
 re : fclean all
 
 test : re
-	./$(NAME) input.txt
+	./$(NAME) 6 14 5 12 1 3 7 13 8 2 11 15 4 10 9 16
 
 .PHONY: all clean fclean re test
