@@ -24,6 +24,6 @@ fclean : clean
 re : fclean all
 
 test : re
-	./$(NAME) 6 14 5 12 1 3 7 13 8 2 11 15 4 10 9 16
+	./$(NAME) 14 6 5 19
 
 .PHONY: all clean fclean re test

@@ -26,8 +26,7 @@ class PmergeMe
 		PmergeMe(int argc, char** argv);
 		~PmergeMe();
 
-		void	sort(size_t n);
-		void	swapPairs(size_t n);
+		void	sort();
 		std::vector<int>& getV() { return _v; }
 };
 

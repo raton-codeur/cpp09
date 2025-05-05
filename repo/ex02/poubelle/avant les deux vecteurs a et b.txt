@@ -1,0 +1,110 @@
+
+
+-
+vecteur v
+une paire = 2 éléments
+n : la taille indivisible d'un élément
+-
+
+-
+parcourir les éléments
+	i = n - 1
+	j = 0
+	k = 0
+	tant que i < size de v
+		on a la tete à l'indice i
+		on a l'indice du début de l'élément à l'indice j
+		pour a l'indice de l'élément à l'indice k
+		i += n
+		j += n
+-
+
+
+-
+imaginons qu'on a remonté tous les appels récursifs
+
+on a une liste current d'éléments de taille 1 : b1 a1 b2 a2...
+
+si le nombre d'éléments de current est <= 2
+	return current
+
+next = [b1, a1]
+jacobsthal_previous = 1
+jacobsthal_current = 3
+indice du dernier b =
+	(nombre d'éléments de current) + 1 / 2
+	avec nombre d'éléments de current = size / n
+
+indice du b_previous = formule du 2 * (i - 1) pour i = jacobsthal_previous
+indice du b_current = ...
+indice de b = indice du b_previous + 2 * n
+
+tant que l'indice de b < v.size
+	tant que l'indice de b < l'indice 
+	tant qu'il y a des b d'indice compris entre jacobsthal current (inclus) et jacobsthal previous (exclu) dans current :
+		insérer (dans le sens décroissant) les b dans le next 
+	insérer les a correspondant aux b insérés dans le next (dans l'ordre croissant)
+	tmp = jacobsthal_previous
+	jacobsthal_previous = jacobsthal_current
+	jacobsthal_current += 2 * tmp
+return next
+-
+
+
+
+
+-
+i : un indice de tete d'élément
+j : un indice de début d'élément
+k : un indice d'élément
+
+k <-> i
+i = k * n
+
+k <-> j
+j = (n - 1) + k * n
+
+b_i a pour indice : 2 * (i - 1)
+a_i a pour indice : 2 * i - 1
+-
+
+
+
+
+
+
+-
+autre idée : utiliser deux vecteurs, un pour les a, un autre pour les b
+comme ça, a[i] et b[i] on le bon sens
+
+pour commencer on peut peut etre utiliser plus de données que nécessaires.
+
+à terme j'aimerais bien, si on garde l'idées des deux vecteurs a et b, adapter l'insertion pour qu'elle se fasse directement dans le vecteur des a.
+
+pour l'instant, on va utiliser un autre vecteur pour écrire le next
+
+dans a et b on peut laisser la première case vide pour utiliser les vrais indices !
+
+
+gardons le swap en place de tout à l'heure pour l'instant, je pense pas qu'il soit si terrible.
+
+on a un vecteur current : b1 a1 b2 a2...
+
+init de a[0] à a[n - 1] à 0
+pareil pour b
+
+on parcourt current avec i pour l'indice du début, j pour la tete, k pour indice :
+	si k est pair :
+		insérer l'élément dans b
+	sinon
+		insérer l'élément dans a
+-
+
+
+
+-
+version simplifiée
+
+-
+
+
