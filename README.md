@@ -128,11 +128,11 @@ on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
 ### trouver la taille d'une série pour n donné
 
-pour une liste de `c` de taille `n` donnée, on sait que toutes les insertions de la prochaine série utiliseront des recherches dichotomiques à `cmp(n)` comparaisons maximales. la question revient donc à trouver le nombre de valeurs supérieurs ou égales à `n` qui donnent ce même `cmp(n)`.
+pour une liste de `c` de taille `n` donnée, on sait que toutes les insertions de la prochaine série utiliseront des recherches dichotomiques à `cmp(n)` comparaisons maximum. la question revient donc à trouver le nombre de valeurs supérieurs ou égales à `n` qui donnent ce même `cmp(n)`.
 
 par exemple, au début de l'étape 5, on avait n = 2. cmp(2) = 2 et, dans le tableau, on voit bien que cmp(n) reste à 2 jusqu'à la prochaine puissance de 2, qui est 4. c'est ce qui explique que la taille de la prochaine série devait être de 4 - 2 = 2.
 
-on avait ensuite n = 6 car on a inséré 2 éléments de type `b` et 2 éléments de type `a` à une liste de taille `2`. cmp(6) = 3 et cmp(n) reste à 3 jusqu'à ce que n = 8. 8 - 6 = 2 donc on a encore eu une série de taille 2.
+on avait ensuite n = 6 car on a inséré 2 éléments de type `b` et 2 éléments de type `a` dans une liste de taille `2`. cmp(6) = 3 et cmp(n) reste à 3 jusqu'à ce que n = 8. 8 - 6 = 2 donc on a encore eu une série de taille 2.
 
 ensuite, on avait n = 10 (= 6 + 2 * 2), cmp(n) = 4 jusqu'à ce que n = 16. 16 - 10 = 6 et c'est pourquoi on avait une série de taille 6.
 
@@ -178,12 +178,11 @@ on peux faire mieux avec la recherche dichotomique, car `T` est trié, réduisan
 
 c'est un algorithme récursif. appelons-le `recherche_indice`. il prend en argument le sous tableau de `T` des éléments compris entre les indices `i` (inclus) et `j` exclu, que je vais noter `T[i:j]`, et notre élément `b`.
 
-- cas de base : `T[i:j]` est de taille 1.
-  - si `T[i]` < `b`, alors on a trouvé l'indice où insérer : c'est `j`. ainsi, on va insérer `b` juste après `T[i]`. 
-  - si `T[i]` > `b`, alors on a trouvé l'indice où insérer : c'est `i`. ainsi, on va insérer `b` juste avant `T[i]`. 
-- pour un sous tableau `T[i:j]` de taille `j - i` > 1, on compare `b` à l'élément central de `T[i:j]`. appelons `c` l'indice de cet élément central. on l'obtient en faisant : `i + (j - i) / 2`.
+- cas de base : `T[i:j]` est vide car `i == j`.
+  - on peut renvoyer `i`, c'est l'indice auquel il faut insérer `b`
+- pour un sous tableau `T[i:j]` de taille `j - i` > 0, on compare `b` à l'élément central de `T[i:j]`. appelons `c` l'indice de cet élément central. on l'obtient en faisant : `i + (j - i) / 2`.
   - si `b` < `T[c]`, on renvoie `recherche_indice(T[i:c], b)` 
-  - si `b` > `T[c]`, on renvoie `recherche_indice(T[c:j], b)`
+  - si `b` > `T[c]`, on renvoie `recherche_indice(T[(c + 1):j], b)`
 
 ## exemple simple
 
@@ -202,9 +201,12 @@ recherche_indice(T[0:4], 8)
 		8 < 9 donc on renvoie recherche_indice(T[0:1], 8)
 		recherche_indice(T[0:1], 8)
 			taille de T[0:1] = 1
-			(cas de base)
+			c = 0 + 1 / 2 = 0
 			T[0] = 2
-			2 < 8 donc on renvoie 1
+			8 > 2 donc on renvoie recherche_indice(T[1:1], 8)
+				recherche_indice(T[1:1], 8)
+					cas de base
+					on renvoie 1
 
 recherche_indice(T[0:4], 10)
 	taille de T[0:4] = 4
@@ -213,12 +215,9 @@ recherche_indice(T[0:4], 10)
 	10 < 13 donc on renvoie recherche_indice(T[0:2], 10)
 	recherche_indice(T[0:2], 10)
 		taille de T[0:2] = 2
-		c = 1
+		c = 0 + 2 / 2 = 1
 		T[1] = 9
-		10 > 9 donc on renvoie recherche_indice(T[1:2], 10)
-		recherche_indice(T[1:2], 10)
-			taille de T[1:2] = 1
-			(cas de base)
-			T[1] = 9
-			9 < 10 donc on renvoie 2
+		10 > 9 donc on renvoie recherche_indice(T[2:2], 10)
+			cas de base
+			on renvoie 2
 ```
