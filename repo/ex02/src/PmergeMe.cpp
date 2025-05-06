@@ -56,15 +56,13 @@ PmergeMe::PmergeMe(int argc, char** argv)
 
 void print(Vec& v, size_t n)
 {
-	size_t iE;
-	size_t i;
-	size_t nbE;
+	size_t iR;
 
-	nbE = (v.size() / n) * n;
-	for (iE = 0; iE < nbE; iE += n)
+	iR = v.size() - v.size() % n;
+	for (size_t iE = 0; iE < iR; iE += n)
 	{
 		std::cout << "[";
-		for (i = iE; i < iE + n; ++i)
+		for (size_t i = iE; i < iE + n; ++i)
 		{
 			std::cout << v[i];
 			if (i != iE + n - 1)
@@ -72,19 +70,29 @@ void print(Vec& v, size_t n)
 		}
 		std::cout << "]";
 	}
-	for (i = iE; i < v.size(); ++i)
+	for (size_t i = iR; i < v.size(); ++i)
 	{
 		std::cout << v[i];
 		if (i != v.size() - 1)
 			std::cout << " ";
 	}
+	std::cout << std::endl;
 }
 
-void PmergeMe::sort()
+
+
+
+void PmergeMe::main()
 {
 	Vec v = _v;
-	size_t n = 2;
+	size_t n = 1;
 
 	print(v, n);
+
+	Vec a;
+	Vec b;
+
+	
+	
 
 }

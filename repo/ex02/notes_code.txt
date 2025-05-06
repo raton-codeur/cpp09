@@ -1,18 +1,72 @@
 
 
 -
-define
+les variables
 
-_v : le vecteur 
-_n : la taille d'un élément dans v 
-_nbE : le nombre d'éléments dans v
-_e : l'indice dans v du début d'un élément
-_h : l'indice dans v de la tête d'un d'élément
-_i : l'indice d'un élément
+v : le vecteur 
+n : la taille d'un élément dans v
+iR : indice du reste, l'indice dans v juste après le dernier élément de v
+iE : l'indice dans v du début d'un élément
+iH : l'indice dans v de la tête d'un d'élément
 -
 
 -
-calculs
+iR = (v.size() / n) * n;
+
+parcourir les elements avec
+for iE = 0; iE < iR; iE += n
+
+pour un iE donné on peut parcourir les nombres de l'élément avec
+for i = iE; i < iE + n; ++i
+
+on peut parcourir les elements du reste avec
+for i = iR; i < v.size(); ++i
+-
+
+
+-
+on a nos pairs ordonnées : 3 4 1 6 2 7 5 9 8 10 
+
+iR : indice du premier nombre qui n'est pas un élément ou pas en couple
+	iR = v.size() - v.size() % (2 * n)
+
+boucler sur les couples
+	for iE = 0; iE + n < iR; iE += 2 * n
+		if (v[iE + n - 1] < v[iE + 2 * n - 1])
+			b est à iE, a est à iE + n
+			push les nombres dans b puis a
+				for i = 0; i < n; ++i
+					b . push back (v[iE + i])
+				for i = 0; i < n; ++i
+					a.push_back(v[iE + n + i])
+		sinon
+			a est à iE, b est à iE + n
+			push les nombres dans a puis b
+
+recopier le reste des nombres dans b
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 _nbE = _v.size() / _n
 
@@ -33,12 +87,6 @@ trouver l'indice dans v de l'élément b_k
 
 
 -
-on veut swap les pairs
-on donne v et la taille d'un element
-
-parcourir les elements avec iE, deux par deux
-	si les tetes sont pas dans le bon ordre
-		swap les pairs
 
 
 

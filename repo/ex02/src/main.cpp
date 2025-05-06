@@ -5,7 +5,7 @@ int main(int argc, char** argv)
 	try
 	{
 		PmergeMe p(argc, argv);
-		p.sort();
+		p.main();
 	}
 	catch (const std::exception& e)
 	{

@@ -27,7 +27,7 @@ class PmergeMe
 		PmergeMe(int argc, char** argv);
 		~PmergeMe();
 
-		void sort();
+		void main();
 };
 
 #endif
