@@ -8,8 +8,7 @@ voir la version précédente plus bas !
 
 on veut trier un tableau T de n nombres.
 
-# première étape de l'algo :
-# parcourir T pour faire des paires ordonnées d'éléments.
+# première étape de l'algo : parcourir T pour faire des paires ordonnées d'éléments.
 
 on obtient deux tableaux : `a` et `b`
 
