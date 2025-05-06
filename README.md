@@ -72,7 +72,7 @@ b = 2, 3, 5
 
 ## étape 4 : insérer le reste des éléments de b dans a
 
-on va faire des séries d'insertion d'éléments de b dans a. mais il ne faut pas juste insérer les `b` dans l'ordre. on va vite comprendre pourquoi.
+on va faire des séries d'insertion d'éléments de `b` dans `a`. mais il ne faut pas juste insérer les `b` dans l'ordre. on va vite comprendre pourquoi.
 
 ### définition
 
@@ -84,9 +84,9 @@ la première série d'insertion est S0, puis S1, S2, S3, ...
 
 ---
 
-S0 a déjà été réalisé à l'étape 3 lorsqu'on a inséré b0 au début de `a`. c'était une série de taille 1.
+S0 a déjà été réalisé à l'étape 3 lorsqu'on a inséré `b0` au début de `a`. c'était une série de taille 1.
 
-on continue avec S1 et `len = 3` (on verra pourquoi plus tard).
+on continue avec S1 et `len = 3` (on verra pourquoi plus tard), pour insérer les deux prochains `b` : `b1` et `b2`.
 
 situation :
 
@@ -94,21 +94,21 @@ situation :
 
 #### si on insère b1 puis b2
 
-la prochaine série, S1, est de taille 2. mais il faut absolument insérer b2 avant b1. voici pourquoi.
-
 (il faut absolument être à l'aise en recherche dichotomique pour comprendre cette partie. voir l'annexe ci-dessous si ce n'est pas le cas.)
 
 on a un truc comme ça :
 
 <img src="img/i.png" height="150px" />
 
-insérer b1 dans le tableau des 2 premiers éléments de `a`, coûte au plus 2 comparaisons.
+insérer b1 dans le tableau des 2 premiers éléments de `a` coûte au plus 2 comparaisons.
 
-on obtient un truc comme ça :
+au moment d'insérer b2, on aura donc un truc comme ça :
 
 <img src="img/j.png" height="150px" />
 
-insérer b2 dans le tableau des 4 premiers éléments de `a`, coûte au plus 3 comparaisons.
+(on a rajouté b1 au début de `a` et on passe a1)
+
+insérer b2 dans le tableau des 4 premiers éléments de `a` coûte au plus 3 comparaisons.
 
 #### si on insère b2 puis b1
 
@@ -124,88 +124,56 @@ selon l'endroit où b2 a été inséré, on se retrouvera dans un de ces cas pou
 
 on remarque que, dans l'un ou l'autre cas, cela ne coûte toujours au plus que 2 comparaisons pour insérer b1. ce résultat serait d'autant plus marquant pour de grandes valeurs de `len`.
 
-pour ne pas s'embêter, on peut garder le même `len` pour toute une série d'insertion.
+pour ne pas s'embêter, on peut garder le même `len` pour toute une série d'insertion, le principe de l'algorithme étant de minimiser le nombre de comparaisons maximales réalisées pour insérer les éléments de `b` dans `a` à une même valeur pour chaque nouvelle série.
 
 ---
 
-finalement, pour S1, on a vu qu'il fallait insérer b2 puis b1 avec len = 3. on mémorise l'indice du dernier b inséré (c'est 2) et on met len à 7.
+on peut passer à S2 :
+- taille : 2
+- len : 7
 
-on obtient :
+on a :
 
 <img src="img/m.png" height="150px" />
 
-### pour S2
+là encore, il faut d'abord insérer b4 dans le tableau des 7 premiers éléments de `a` (3 comparaisons maximum) puis insérer b3 (toujours avec 3 comparaisons maximum).
 
-il faut d'abord insérer b4 dans le tableau des 7 premiers éléments de `a` (3 comparaisons maximum) puis insérer b3 (toujours avec 3 comparaisons maximum).
+pour S3, on a :
+- taille : 6
+- len : 15
 
-on obtient :
+on a :
 
 <img src="img/n.png" height="150px" />
 
-on mémorise l'indice du dernier b inséré (c'est 4) et on passe à len = 15
+il faut d'abord insérer b10, puis b9, b8, b7, b6, b5. ça coutera 4 comparaisons maximum à chaque fois.
+
+## comprendre d'où sortent la taille et len
+
+on change les définitions précédentes. pour une série S_n :
+- len_n est le nombre d'éléments bien placés au début de `a`
+- s_n est le nombre maximal d'éléments de `b` qui vont être insérés dans `a` au cours de la série
+- lenI_n est la longueur de `a` utilisé pour insérer les `b`. c'est len_n + s_n - 1
+
+après l'étape 3 (= S0), on a :
+- len_1 = 2 car on a bien placé b0 et a0.
+- s_1 = 2
+
+n | 2^n
+-- | --
+0 | 1
+1 | 1
+2 | 4
+3 | 8
 
 
-### 
 
 
-
-
-
-la 2e série d'insertion a donc permis d'insérer 2 éléments de type `b` dans la liste finale (et automatiquement les 2 éléments de type `a` qui leur étaient associés), en utilisant, pour chaque insertion, le même nombre maximal de comparaisons.
-
-on se retrouve dans cette configuration :
-
-<img src="img/e.png" height="150px" />
-
-quel élément faut-il insérer ensuite ? encore une fois, cela dépend de la taille de `c`.
-
-pour une taille de 6, il faut d'abord insérer `b5`, puis `b4`. ainsi, on aura, pour l'une et l'autre insertion, seulement 3 comparaisons maximum à faire.
-
-une fois `b4` et `b5` insérés, on est dans la configuration :
-
-<img src="img/f.png" height="150px" />
-
-(changer `d` en `c`)
-
-là, pour une taille de `c` de 10, la prochaine série consiste à insérer `b11`, puis `b10`, `b9`, `b8`, `b7`, et `b6` (et donc automatique les éléments de type `a` qui leur sont associés). ainsi, on aura, pour toutes ces insertions, au plus 4 comparaisons à faire.
-
-on peut préciser maintenant ce qu'on étend par série d'insertion d'indice `k` : c'est le fait d'insérer tous les éléments de type `b` qui sont d'indice `k` ou moins, du plus grand au plus petit.
-
-à ce stade on a donc réalisé les 4 premières séries d'insertions, d'indices : 1, 3, 5 et 11.
 
 ## comprendre et trouver les indices des séries d'insertions
 
 pour trouver l'indice d'une nouvelle série, sachant celle de la précédente, il faut qu'on trouve sa taille, c'est a dire, le nombre d'éléments de type `b` qui vont être insérés au cours de la série. en effet, l'indice d'une série c'est l'indice de la précédente série + la taille de la nouvelle série.
 
-### nombre de comparaisons d'une recherche dichotomique
-
-on cherche le nombre de comparaisons maximales nécessaires pour insérer une valeur `b` dans un tableau trié de n éléments. appelons ça cmp(n).
-
-petit récap de ce qu'on a vu + généralisation :
-
-n | cmp(n)
--- | --
-2 | 2
-3 | 2
-4 | 3
-5 | 3
-6 | 3
-7 | 3
-8 | 4
-9 | 4
-10 | 4
-11 | 4
-12 | 4
-13 | 4
-14 | 4
-15 | 4
-16 | 5
-17 | 5
-... | ...
-
-on remarque que cmp(n) change à chaque puissance de 2.
-
-on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
 ### trouver la taille d'une série pour n donné
 
@@ -302,6 +270,38 @@ recherche_indice(T[0:4], 10)
 			cas de base
 			on renvoie 2
 ```
+
+
+### autre annexe : nombre de comparaisons d'une recherche dichotomique
+
+on cherche le nombre de comparaisons maximales nécessaires pour insérer une valeur `b` dans un tableau trié de n éléments. appelons ça cmp(n).
+
+petit récap de ce qu'on a vu + généralisation :
+
+n | cmp(n)
+-- | --
+2 | 2
+3 | 2
+4 | 3
+5 | 3
+6 | 3
+7 | 3
+8 | 4
+9 | 4
+10 | 4
+11 | 4
+12 | 4
+13 | 4
+14 | 4
+15 | 4
+16 | 5
+17 | 5
+... | ...
+
+on remarque que cmp(n) change à chaque puissance de 2.
+
+on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
+
 
 
 
@@ -468,63 +468,3 @@ on peut remarquer que les indices suivent la suite de jacobsthal :
 J_n = J_(n - 1) + 2 * J_(n - 2)
 
 donc on pourra directement utiliser cette propriété.
-
-# annexe : trouver l'indice d'insertion grâce à la recherche dichotomique
-
-(lire https://fr.wikipedia.org/wiki/Recherche_dichotomique avant, pour comprendre le principe d'une recherche dichotomique.)
-
-soit `T` = [`T[0]`, `T[1]`, `T[2]`, ..., `T[n - 1]`], un tableau **trié** de n nombres.
-
-on veut insérer un nombre `b` dans T. pour cela, on veut savoir l'indice de `T` auquel insérer `b`.
-
-il se trouve que cet indice n'est autre que le nombre d'éléments de `T` qui sont inférieurs à `b`.
-
-on pourrait parcourir `T` et compter le nombre d'éléments qui sont inférieurs à `b`, mais cela reviendrait à faire jusqu'à n comparaisons si `b` doit être inséré à la fin de `T`, par exemple.
-
-on peux faire mieux avec la recherche dichotomique, car `T` est trié, réduisant à log2(n) le nombre maximal de comparaisons.
-
-c'est un algorithme récursif. appelons-le `recherche_indice`. il prend en argument le sous tableau de `T` des éléments compris entre les indices `i` (inclus) et `j` exclu, que je vais noter `T[i:j]`, et notre élément `b`.
-
-- cas de base : `T[i:j]` est vide car `i == j`.
-  - on peut renvoyer `i`, c'est l'indice auquel il faut insérer `b`
-- pour un sous tableau `T[i:j]` de taille `j - i` > 0, on compare `b` à l'élément central de `T[i:j]`. appelons `c` l'indice de cet élément central. on l'obtient en faisant : `i + (j - i) / 2`.
-  - si `b` < `T[c]`, on renvoie `recherche_indice(T[i:c], b)` 
-  - si `b` > `T[c]`, on renvoie `recherche_indice(T[(c + 1):j], b)`
-
-## exemple simple
-
-T = [2, 9, 13, 21]
-
-```
-recherche_indice(T[0:4], 8)
-	taille de T[0:4] = 4 - 0 = 4
-	c = 0 + 4 / 2 = 2
-	T[2] = 13
-	8 < 13 donc on renvoie recherche_indice(T[0:2], 8)
-	recherche_indice(T[0:2], 8)
-		taille de T[0:2] = 2 - 0 = 2
-		c = 0 + 2 / 2 = 1
-		T[1] = 9
-		8 < 9 donc on renvoie recherche_indice(T[0:1], 8)
-		recherche_indice(T[0:1], 8)
-			taille de T[0:1] = 1
-			c = 0 + 1 / 2 = 0
-			T[0] = 2
-			8 > 2 donc on renvoie recherche_indice(T[1:1], 8)
-				recherche_indice(T[1:1], 8)
-					cas de base
-					on renvoie 1
-
-recherche_indice(T[0:4], 10)
-	taille de T[0:4] = 4
-	c = 2
-	T[2] = 13
-	10 < 13 donc on renvoie recherche_indice(T[0:2], 10)
-	recherche_indice(T[0:2], 10)
-		taille de T[0:2] = 2
-		c = 0 + 2 / 2 = 1
-		T[1] = 9
-		10 > 9 donc on renvoie recherche_indice(T[2:2], 10)
-			cas de base
-			on renvoie 2
-```
