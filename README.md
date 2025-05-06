@@ -6,7 +6,7 @@ voir la version précédente plus bas !
 
 ---
 
-on veut trier un tableau T de n nombres.
+on veut trier un tableau T
 
 ## étape 1 : parcourir T pour faire des paires ordonnées
 
@@ -24,54 +24,59 @@ et si on ordonne les paires de T, on obtient : 2, 4, 3, 6, 5
 
 ### définition
 
-dans une paire donnée, on dit que l'élément le plus grand est de type `a` et que l'élément le plus petit est de type `b`. on parle aussi du "grand" et du "petit".
+dans une paire donnée, on dit qu'on a (d'abord) un "petit" et (puis) un "grand". je les appelle aussi `b` pour le petit et `a` pour le grand.
 
 ### notation
 
-`b -> a` signifie que b < a.
+`i -> j` signifie que i < j.
+
+donc, pour la paire d'indice i, on a : `b_i -> a_i`
 
 ## étape 2 : trier les paires par ordre croissant selon les grands
 
 cela se fait par récurrence, selon le même algorithme. on y reviendra mais pour l'instant on va admettre que ça marche.
 
-on va obtenir un tableau : [b[0], a[0], b[1], a[1], b[2], a[2], ...]
+on va obtenir un tableau : [b0, a0, b1, a1, b2, a2, ...]
 
 avec :
 
 <img src="img/g.png" height="150px" />
 
+## étape 3 : initialiser a et b 
 
+on initialise :
+- a = [T[0], T[1], T[3], T[5], ...], le tableau des grands de chaque paire
+- b = [T[0], T[2], T[4], ...], le tableau des petits de chaque paire
 
+à noter que `a` est forcément toujours trié
+ 
+exemple (issu de l'étape précédente) :
 
+T = 2, 4, 3, 6, 5 
 
-**étape 4** : initialiser l'insertion.
+a = 4, 6
 
-
----
-on obtient deux tableaux :
-- `a` : le tableau des grands de chaque paire
-- `b` : le tableau des petits de chaque paire
-
-pour un indice i, commun à `a` et `b`, on a : `b[i] -> a[i]`
-
-
-exemple :
-
-T = [4, 2, 6, 3, 5]
-
-si on divise T en paires : [[4, 2], [6, 3], 5]
-
-et si on ordonne les paires : [[2, 4], [3, 6], 5]
-
-donc a = [4, 6] et b = [2, 3, 5]
+b = 2, 3, 5
 
 (si il reste un nombre solo on le met dans b)
+
+## étape 4 : insérer les éléments de b dans a
+
+on va faire des séries d'insertion d'éléments de b dans a.
+
+### définition
+
+on dit qu'on va insérer des éléments de type `a` ou `b` dans une liste finale qui est en fait au début de `a`. cette liste contiendra des éléments de type `c` (qui étaient donc avant de type `a` ou `b`).
+
+la première série d'insertion est S0, puis S1, S2, ...
+
 ---
 
+lorsqu'on insère un élément dans a, il va falloir préciser une taille. on reverra ça.
 
-on dit qu'un élément de type `a` ou `b` devient de type `c` lorsqu'il est inséré dans la liste finale. la liste des `c` en question est donc triée à tout moment et se situe avant les paires (voir sur les schémas).
+## S0
 
-l'algorithme consiste à faire des série d'insertions d'éléments de type `b` dans la liste finale, ce qui au passage va aussi insérer les éléments de type `a` qui leur sont associés.
+on insère b0 parmi 
 
 pour cette première série d'insertion, rien ne va changer à part la notation. en effet, on veut juste insérer `b1` (et, de ce fait, le `a1` qui lui est associé). or, `b1` est déjà bien placé, donc on ne fait rien.
 
