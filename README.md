@@ -134,7 +134,7 @@ finalement, pour S1, on a vu qu'il fallait insérer b2 puis b1 avec len = 3. on 
 
 on obtient :
 
-<img src="img/m.jpeg" />
+<img src="img/m.png" />
 
 
 ### S2
