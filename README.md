@@ -153,17 +153,15 @@ il faut d'abord insérer b10, puis b9, b8, b7, b6, b5. ça coutera 4 comparaison
 on change les définitions précédentes. pour une série S_n :
 - len_n est le nombre d'éléments bien placés au début de `a`
 - s_n est le nombre maximal d'éléments de `b` qui vont être insérés dans `a` au cours de la série
-- lenI_n est la longueur de `a` utilisé pour insérer les `b`. c'est len_n + s_n - 1
+- last est l'indice du dernier `b` ayant été inséré dans `a`
 
-après l'étape 3 (= S0), on a :
-- len_1 = 2 car on a bien placé b0 et a0.
-- s_1 = 2
+cmp(len_n) nous donne le nombre de comparaisons qui seront utilisés pour une insertion de b vers a au cours de la série
 
-n | len_n | cmp(len_n) | s_n
--- | -- | -- | --
-0 | 0 | x | 1
-1 | 0 + 2 * 1 = 2 | log(2) + 1 = 2 | 2
-2 | 2 + 2 * 2 = 6 | log(4) + 1 = 3 | 2
+n | 2^n | len_n | cmp(len_n) | s_n
+-- | -- | -- | -- | --
+0 | 1 | 0 | x | 1
+1 | 2 | 0 + 2 * 1 = 2 | log(2) + 1 = 2 | 2
+2 | 4 | 2 + 2 * 2 = 6 | log(4) + 1 = 3 | 2
 
 
 
