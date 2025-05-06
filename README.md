@@ -8,11 +8,49 @@ voir la version précédente plus bas !
 
 on veut trier un tableau T de n nombres.
 
-## première étape de l'algo : parcourir T pour faire des paires ordonnées d'éléments.
+## étape 1 : parcourir T pour faire des paires ordonnées
 
+on peut rester dans le même tableau et juste faire des swaps.
+
+exemple :
+
+T = 4, 2, 6, 3, 5
+
+on peut voir T comme composé des paires suivantes : [4, 2], [6, 3], 5
+
+et si on ordonne les paires de T, on obtient : 2, 4, 3, 6, 5
+
+(on ne touche pas aux éléments solos à la fin de T)
+
+### définition
+
+dans une paire, on dit que l'élément le plus grand est de type `a` et que l'élément le plus petit est de type `b`.
+
+### notation
+
+`b -> a` signifie que b < a.
+
+
+## étape 2 : trier les paires par ordre croissant selon les éléments de type `a`.
+
+cela se fait par récurrence, selon le même algorithme. on va obtenir :
+
+<img src="img/a.png" height="150px" />
+
+
+
+
+
+**étape 4** : initialiser l'insertion.
+
+
+---
 on obtient deux tableaux :
 - `a` : le tableau des grands de chaque paire
 - `b` : le tableau des petits de chaque paire
+
+pour un indice i, commun à `a` et `b`, on a : `b[i] -> a[i]`
+
 
 exemple :
 
@@ -25,27 +63,8 @@ et si on ordonne les paires : [[2, 4], [3, 6], 5]
 donc a = [4, 6] et b = [2, 3, 5]
 
 (si il reste un nombre solo on le met dans b)
+---
 
-### notation pour les schémas
-
-`b -> a` signifie b < a
-
-pour un indice i, commun à `a` et `b`, on a : `b[i] -> a[i]`
-
-## étape 2
-**étape 2** : ordonner les 2 éléments qui composent chaque paire.
-
-on dit que l'élément le plus grand d'une paire donnée est de type `a`, et l'autre est de type `b`.
-
-la notation 
-
-**étape 3** : trier les paires par ordre croissant selon les éléments de type `a`.
-
-cela se fait par récurrence, selon le même algorithme. on va obtenir :
-
-<img src="img/a.png" height="150px" />
-
-**étape 4** : initialiser l'insertion.
 
 on dit qu'un élément de type `a` ou `b` devient de type `c` lorsqu'il est inséré dans la liste finale. la liste des `c` en question est donc triée à tout moment et se situe avant les paires (voir sur les schémas).
 
