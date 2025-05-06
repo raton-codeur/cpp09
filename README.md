@@ -88,31 +88,46 @@ situation :
 
 <img src="img/hh.png" height="150px" />
 
----
+en fait, je vais dire que les `len` premiers éléments de `a` sont de type `a_x`. on s'en fiche un peu de savoir s'ils proviennent de `a` ou de `b`. en tout cas, ils sont triés. on garde juste en mémoire l'indice du dernier `b` ayant été inséré.
 
-lorsqu'on insère un élément dans a, il va falloir préciser une taille. on reverra ça.
+### S1
 
-## S0
+il ne faut pas juste insérer les `b` dans l'ordre. c'est pourquoi il y a des séries d'insertion. petit exemple pour comprendre :
 
-on insère b0 parmi 
+#### si on insère b1 puis b2
 
-pour cette première série d'insertion, rien ne va changer à part la notation. en effet, on veut juste insérer `b1` (et, de ce fait, le `a1` qui lui est associé). or, `b1` est déjà bien placé, donc on ne fait rien.
+(il faut absolument être à l'aise en recherche dichotomique pour comprendre cette partie. voir l'annexe ci-dessous si ce n'est pas le cas)
 
-on remarque que, pour insérer un élément dans cette liste vide de `c`, 0 comparaisons sont nécessaires.
+on a un truc comme ça :
 
-on obtient les 2 premiers `c`, qui sont les anciens `b1` et `a1` :
+<img src="img/i.png" />
 
-<img src="img/b.png" height="150px" />
+insérer b1 dans le tableau des 2 premiers éléments de `a`, coûte au plus 2 comparaisons.
 
-**étape 5** : continuer les séries d'insertions.
+on obtient un truc comme ça :
 
-le nombre d'éléments de type `c` détermine la prochaine série d'insertions. en effet, il ne faut pas juste insérer les `b` dans l'ordre des paires. petit exemple pour comprendre pourquoi :
+<img src="img/j.png" />
 
-## si on insère b2 puis b3
+insérer b2 dans le tableau des 4 premiers éléments de `a`, coûte au plus 3 comparaisons.
 
-### pour b2
+#### si on insère b2 puis b1
 
-on veut insérer `b2` dans un tableau trié [`c1`, `c2`]. ça va nous couter au plus 2 comparaisons (une avec `c2`, et, si on a pas de chance, une autre avec `c1`). (voir annexe pour un rappel sur la recherche dichotomique).
+on était dans un truc comme ça :
+
+<img src="img/k.png" />
+
+insérer b2 dans le tableau des 3 premiers éléments de `a` coûte au plus 2 comparaisons.
+
+selon l'endroit où b2 a été inséré, on se retrouvera dans un de ces cas pour insérer b1 :
+
+<img src="img/l.png" />
+
+on remarque que, dans l'un ou l'autre cas, cela ne coûte toujours au plus que 2 comparaisons.
+
+
+
+
+on veut insérer `b1` dans un tableau trié [`c1`, `c2`]. ça va nous couter au plus 2 comparaisons (une avec `c2`, et, si on a pas de chance, une autre avec `c1`). (voir annexe pour un rappel sur la recherche dichotomique).
 
 on se retrouve avec une configuration :
 
