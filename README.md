@@ -102,13 +102,13 @@ il ne faut pas juste insérer les `b` dans l'ordre. c'est pourquoi il y a des s�
 
 on a un truc comme ça :
 
-<img src="img/i.png" />
+<img src="img/i.png" height="150px" />
 
 insérer b1 dans le tableau des 2 premiers éléments de `a`, coûte au plus 2 comparaisons.
 
 on obtient un truc comme ça :
 
-<img src="img/j.png" />
+<img src="img/j.png" height="150px" />
 
 insérer b2 dans le tableau des 4 premiers éléments de `a`, coûte au plus 3 comparaisons.
 
@@ -116,13 +116,13 @@ insérer b2 dans le tableau des 4 premiers éléments de `a`, coûte au plus 3 c
 
 on était dans un truc comme ça :
 
-<img src="img/k.png" />
+<img src="img/k.png" height="150px" />
 
 insérer b2 dans le tableau des 3 premiers éléments de `a` coûte au plus 2 comparaisons.
 
 selon l'endroit où b2 a été inséré, on se retrouvera dans un de ces cas pour insérer b1 :
 
-<img src="img/l.png" />
+<img src="img/l.png" height="150px" />
 
 on remarque que, dans l'un ou l'autre cas, cela ne coûte toujours au plus que 2 comparaisons pour insérer b1. ce résultat serait d'autant plus marquant pour de grandes valeurs de `len`.
 
@@ -134,7 +134,7 @@ finalement, pour S1, on a vu qu'il fallait insérer b2 puis b1 avec len = 3. on 
 
 on obtient :
 
-<img src="img/m.png" />
+<img src="img/m.png" height="150px" />
 
 
 ### S2
