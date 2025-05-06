@@ -51,12 +51,12 @@ on initialise :
 - b = [T[0], T[2], T[4], ...]
 
 c'est à dire :
-- a = [b0, a1, a2, a3, a4, ...]
+- a = [b0, a0, a1, a2, a3, a4, ...]
 - b = [b0, b1, b2, ...]
 
 `a` est forcément toujours trié. c'est là-dedans qu'on va construire notre résultat.
 
-on a rajouté b0 au début de `a` pour gagner du temps.
+on a rajouté b0 au début de `a` pour gagner du temps sur l'étape suivante.
 
 `b` fait la liste des petits. on va juste y accéder en lecture.
 
@@ -72,31 +72,25 @@ b = 2, 3, 5
 
 ## étape 4 : insérer le reste des éléments de b dans a
 
-on va faire des séries d'insertion d'éléments de b dans a.
+on va faire des séries d'insertion d'éléments de b dans a. mais il ne faut pas juste insérer les `b` dans l'ordre. on va vite comprendre pourquoi.
 
 ### définition
 
-la taille d'une série c'est le nombre maximal d'éléments de b qui sont insérés au cours de la série.
+la taille d'une série c'est le nombre maximal d'éléments de b qui sont insérés au cours de cette série.
 
-`a` possède une taille courante que je vais noter `len` et qui est différente de son nombre d'éléments. c'est une taille qui dépendra uniquement de la série d'insertion. on y reviendra.
+`a` possède une taille courante que je vais appeler `len` et qui est différente de son nombre d'éléments. c'est une taille qui dépendra uniquement de la série d'insertion. on y reviendra plus tard.
 
 la première série d'insertion est S0, puis S1, S2, S3, ...
 
+---
+
 S0 a déjà été réalisé à l'étape 3 lorsqu'on a inséré b0 au début de `a`. c'était une série de taille 1.
 
-donc on commence à S1 avec `len = 3` (on verra comment trouver `len` exactement plus tard).
+on continue avec S1 et `len = 3` (on verra pourquoi plus tard).
 
 situation :
 
 <img src="img/hh.png" height="150px" />
-
-en fait, on devra souvent raisonner sur les `len` premiers éléments de `a`, peu importe qu'ils proviennent de `a` ou de `b`. perso, je vais juste les appeler `a`.
-
-à chaque série, il faudra garder en mémoire l'indice du dernier `b` ayant été inséré.
-
-### comprendre le déroulement d'une série d'insertion
-
-il ne faut pas juste insérer les `b` dans l'ordre. c'est pourquoi il y a des séries avec des tailles bien précises. petit exemple pour comprendre pourquoi :
 
 #### si on insère b1 puis b2
 
