@@ -55,12 +55,44 @@ PmergeMe::PmergeMe(int argc, char** argv)
 
 
 
+void printVec(const Vec& v)
+{
+	for (size_t i = 0; i < v.size(); ++i)
+	{
+		std::cout << v[i];
+		if (i != v.size() - 1)
+			std::cout << " ";
+	}
+	std::cout << std::endl;
+}
 
+void swapPairs(Vec& v)
+{
+	for (size_t i = 0; i < v.size() - 1; i += 2)
+	{
+		if (v[i] > v[i + 1])
+			std::swap(v[i], v[i + 1]);
+	}
+}
 
-
-
+void sortPairs(Vec& v)
+{
+	for (size_t i = 0; i < v.size / 2; ++i)
+	{
+		
+	}
+}
 
 void PmergeMe::sort()
 {
+	Vec v = _v;
+
+	swapPairs(v);
+
+	sortPairs(v);
+
+	printVec(v);
+
+
 
 }
