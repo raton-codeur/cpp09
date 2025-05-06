@@ -24,7 +24,7 @@ et si on ordonne les paires de T, on obtient : 2, 4, 3, 6, 5
 
 ### définition
 
-dans une paire donnée, on dit qu'on a (d'abord) un "petit" et (puis) un "grand". je les appelle aussi `b` pour le petit et `a` pour le grand.
+dans une paire donnée, on dit qu'on a (d'abord) un "petit" et (puis) un "grand". à ce stade, je les appelle aussi `b` pour le petit et `a` pour le grand.
 
 ### notation
 
@@ -42,33 +42,51 @@ avec :
 
 <img src="img/g.png" height="150px" />
 
-## étape 3 : initialiser a et b 
+## étape 3 : initialiser a et b
+
+`a` et `b` désignent maintenant deux nouveaux tableaux.
 
 on initialise :
-- a = [T[0], T[1], T[3], T[5], ...], le tableau des grands de chaque paire
-- b = [T[0], T[2], T[4], ...], le tableau des petits de chaque paire
+- a = [T[0], T[1], T[3], T[5], T[7], ...]
+- b = [T[0], T[2], T[4], ...]
 
-à noter que `a` est forcément toujours trié
- 
+c'est à dire :
+- a = [b0, a1, a2, a3, a4, ...]
+- b = [b0, b1, b2, ...]
+
+`a` est forcément toujours trié. c'est là-dedans qu'on va construire notre résultat.
+
+on a rajouté b0 au début de `a` pour gagner du temps.
+
+`b` fait la liste des petits. on va juste y accéder en lecture.
+
 exemple (issu de l'étape précédente) :
 
 T = 2, 4, 3, 6, 5 
 
-a = 4, 6
+a = 2, 4, 6
 
 b = 2, 3, 5
 
 (si il reste un nombre solo on le met dans b)
 
-## étape 4 : insérer les éléments de b dans a
+## étape 4 : insérer le reste des éléments de b dans a
 
 on va faire des séries d'insertion d'éléments de b dans a.
 
 ### définition
 
-on dit qu'on va insérer des éléments de type `a` ou `b` dans une liste finale qui est en fait au début de `a`. cette liste contiendra des éléments de type `c` (qui étaient donc avant de type `a` ou `b`).
+`a` possède une taille courante que je vais noter `len` et qui est différente de son nombre d'éléments. c'est une taille qui dépend de la série d'insertion. on y reviendra.
+
+on initialise : len = 3
 
 la première série d'insertion est S0, puis S1, S2, ...
+
+S0 a déjà été réalisé à l'étape 3 lorsqu'on a inséré b0 au début de `a`. donc on commence à S1.
+
+situation :
+
+<img src="img/h.png" height="150px" />
 
 ---
 
