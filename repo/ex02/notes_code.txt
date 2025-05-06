@@ -33,37 +33,17 @@ trouver l'indice dans v de l'élément b_k
 
 
 -
-on veut afficher le vecteur avec [element] [element]
-element peut est lui meme de la forme [nombre nombre nombre]
+on veut swap les pairs
+on donne v et la taille d'un element
 
-pour a le nombre d'elements avec v_size / n
-c'est le nombre de [element]
+parcourir les elements avec iE, deux par deux
+	si les tetes sont pas dans le bon ordre
+		swap les pairs
 
-iE = 0
-tant que iE < v_size / n
-	afficher [
-	i = iE
-	tant que i < iE + n
-		afficher v[i]
-		si i n'est pas le dernier
-			afficher ' '
-	afficher ]
-i = iE
-au soit dans le vide soit sur le premier nombre solo
-tant que i < v.size
-	afficher v[i]
-	
 
-afficher v avec n
-	nb_e = v_size / n
-	i = 0
-	tant que i < nb_e
-		i_e(i)
-		afficher l'élément d'indice i_e
-		i++
-	i_e(i)
-	tant que i_e < v_size
-		afficher v[i_e]
+
+
+-
 
 
 

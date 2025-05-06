@@ -54,44 +54,37 @@ PmergeMe::PmergeMe(int argc, char** argv)
 }
 
 
-
-
-void printE(Vec& v, size_t iE, size_t n)
+void print(Vec& v, size_t n)
 {
-	std::cout << "[";
-	for (size_t i = 0; i < n; ++i)
+	size_t iE;
+	size_t i;
+	size_t nbE;
+
+	nbE = (v.size() / n) * n;
+	for (iE = 0; iE < nbE; iE += n)
 	{
-		std::cout << v[iE + i];
-		if (i != n - 1)
-			std::cout << "\t";
+		std::cout << "[";
+		for (i = iE; i < iE + n; ++i)
+		{
+			std::cout << v[i];
+			if (i != iE + n - 1)
+				std::cout << " ";
+		}
+		std::cout << "]";
 	}
-	std::cout << "]";
-}
-
-void printV(Vec& v, size_t n)
-{
-	std::cout << "[";
-	for (size_t i = 0; i < v.size(); i += n)
+	for (i = iE; i < v.size(); ++i)
 	{
-		std::cout << i;
+		std::cout << v[i];
 		if (i != v.size() - 1)
-			std::cout << "\t";
+			std::cout << " ";
 	}
-	std::cout << "]" << std::endl;
-	// std::cout << "[";
-	// for (size_t i = 0; i < v.size(); ++i)
-	// {
-	// 	printE(v, i, n);
-	// 	if (i != v.size() - 1)
-	// 		std::cout << "\t";
-	// }
-	// std::cout << "]" << std::endl;
 }
 
 void PmergeMe::sort()
 {
 	Vec v = _v;
+	size_t n = 2;
 
-	printV(v, 2);
+	print(v, n);
 
 }
