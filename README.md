@@ -159,10 +159,11 @@ après l'étape 3 (= S0), on a :
 - len_1 = 2 car on a bien placé b0 et a0.
 - s_1 = 2
 
-n | 2^n | len_n | s_n
--- | -- | -- | --
-0 | 1 | 0 | 1
-1 | 2 | 0 + 2 * 1
+n | len_n | cmp(len_n) | s_n
+-- | -- | -- | -- | --
+0 | 0 | ? | 1
+1 | 0 + 2 * 1 = 2 | 2 | 2 ?
+
 
 
 
