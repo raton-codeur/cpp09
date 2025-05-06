@@ -1,5 +1,124 @@
 
 
+-
+define
+
+_v : le vecteur 
+_n : la taille d'un élément dans v 
+_nbE : le nombre d'éléments dans v
+_e : l'indice dans v du début d'un élément
+_h : l'indice dans v de la tête d'un d'élément
+_i : l'indice d'un élément
+-
+
+-
+calculs
+
+_nbE = _v.size() / _n
+
+trouver le _h à partir d'un _e :
+	_h = _e + _n - 1
+
+trouver le _e à partir d'un _i :
+	_e = _i * _n
+
+trouver le _h à partir d'un _i :
+	_h = _i * _n + _n - 1
+
+trouver l'indice dans v de l'élément b_k
+	c'est 2 * (k - i)
+	on peut ensuite lui appliquer la formule pour trouver le i_e et i_h
+-
+
+
+
+-
+on veut afficher le vecteur avec [element] [element]
+element peut est lui meme de la forme [nombre nombre nombre]
+
+pour a le nombre d'elements avec v_size / n
+c'est le nombre de [element]
+
+iE = 0
+tant que iE < v_size / n
+	afficher [
+	i = iE
+	tant que i < iE + n
+		afficher v[i]
+		si i n'est pas le dernier
+			afficher ' '
+	afficher ]
+i = iE
+au soit dans le vide soit sur le premier nombre solo
+tant que i < v.size
+	afficher v[i]
+	
+
+afficher v avec n
+	nb_e = v_size / n
+	i = 0
+	tant que i < nb_e
+		i_e(i)
+		afficher l'élément d'indice i_e
+		i++
+	i_e(i)
+	tant que i_e < v_size
+		afficher v[i_e]
+
+
+
+
+	i = n - 1
+	j = 0
+	k = 0
+	tant que i < size de v
+		on a la tete à l'indice i
+		on a l'indice du début de l'élément à l'indice j
+		pour a l'indice de l'élément à l'indice k
+		i += n
+		j += n
+-
+
+
+-
+imaginons qu'on a remonté tous les appels récursifs
+
+on a une liste current d'éléments de taille 1 : b1 a1 b2 a2...
+
+si le nombre d'éléments de current est <= 2
+	return current
+
+next = [b1, a1]
+jacobsthal_previous = 1
+jacobsthal_current = 3
+indice du dernier b =
+	(nombre d'éléments de current) + 1 / 2
+	avec nombre d'éléments de current = size / n
+
+indice du b_previous = formule du 2 * (i - 1) pour i = jacobsthal_previous
+indice du b_current = ...
+indice de b = indice du b_previous + 2 * n
+
+tant que l'indice de b < v.size
+	tant que l'indice de b < l'indice 
+	tant qu'il y a des b d'indice compris entre jacobsthal current (inclus) et jacobsthal previous (exclu) dans current :
+		insérer (dans le sens décroissant) les b dans le next 
+	insérer les a correspondant aux b insérés dans le next (dans l'ordre croissant)
+	tmp = jacobsthal_previous
+	jacobsthal_previous = jacobsthal_current
+	jacobsthal_current += 2 * tmp
+return next
+-
+
+
+
+
+
+
+
+
+
+
 
 -
 autre idée : utiliser deux vecteurs, un pour les a, un autre pour les b
@@ -31,14 +150,8 @@ on parcourt current avec i pour l'indice du début, j pour la tete, k pour indic
 
 
 -
-get position (a)
-	on veut associer chaque élément de a à sa position triée
-	res = a
-	pour i de 1 à len(a) - 1 :
-		count = 0
-		pour j de 1 à len(a) - 1 :
-			si i != j et si a[j] < a[i]
-				count++
-		
+version simplifiée
+
+-
 
 

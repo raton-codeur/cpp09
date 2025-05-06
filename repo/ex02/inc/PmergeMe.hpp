@@ -12,11 +12,12 @@
 #define RESET "\033[0m"
 
 typedef std::vector<int> Vec;
+#define getIH(i_e, n) (i_e)
 
 class PmergeMe
 {
 	private :
-		Vec _v;
+		Vec		_v;
 
 					PmergeMe();
 					PmergeMe(const PmergeMe& other);
@@ -26,8 +27,7 @@ class PmergeMe
 		PmergeMe(int argc, char** argv);
 		~PmergeMe();
 
-		void	sort();
-		std::vector<int>& getV() { return _v; }
+		void sort();
 };
 
 #endif

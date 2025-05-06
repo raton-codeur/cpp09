@@ -55,43 +55,44 @@ PmergeMe::PmergeMe(int argc, char** argv)
 
 
 
-
-void printE(Vec& v, size_t iE, size_t n)
+void printVec(const Vec& v)
 {
-	std::cout << "[";
-	for (size_t i = 0; i < n; ++i)
+	for (size_t i = 0; i < v.size(); ++i)
 	{
-		std::cout << v[iE + i];
-		if (i != n - 1)
-			std::cout << "\t";
+		std::cout << v[i];
+		if (i != v.size() - 1)
+			std::cout << " ";
 	}
-	std::cout << "]";
+	std::cout << std::endl;
 }
 
-void printV(Vec& v, size_t n)
+void swapPairs(Vec& v)
 {
-	std::cout << "[";
-	for (size_t i = 0; i < v.size(); i += n)
+	for (size_t i = 0; i < v.size() - 1; i += 2)
 	{
-		std::cout << i;
-		if (i != v.size() - 1)
-			std::cout << "\t";
+		if (v[i] > v[i + 1])
+			std::swap(v[i], v[i + 1]);
 	}
-	std::cout << "]" << std::endl;
-	// std::cout << "[";
-	// for (size_t i = 0; i < v.size(); ++i)
-	// {
-	// 	printE(v, i, n);
-	// 	if (i != v.size() - 1)
-	// 		std::cout << "\t";
-	// }
-	// std::cout << "]" << std::endl;
+}
+
+void sortPairs(Vec& v)
+{
+	for (size_t i = 0; i < v.size / 2; ++i)
+	{
+		
+	}
 }
 
 void PmergeMe::sort()
 {
 	Vec v = _v;
 
-	printV(v, 2);
+	swapPairs(v);
+
+	sortPairs(v);
+
+	printVec(v);
+
+
 
 }
