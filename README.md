@@ -154,14 +154,15 @@ on change les définitions précédentes. pour une série S_n :
 - len_n est le nombre d'éléments bien placés au début de `a`
 - s_n est le nombre maximal d'éléments de `b` qui vont être insérés dans `a` au cours de la série
 - last est l'indice du dernier `b` ayant été inséré dans `a`
+- i_b est l'indice du dernier `b` devant être inséré dans `a`
 
 cmp(len_n) nous donne le nombre de comparaisons qui seront utilisés pour une insertion de b vers a au cours de la série
 
-n | 2^n | len_n | cmp(len_n) | s_n
+n | 2^(n+1) | len_n | s_n | i_b
 -- | -- | -- | -- | --
-0 | 1 | 0 | x | 1
-1 | 2 | 0 + 2 * 1 = 2 | log(2) + 1 = 2 | 2
-2 | 4 | 2 + 2 * 2 = 6 | log(4) + 1 = 3 | 2
+0 | 2 | 0 | 1 | 0
+1 | 4 | 0 + 2 * 1 = 2 | 4 - 2 = 2 | 2
+2 | 8 | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 4
 
 
 
