@@ -76,13 +76,15 @@ on va faire des séries d'insertion d'éléments de b dans a.
 
 ### définition
 
-`a` possède une taille courante que je vais noter `len` et qui est différente de son nombre d'éléments. c'est une taille qui dépend de la série d'insertion. on y reviendra.
+la taille d'une série c'est le nombre maximal d'éléments de b qui sont insérés au cours de la série.
 
-on initialise : len = 3
+`a` possède une taille courante que je vais noter `len` et qui est différente de son nombre d'éléments. c'est une taille qui dépend uniquement de la série d'insertion. on y reviendra.
 
 la première série d'insertion est S0, puis S1, S2, ...
 
-S0 a déjà été réalisé à l'étape 3 lorsqu'on a inséré b0 au début de `a`. donc on commence à S1.
+S0 a déjà été réalisé à l'étape 3 lorsqu'on a inséré b0 au début de `a`. c'était une série de taille 1.
+
+donc on commence à S1 avec len = 3 (comment trouver len exactement plus tard).
 
 situation :
 
@@ -92,7 +94,7 @@ en fait, je vais dire que les `len` premiers éléments de `a` sont de type `a_x
 
 ### S1
 
-il ne faut pas juste insérer les `b` dans l'ordre. c'est pourquoi il y a des séries d'insertion. petit exemple pour comprendre :
+il ne faut pas juste insérer les `b` dans l'ordre. c'est pourquoi il y a des séries d'insertion. petit exemple pour comprendre pourquoi :
 
 #### si on insère b1 puis b2
 
@@ -122,40 +124,24 @@ selon l'endroit où b2 a été inséré, on se retrouvera dans un de ces cas pou
 
 <img src="img/l.png" />
 
-on remarque que, dans l'un ou l'autre cas, cela ne coûte toujours au plus que 2 comparaisons.
+on remarque que, dans l'un ou l'autre cas, cela ne coûte toujours au plus que 2 comparaisons pour insérer b1. ce résultat serait d'autant plus marquant pour de grandes valeurs de `len`.
+
+pour ne pas s'embêter, on peut garder le même `len` pour toute une série d'insertion
+
+---
+
+finalement, pour S1, on a vu qu'il fallait insérer b2 puis b1 avec len = 3. on mémorise l'indice du dernier b inséré (c'est 2) et on passe le len à 7.
+
+on obtient :
+
+<img src="img/m.jpeg" />
+
+
+### S2
 
 
 
 
-on veut insérer `b1` dans un tableau trié [`c1`, `c2`]. ça va nous couter au plus 2 comparaisons (une avec `c2`, et, si on a pas de chance, une autre avec `c1`). (voir annexe pour un rappel sur la recherche dichotomique).
-
-on se retrouve avec une configuration :
-
-<img src="img/c.png" height="150px" />
-
-### pour b3
-
-on veut insérer `b3` dans un tableau trié [`c1`, `c2`, `c3`, `c4`].
-
-comme on trie par dichotomie, on sait que ça va nous coûter au plus 3 comparaisons (une avec `c3`, une autre avec `c2` ou `c4`, et potentiellement, une 3e avec `c1`).
-
-au final, si on insère `b2` avant `b3`, ça nous coûte, au pire, **5** comparaisons.
-
-## si on insère b3 puis b2
-
-<img src="img/b.png" height="150px" />
-
-on veut insérer `b3` dans un tableau trié [`c1`, `c2`]. donc, comme on l'a vu juste avant, ça va nous coûter, au plus, 2 comparaisons.
-
-et là, miracle, lorsqu'on va vouloir insérer `b2`, on sera dans cette configuration :
-
-<img src="img/d.png" height="150px" />
-
-donc on va vouloir insérer `b2` dans un tableau trié [`c1`, `c2`, `c3`], ce qui ne coûte toujours que 2 comparaisons, et non 3 (une avec `c2`, et une autre avec `c1` ou `c3`).
-
-donc, si on insère `b3` avant `b2`, ça nous coûte, au pire, **4** comparaisons. c'est mieux que si on insère `b2` avant `b3` et ce serait encore plus marquant pour de grandes tailles de `c`.
-
-## les prochaines séries d'insertion
 
 la 2e série d'insertion a donc permis d'insérer 2 éléments de type `b` dans la liste finale (et automatiquement les 2 éléments de type `a` qui leur étaient associés), en utilisant, pour chaque insertion, le même nombre maximal de comparaisons.
 
