@@ -8,9 +8,11 @@ voir la version précédente plus bas !
 
 on veut trier un tableau T de n nombres.
 
-# première étape de l'algo : parcourir T pour faire des paires ordonnées d'éléments.
+## première étape de l'algo : parcourir T pour faire des paires ordonnées d'éléments.
 
-on obtient deux tableaux : `a` et `b`
+on obtient deux tableaux :
+- `a` : le tableau des grands de chaque paire
+- `b` : le tableau des petits de chaque paire
 
 exemple :
 
@@ -22,13 +24,20 @@ et si on ordonne les paires : [[2, 4], [3, 6], 5]
 
 donc a = [4, 6] et b = [2, 3, 5]
 
-en effet, si il reste un nombre solo on le met dans b
+(si il reste un nombre solo on le met dans b)
 
+### notation pour les schémas
+
+`b -> a` signifie b < a
+
+pour un indice i, commun à `a` et `b`, on a : `b[i] -> a[i]`
+
+## étape 2
 **étape 2** : ordonner les 2 éléments qui composent chaque paire.
 
 on dit que l'élément le plus grand d'une paire donnée est de type `a`, et l'autre est de type `b`.
 
-la notation `b -> a` signifie b < a. dans la paire d'indice `n`, on a donc : `b_n -> a_n`.
+la notation 
 
 **étape 3** : trier les paires par ordre croissant selon les éléments de type `a`.
 
