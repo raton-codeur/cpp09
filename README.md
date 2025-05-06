@@ -78,27 +78,31 @@ on va faire des séries d'insertion d'éléments de b dans a.
 
 la taille d'une série c'est le nombre maximal d'éléments de b qui sont insérés au cours de la série.
 
-`a` possède une taille courante que je vais noter `len` et qui est différente de son nombre d'éléments. c'est une taille qui dépend uniquement de la série d'insertion. on y reviendra.
+`a` possède une taille courante que je vais noter `len` et qui est différente de son nombre d'éléments. c'est une taille qui dépendra uniquement de la série d'insertion. on y reviendra.
 
-la première série d'insertion est S0, puis S1, S2, ...
+la première série d'insertion est S0, puis S1, S2, S3, ...
 
 S0 a déjà été réalisé à l'étape 3 lorsqu'on a inséré b0 au début de `a`. c'était une série de taille 1.
 
-donc on commence à S1 avec len = 3 (comment trouver len exactement plus tard).
+donc on commence à S1 avec `len = 3` (on verra comment trouver `len` exactement plus tard).
 
 situation :
 
 <img src="img/hh.png" height="150px" />
 
-en fait, je vais dire que les `len` premiers éléments de `a` sont de type `a_x`. on s'en fiche un peu de savoir s'ils proviennent de `a` ou de `b`. en tout cas, ils sont triés. on garde juste en mémoire l'indice du dernier `b` ayant été inséré.
+en fait, on devra souvent raisonner sur les `len` premiers éléments de `a`, peu importe qu'ils proviennent de `a` ou de `b`. perso, je vais juste les appeler `a`.
 
-### S1
+à chaque série, il faudra garder en mémoire l'indice du dernier `b` ayant été inséré.
 
-il ne faut pas juste insérer les `b` dans l'ordre. c'est pourquoi il y a des séries d'insertion. petit exemple pour comprendre pourquoi :
+### comprendre le déroulement d'une série d'insertion
+
+il ne faut pas juste insérer les `b` dans l'ordre. c'est pourquoi il y a des séries avec des tailles bien précises. petit exemple pour comprendre pourquoi :
 
 #### si on insère b1 puis b2
 
-(il faut absolument être à l'aise en recherche dichotomique pour comprendre cette partie. voir l'annexe ci-dessous si ce n'est pas le cas)
+la prochaine série, S1, est de taille 2. mais il faut absolument insérer b2 avant b1. voici pourquoi.
+
+(il faut absolument être à l'aise en recherche dichotomique pour comprendre cette partie. voir l'annexe ci-dessous si ce n'est pas le cas.)
 
 on a un truc comme ça :
 
@@ -122,7 +126,7 @@ insérer b2 dans le tableau des 3 premiers éléments de `a` coûte au plus 2 co
 
 selon l'endroit où b2 a été inséré, on se retrouvera dans un de ces cas pour insérer b1 :
 
-<img src="img/l.png" height="150px" />
+<img src="img/l.png" height="300px" />
 
 on remarque que, dans l'un ou l'autre cas, cela ne coûte toujours au plus que 2 comparaisons pour insérer b1. ce résultat serait d'autant plus marquant pour de grandes valeurs de `len`.
 
@@ -136,8 +140,11 @@ on obtient :
 
 <img src="img/m.png" height="150px" />
 
-
 ### S2
+
+il faut d'abord insérer b4 dans le tableau des 7 premiers éléments de `a`. ça coûte 3 comparaisons maximum. ensuite, on peut faire pareil pour b3, avec toujours 3 comparaisons max.
+
+### 
 
 
 
