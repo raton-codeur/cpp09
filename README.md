@@ -16,7 +16,7 @@ exemple :
 
 T = 4, 2, 6, 3, 5
 
-on peut voir T comme composé des paires suivantes : [4, 2], [6, 3], 5
+on peut voir T comme étant composé des paires suivantes : [4, 2], [6, 3], 5
 
 et si on ordonne les paires de T, on obtient : 2, 4, 3, 6, 5
 
@@ -24,18 +24,21 @@ et si on ordonne les paires de T, on obtient : 2, 4, 3, 6, 5
 
 ### définition
 
-dans une paire, on dit que l'élément le plus grand est de type `a` et que l'élément le plus petit est de type `b`.
+dans une paire donnée, on dit que l'élément le plus grand est de type `a` et que l'élément le plus petit est de type `b`. on parle aussi du "grand" et du "petit".
 
 ### notation
 
 `b -> a` signifie que b < a.
 
+## étape 2 : trier les paires par ordre croissant selon les grands
 
-## étape 2 : trier les paires par ordre croissant selon les éléments de type `a`.
+cela se fait par récurrence, selon le même algorithme. on y reviendra mais pour l'instant on va admettre que ça marche.
 
-cela se fait par récurrence, selon le même algorithme. on va obtenir :
+on va obtenir un tableau : [b[0], a[0], b[1], a[1], b[2], a[2], ...]
 
-<img src="img/a.png" height="150px" />
+avec :
+
+<img src="img/g.png" height="150px" />
 
 
 
