@@ -130,19 +130,26 @@ selon l'endroit où b2 a été inséré, on se retrouvera dans un de ces cas pou
 
 on remarque que, dans l'un ou l'autre cas, cela ne coûte toujours au plus que 2 comparaisons pour insérer b1. ce résultat serait d'autant plus marquant pour de grandes valeurs de `len`.
 
-pour ne pas s'embêter, on peut garder le même `len` pour toute une série d'insertion
+pour ne pas s'embêter, on peut garder le même `len` pour toute une série d'insertion.
 
 ---
 
-finalement, pour S1, on a vu qu'il fallait insérer b2 puis b1 avec len = 3. on mémorise l'indice du dernier b inséré (c'est 2) et on passe le len à 7.
+finalement, pour S1, on a vu qu'il fallait insérer b2 puis b1 avec len = 3. on mémorise l'indice du dernier b inséré (c'est 2) et on met len à 7.
 
 on obtient :
 
 <img src="img/m.png" height="150px" />
 
-### S2
+### pour S2
 
-il faut d'abord insérer b4 dans le tableau des 7 premiers éléments de `a`. ça coûte 3 comparaisons maximum. ensuite, on peut faire pareil pour b3, avec toujours 3 comparaisons max.
+il faut d'abord insérer b4 dans le tableau des 7 premiers éléments de `a` (3 comparaisons maximum) puis insérer b3 (toujours avec 3 comparaisons maximum).
+
+on obtient :
+
+<img src="img/n.png" height="150px" />
+
+on mémorise l'indice du dernier b inséré (c'est 4) et on passe à len = 15
+
 
 ### 
 
