@@ -86,7 +86,7 @@ S0 a déjà été réalisé à l'étape 3 lorsqu'on a inséré b0 au début de `
 
 situation :
 
-<img src="img/h.png" height="150px" />
+<img src="img/hh.png" height="150px" />
 
 ---
 
