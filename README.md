@@ -158,12 +158,12 @@ on change les définitions précédentes. pour une série S_n :
 
 cmp(len_n) nous donne le nombre de comparaisons qui seront utilisés pour une insertion de b vers a au cours de la série
 
-n | 2^(n+1) | len_n | s_n | i_b
+n | 2^(n + 1) | len_n | s_n | i_b + 1
 -- | -- | -- | -- | --
-0 | 2 | 0 | 1 | 1 - 1 = 0
-1 | 4 | 0 + 2 * 1 = 2 | 4 - 2 = 2 | 3 - 1 = 2
-2 | 8 | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 5 - 1 = 4
-
+0 | 1 | 0 | 1 | 1
+1 | 2 | 0 + 2 * 1 = 2 | 2 - 2 = 2 | 3 
+2 | 8 | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 5 
+3 | 16 | 6 + 2 * 2 = 10 | 16 - 10 = 6 | 11
 
 
 

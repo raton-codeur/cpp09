@@ -11,17 +11,8 @@ iH : l'indice dans v de la tête d'un d'élément
 -
 
 -
-iR = (v.size() / n) * n;
 
-parcourir les elements avec
-for iE = 0; iE < iR; iE += n
 
-pour un iE donné on peut parcourir les nombres de l'élément avec
-for i = iE; i < iE + n; ++i
-
-on peut parcourir les elements du reste avec
-for i = iR; i < v.size(); ++i
--
 
 
 -
