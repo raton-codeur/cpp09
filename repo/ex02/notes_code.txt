@@ -3,50 +3,32 @@
 -
 les variables
 
-v : le vecteur 
+v : le vecteur de nombres
+ve : le vecteur abstrait des éléments
 n : la taille d'un élément dans v
 iR : indice du reste, l'indice dans v juste après le dernier élément de v
 iE : l'indice dans v du début d'un élément
 iH : l'indice dans v de la tête d'un d'élément
 -
 
+on a fini S0
+
+jacobsthal_previous = 1
+jacobsthal_current = 3
+len = 3
+sizeS = 2
+
+last : l'indice du dernier veB qui a été inséré
+	jacobsthal_previous - 1
+
 -
+on veut insérer les elements de b dans a
 
+len += 2 * sizeS
+nbEB : nbE dans B
 
-
-
--
-on a nos pairs ordonnées : 3 4 1 6 2 7 5 9 8 10 
-
-iR : indice du premier nombre qui n'est pas un élément ou pas en couple
-	iR = v.size() - v.size() % (2 * n)
-
-boucler sur les couples
-	for iE = 0; iE + n < iR; iE += 2 * n
-		if (v[iE + n - 1] < v[iE + 2 * n - 1])
-			b est à iE, a est à iE + n
-			push les nombres dans b puis a
-				for i = 0; i < n; ++i
-					b . push back (v[iE + i])
-				for i = 0; i < n; ++i
-					a.push_back(v[iE + n + i])
-		sinon
-			a est à iE, b est à iE + n
-			push les nombres dans a puis b
-
-recopier le reste des nombres dans b
-
-
-
-
-
-
-
-
-
-
-
-
+trouver le prochain veB[k] max
+	tant que k > last et k < nbEB 
 
 
 

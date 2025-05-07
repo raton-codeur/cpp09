@@ -95,25 +95,58 @@ void checkPairs(Vec& v, size_t n)
 	}
 }
 
-
+void initAB(const Vec& v, Vec& a, Vec& b, size_t iR, size_t n)
+{
+	for (size_t i = 0; i < n; ++i)
+		a.push_back(v[i]);
+	
+	for (size_t iE = 0, k = 0; iE < iR; iE += n, ++k)
+	{
+		if (k % 2)
+		{
+			for (size_t j = 0; j < n; ++j)
+				a.push_back(v[iE + j]);
+		}
+		else
+		{
+			for (size_t j = 0; j < n; ++j)
+				b.push_back(v[iE + j]);
+		}
+	}
+}
 
 void PmergeMe::main()
 {
 	Vec v = _v;
-	size_t n = 1;
+	size_t n = 2;
 
 	checkPairs(v, n);
 	print(v, n);
 
-	/* appel rec */
-
-	Vec a;
-	Vec b;
-
+	/* appel rec ici sur v, n * 2 */
+	
 	size_t iR = v.size() - v.size() % n;
-	for (size_t iE = 0; iE < iR; iE += n)
-	
+	size_t nbE = iR / n;
 
-	
+	Vec a, b;
+	if (nbE <= 2)
+	{
+		for (size_t i = 0; i < iR; ++i)
+			a.push_back(v[i]);
+	}
+	else
+	{
+		initAB(v, a, b, iR, n);
+
+		/* insertion */
+
+		for (size_t i = iR; i < v.size(); ++i)
+			a.push_back(v[i]);
+	}
+
+	std::cout << "a : ";
+	print(a, n);
+	std::cout << "b : ";
+	print(b, n);
 
 }

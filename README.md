@@ -165,51 +165,6 @@ n | 2^(n + 1) | len_n | s_n | i_b + 1
 2 | 8 | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 5 
 3 | 16 | 6 + 2 * 2 = 10 | 16 - 10 = 6 | 11
 
-
-
-
-
-## comprendre et trouver les indices des séries d'insertions
-
-pour trouver l'indice d'une nouvelle série, sachant celle de la précédente, il faut qu'on trouve sa taille, c'est a dire, le nombre d'éléments de type `b` qui vont être insérés au cours de la série. en effet, l'indice d'une série c'est l'indice de la précédente série + la taille de la nouvelle série.
-
-
-### trouver la taille d'une série pour n donné
-
-pour une liste de `c` de taille `n` donnée, on sait que toutes les insertions de la prochaine série utiliseront des recherches dichotomiques à `cmp(n)` comparaisons maximum. la question revient donc à trouver le nombre de valeurs supérieurs ou égales à `n` qui donnent ce même `cmp(n)`.
-
-par exemple, au début de l'étape 5, on avait n = 2. cmp(2) = 2 et, dans le tableau, on voit bien que cmp(n) reste à 2 jusqu'à la prochaine puissance de 2, qui est 4. c'est ce qui explique que la taille de la prochaine série devait être de 4 - 2 = 2.
-
-on avait ensuite n = 6 car on a inséré 2 éléments de type `b` et 2 éléments de type `a` dans une liste de taille `2`. cmp(6) = 3 et cmp(n) reste à 3 jusqu'à ce que n = 8. 8 - 6 = 2 donc on a encore eu une série de taille 2.
-
-ensuite, on avait n = 10 (= 6 + 2 * 2), cmp(n) = 4 jusqu'à ce que n = 16. 16 - 10 = 6 et c'est pourquoi on avait une série de taille 6.
-
-### trouver l'indice d'une série sachant l'indice précédent et la taille
-
-k | 2^k | taille de c | taille de la série | indice du premier b à insérer
---  | -- | -- | -- | --
-1 | 2 | 0 | 1 | 1
-2 | 4 | 0 + 2 * 1 = 2 | 4 - 2 = 2 | 1 + 2 = 3
-3 | 8 | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 3 + 2 = 5
-4 | 16 | 6 + 2 * 2 = 10 | 16 - 10 = 6 | 5 + 6 = 11
-5 | 32 | 10 + 2 * 6 = 22 | 32 - 22 = 10 | 11 + 10 = 21
-6 | 64 | 22 + 2 * 10 = 42 | 64 - 42 = 22 | 21 + 22 = 43
-... | ... | ... | ...
-
-remarques :
-
-taille de c = 2 * indice précédent
-
-taille de la série = 2 * indice précédent précédent
-
-### la suite de jacobsthal
-
-on peut remarquer que les indices suivent la suite de jacobsthal :
-
-J_n = J_(n - 1) + 2 * J_(n - 2)
-
-donc on pourra directement utiliser cette propriété.
-
 # annexe : trouver l'indice d'insertion grâce à la recherche dichotomique
 
 (lire https://fr.wikipedia.org/wiki/Recherche_dichotomique avant, pour comprendre le principe d'une recherche dichotomique.)
