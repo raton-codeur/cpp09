@@ -210,6 +210,7 @@ on veut savoir :
 
 
 indice de S | l | j | z
+-- | -- | -- | --
 0
 1 | 2 | 3 | 2
 2 | 6 | 5 | 2
