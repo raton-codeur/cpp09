@@ -70,23 +70,134 @@ b = 2, 3, 5
 
 (si il reste un nombre solo on le met dans b)
 
+## la recherche dichotomique
+
+la dernière étape consistera à insérer le reste des éléments de `b` dans `a`. mais avant cela, voici un petit rappel sur la recherche dichotomique.
+
+le but d'une recherche dichotomique est de retrouver efficacement une valeur dans un tableau trié. à chaque étape de l'algorithme, on divise le tableau en 2, on compare la valeur recherchée à l'élément central du tableau et on relance la recherche récursivement, soit dans le sous-tableau du bas, soit dans le sous-tableau du haut.
+
+nous, on va utiliser la recherche dichotomique pour savoir à quel indice de `a` il faut insérer un élément de `b`. insérer à l'indice 0 veut dire qu'on insère au début du tableau, c'est à dire, après 0 élément. insérer à l'indice 1 veut dire qu'on insère après le premier élément, etc.
+
+pour a = [a[0], a[1], a[2], a[3], ..., a[n - 1]], l'indice auquel il faut insérer `b` n'est autre que le nombre d'éléments de `a` qui sont inférieurs à `b`.
+
+on pourrait parcourir `a` et compter le nombre d'éléments qui sont inférieurs à `b`, mais cela reviendrait à faire jusqu'à n comparaisons (dans le cas où `b` doit être inséré à la fin de `a`). avec une recherche dichotomique, on fera seulement log(n) comparaisons maximum.
+
+appelons cet algorithme `findI`. il est récursif. il prend en arguments :
+- `a`
+- `i`
+- `j`
+- `b`
+`i` et `j` sont des indices de `a`. `a[i:j]` désigne le sous-tableau de `a` des éléments compris entre les indices `i` (inclus) et `j` exclu.
+
+```
+- cas de base : i == j
+  - renvoyer i : c'est l'indice recherché
+- cas de propagation
+  - on compare b à l'élément central de a[i:j]. appelons c l'indice de cet élément central. c = i + (j - i) / 2
+    - si b < a[c] on renvoie findI(a, i, c, b)
+    - si b > a[c] on renvoie findI(a, c + 1, j, b)
+```
+
+### exemple simple
+
+a = [2, 9, 13, 21]
+
+```
+findI(a, 0, 4, 8)
+	taille de a[0:4] = 4 - 0 = 4
+	c = 0 + 4 / 2 = 2
+	a[2] = 13
+	8 < 13 donc on renvoie findI(a, 0, 2, 8)
+		taille de a[0:2] = 2 - 0 = 2
+		c = 0 + 2 / 2 = 1
+		a[1] = 9
+		8 < 9 donc on renvoie findI(a, 0, 1, 8)
+			taille de a[0:1] = 1
+			c = 0 + 1 / 2 = 0
+			a[0] = 2
+			8 > 2 donc on renvoie findI(a, 1, 1, 8)
+					cas de base donc on renvoie 1
+
+findI(a, 0, 4, 10)
+	taille de a[0:4] = 4
+	c = 2
+	a[2] = 13
+	10 < 13 donc on renvoie findI(a, 0, 2, 10)
+		taille de a[0:2] = 2
+		c = 0 + 2 / 2 = 1
+		a[1] = 9
+		10 > 9 donc on renvoie findI(a, 2, 2, 10)
+			cas de base donc on renvoie 2
+```
+
+## le nombre de comparaisons d'une recherche dichotomique
+
+on cherche le nombre de comparaisons maximales nécessaires pour insérer une valeur `b` dans un tableau trié de n éléments. appelons ça cmp(n).
+
+n | cmp(n)
+-- | --
+2 | 2
+3 | 2
+4 | 3
+5 | 3
+6 | 3
+7 | 3
+8 | 4
+9 | 4
+10 | 4
+11 | 4
+12 | 4
+13 | 4
+14 | 4
+15 | 4
+16 | 5
+17 | 5
+... | ...
+
+on remarque que cmp(n) change à chaque puissance de 2.
+
+on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
+
+
+
+
+
+
+
+ de l'algorithme est d'optimiser les recherches dichotomiques permettant d'insérer les éléments de `b` dans `a`. ceci est possible, car, rappelons-le. `a` est toujours trié.
+
+ceci est une partie pour rappeler comment se passe une recherche dichotomique et introduire le coût d'une recherche. 
+
+
+
 ## étape 4 : insérer le reste des éléments de b dans a
 
-on va faire des séries d'insertion d'éléments de `b` dans `a`. mais il ne faut pas juste insérer les `b` dans l'ordre. on va vite comprendre pourquoi.
+on va faire des séries d'insertion d'éléments de `b` dans `a`. mais il ne faut pas juste insérer les `b` dans l'ordre ! petit exemples pour comprendre :
 
-### définition
+### si on insère b1 puis b2
 
-la taille d'une série c'est le nombre maximal d'éléments de b qui sont insérés au cours de cette série.
+(il faut absolument être à l'aise en recherche dichotomique pour comprendre cette partie. voir l'annexe ci-dessous si ce n'est pas le cas.)
 
-`a` possède une taille courante que je vais appeler `len` et qui est différente de son nombre d'éléments. c'est une taille qui dépendra uniquement de la série d'insertion. on y reviendra plus tard.
+on a :
 
-la première série d'insertion est S0, puis S1, S2, S3, ...
+
+
+
+
+
+### définitions
+
+la taille d'une série, notée `z`, c'est le nombre maximal d'éléments de `b` qui sont insérés dans `a` au cours de la série.
+
+`a` a une taille courante, notée `l`. elle est différente de son nombre d'éléments ! c'est une donnée qui dépendra uniquement de la série d'insertion. on y reviendra plus tard.
+
+la première série d'insertion est notée `S0`, puis on aura `S1`, `S2`, `S3`, ...
 
 ---
 
-S0 a déjà été réalisé à l'étape 3 lorsqu'on a inséré `b0` au début de `a`. c'était une série de taille 1.
+`S0` a déjà été réalisé à l'étape 3 lorsqu'on a inséré `b0` au début de `a`. c'était une série de taille 1.
 
-on continue avec S1 et `len = 3` (on verra pourquoi plus tard), pour insérer les deux prochains `b` : `b1` et `b2`.
+on continue avec S1 et `l = 3` (on verra pourquoi plus tard), pour insérer les deux prochains `b` : `b1` et `b2`.
 
 situation :
 
@@ -94,7 +205,6 @@ situation :
 
 #### si on insère b1 puis b2
 
-(il faut absolument être à l'aise en recherche dichotomique pour comprendre cette partie. voir l'annexe ci-dessous si ce n'est pas le cas.)
 
 on a un truc comme ça :
 
@@ -102,11 +212,11 @@ on a un truc comme ça :
 
 insérer b1 dans le tableau des 2 premiers éléments de `a` coûte au plus 2 comparaisons.
 
-au moment d'insérer b2, on aura donc un truc comme ça :
+au moment d'insérer b2, on aura un truc comme ça :
 
 <img src="img/j.png" height="150px" />
 
-(on a rajouté b1 au début de `a` et on passe a1)
+(on a rajouté `b1` au début de `a` et + `a1` qui n'a pas bougé)
 
 insérer b2 dans le tableau des 4 premiers éléments de `a` coûte au plus 3 comparaisons.
 
@@ -122,15 +232,15 @@ selon l'endroit où b2 a été inséré, on se retrouvera dans un de ces cas pou
 
 <img src="img/l.png" height="300px" />
 
-on remarque que, dans l'un ou l'autre cas, cela ne coûte toujours au plus que 2 comparaisons pour insérer b1. ce résultat serait d'autant plus marquant pour de grandes valeurs de `len`.
+on remarque que, dans l'un ou l'autre cas, cela ne coûte toujours au plus que 2 comparaisons pour insérer b1. ce résultat serait d'autant plus marquant pour de grandes valeurs de `l`.
 
-pour ne pas s'embêter, on peut garder le même `len` pour toute une série d'insertion, le principe de l'algorithme étant de minimiser le nombre de comparaisons maximales réalisées pour insérer les éléments de `b` dans `a` à une même valeur pour chaque nouvelle série.
+pour ne pas s'embêter, on peut garder le même `l` pour toute une série d'insertion, le principe de l'algorithme étant de minimiser le nombre de comparaisons maximales réalisées pour insérer les éléments de `b` dans `a` à une même valeur pour chaque nouvelle série.
 
 ---
 
-on peut passer à S2 :
-- taille : 2
-- len : 7
+on peut passer à `S2` :
+- z : 2
+- l : 7
 
 on a :
 
@@ -138,9 +248,9 @@ on a :
 
 là encore, il faut d'abord insérer b4 dans le tableau des 7 premiers éléments de `a` (3 comparaisons maximum) puis insérer b3 (toujours avec 3 comparaisons maximum).
 
-pour S3, on a :
-- taille : 6
-- len : 15
+pour `S3`, on a :
+- z : 6
+- l : 15
 
 on a :
 
@@ -148,11 +258,11 @@ on a :
 
 il faut d'abord insérer b10, puis b9, b8, b7, b6, b5. ça coutera 4 comparaisons maximum à chaque fois.
 
-## comprendre d'où sortent la taille et len
+## comprendre d'où sortent z et l
 
-on change les définitions précédentes. pour une série S_n :
-- len_n est le nombre d'éléments bien placés au début de `a`
-- s_n est le nombre maximal d'éléments de `b` qui vont être insérés dans `a` au cours de la série
+on change les définitions précédentes. pour une série donnée :
+- `l` est le nombre d'éléments bien placés au début de `a`
+- `z` est le nombre maximal d'éléments de `b` qui vont être insérés dans `a` au cours de la série
 - last est l'indice du dernier `b` ayant été inséré dans `a`
 - i_b est l'indice du dernier `b` devant être inséré dans `a`
 
