@@ -118,27 +118,26 @@ void initAB(const Vec& v, Vec& a, Vec& b, size_t iR, size_t n)
 void PmergeMe::main()
 {
 	Vec v = _v;
-	size_t n = 2;
+	size_t n = 1;
 
 	checkPairs(v, n);
 	print(v, n);
 
-	/* appel rec ici sur v, n * 2 */
+	/* appel rec sur (v, n * 2) ici */
 	
 	size_t iR = v.size() - v.size() % n;
 	size_t nbE = iR / n;
-
 	Vec a, b;
 	if (nbE <= 2)
 	{
-		for (size_t i = 0; i < iR; ++i)
+		for (size_t i = 0; i < v.size(); ++i)
 			a.push_back(v[i]);
 	}
 	else
 	{
 		initAB(v, a, b, iR, n);
 
-		/* insertion */
+		/* insertion ici */
 
 		for (size_t i = iR; i < v.size(); ++i)
 			a.push_back(v[i]);
