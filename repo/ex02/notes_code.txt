@@ -1,5 +1,26 @@
 
 
+
+changer le binary insert avec le paramètre iE pour indice de élément et n pour aller d'élément en élément
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -
 les variables
 
@@ -33,6 +54,7 @@ k = k_max
 	si veB 
 trouver le prochain veB[k] max
 	tant que k > last et k < nbEB 
+
 
 
 

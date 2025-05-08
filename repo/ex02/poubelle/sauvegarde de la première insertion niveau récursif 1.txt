@@ -1,0 +1,49 @@
+void binaryInsert(Vec& a, const Vec& b, size_t i, size_t j, size_t iE, size_t n)
+{
+	if (i == j)
+		a.insert(a.begin() + i, b);
+	else
+	{
+		size_t c = i + (j - i) / 2;
+		if (b < a[c])
+			binaryInsert(a, i, c, b);
+		else
+			binaryInsert(a, c + 1, j, b);
+	}
+}
+
+
+
+size_t jp, l, j, z, ip, i, end, tmp;
+		l = 2;
+		jp = 1;
+		j = 3;
+		z = 2;
+		ip = 0;
+		end = 0;
+		iR = b.size() / n;
+
+		while (end == 0)
+		{
+			std::cout << "l = " << l << ", j = " << j << ", z = " << z << std::endl;
+			std::cout << "recherche sur len(a) = " << l + z - 1 << std::endl;
+			i = j - 1;
+			if (i * n >= iR)
+			{
+				i = iR - n;
+				end = 1;
+			}
+			while (i != ip)
+			{
+				binaryInsert(a, 0, l + z - 1, b[i * n]);
+				print(a, n);
+				i--;
+			}
+			ip = j - 1;
+			tmp = l;
+			l += 2 * z;
+			z = tmp;
+			tmp = j;
+			j += 2 * jp;
+			jp = tmp;
+		}

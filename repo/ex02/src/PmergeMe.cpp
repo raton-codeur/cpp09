@@ -116,20 +116,29 @@ void initAB(const Vec& v, Vec& a, Vec& b, size_t iR, size_t n)
 }
 
 
-void binaryInsert(Vec& a, size_t i, size_t j, int b)
+
+void insertE(Vec& a, const Vec& b, size_t iA, size_t iB, size_t n)
 {
-	if (i == j)
-		a.insert(a.begin() + i, b);
-	else
+	for (int i = n - 1; i <= 0; --i)
 	{
-		size_t c = i + (j - i) / 2;
-		if (b < a[c])
-			binaryInsert(a, i, c, b);
-		else
-			binaryInsert(a, c + 1, j, b);
+		a.insert(a.begin() + iA, b[iB + i]);
 	}
 }
 
+void binaryInsert(Vec& a, const Vec& b, size_t i, size_t j, size_t iB, size_t n)
+{
+	if (i == j)
+		insertE(a, b, i, iB, n);
+	else
+	{
+		size_t c = (j - i) / n;
+		c = i + (c / 2) * n;
+		if (b[iB * (n + 1) - 1] < a[c + n - 1])
+			binaryInsert(a, b, i, c, iB, n);
+		else
+			binaryInsert(a, b, c + n, j, iB, n);
+	}
+}
 
 
 void PmergeMe::main()
@@ -158,30 +167,28 @@ void PmergeMe::main()
 		std::cout << "b : ";
 		print(b, n);
 	
-		/**/
-		
-		
-		size_t jp, l, j, z, ip, ll, i, end, tmp;
-		jp = 1;
+		size_t jp, l, j, z, ip, i, end, tmp;
 		l = 2;
+		jp = 1;
 		j = 3;
 		z = 2;
 		ip = 0;
 		end = 0;
+		iR = b.size() / n;
 
 		while (end == 0)
 		{
+			std::cout << "l = " << l << ", j = " << j << ", z = " << z << std::endl;
+			std::cout << "recherche sur len(a) = " << l + z - 1 << std::endl;
 			i = j - 1;
-			ll = l + z - 1;
 			if (i >= iR)
 			{
-				i = iR - n;
+				i = iR - 1;
 				end = 1;
 			}
 			while (i != ip)
 			{
-				if (end == 0)
-					binaryInsert(a, 0, ll, b[i * n]);
+				binaryInsert(a, b, 0, (l + z - 1) * n, i * n, n);
 				print(a, n);
 				i--;
 			}
