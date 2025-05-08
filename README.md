@@ -74,15 +74,15 @@ b = 2, 3, 5
 
 la dernière étape consistera à insérer le reste des éléments de `b` dans `a`. mais avant cela, voici un petit rappel sur la recherche dichotomique.
 
-le but d'une recherche dichotomique est de retrouver efficacement une valeur dans un tableau trié. à chaque étape de l'algorithme, on divise le tableau en 2, on compare la valeur recherchée à l'élément central du tableau et on relance la recherche récursivement, soit dans le sous-tableau du bas, soit dans le sous-tableau du haut.
+le but d'une recherche dichotomique est de retrouver efficacement une valeur dans un tableau trié. à chaque étape, on compare la valeur recherchée à l'élément central du tableau et, si elle est <, on relance la recherche dans le sous-tableau inférieur, sinon on relance dans le sous-tableau supérieur. c'est un algorithme récursif. comme la taille du tableau est divisée par 2 à chaque étape, la complexité est en O(log2(n)).
 
 nous, on va utiliser la recherche dichotomique pour savoir à quel indice de `a` il faut insérer un élément de `b`. insérer à l'indice 0 veut dire qu'on insère au début du tableau, c'est à dire, après 0 élément. insérer à l'indice 1 veut dire qu'on insère après le premier élément, etc.
 
 pour a = [a[0], a[1], a[2], a[3], ..., a[n - 1]], l'indice auquel il faut insérer `b` n'est autre que le nombre d'éléments de `a` qui sont inférieurs à `b`.
 
-on pourrait parcourir `a` et compter le nombre d'éléments qui sont inférieurs à `b`, mais cela reviendrait à faire jusqu'à n comparaisons (dans le cas où `b` doit être inséré à la fin de `a`). avec une recherche dichotomique, on fera seulement log(n) comparaisons maximum.
+on pourrait parcourir `a` et compter le nombre d'éléments qui sont inférieurs à `b`, mais cela reviendrait à faire jusqu'à n comparaisons (dans le cas où `b` doit être inséré à la fin de `a`). avec une recherche dichotomique, on fera seulement log2(n) comparaisons maximum.
 
-appelons cet algorithme `findI`. il est récursif. il prend en arguments :
+appelons cet algorithme `findI`. il prend en arguments :
 - `a`
 - `i`
 - `j`
@@ -158,27 +158,115 @@ on remarque que cmp(n) change à chaque puissance de 2.
 
 on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
-
-
-
-
-
-
- de l'algorithme est d'optimiser les recherches dichotomiques permettant d'insérer les éléments de `b` dans `a`. ceci est possible, car, rappelons-le. `a` est toujours trié.
-
-ceci est une partie pour rappeler comment se passe une recherche dichotomique et introduire le coût d'une recherche. 
-
-
-
 ## étape 4 : insérer le reste des éléments de b dans a
 
-on va faire des séries d'insertion d'éléments de `b` dans `a`. mais il ne faut pas juste insérer les `b` dans l'ordre ! petit exemples pour comprendre :
+- `l` : la longueur de `c`
+- `z` : la taille de la série
 
-### si on insère b1 puis b2
+- `j` : le nombre de jacobsthal courant
+- `jp` : le nombre de jacobsthal précédent
 
-(il faut absolument être à l'aise en recherche dichotomique pour comprendre cette partie. voir l'annexe ci-dessous si ce n'est pas le cas.)
+init 0 :
 
-on a :
+j = 1
+
+init 1 :
+l = 0
+j = 1
+z = 1
+
+après S0, début de S1 :
+
+l = lp + 2 * zp = 0 + 2 * 1 = 2
+j = jp + 2 * jpp = 1 + 2 * 1 = 3
+z = j - jp = lp = 3 - 1 = 2
+
+début de S2 :
+
+l = 2 + 2 * 2 = 6
+j = 3 + 2 * 1 = 5
+z = 5 - 3 = 2
+
+début de S3 :
+l = 6 + 2 * 2 = 10
+j = 5 + 2 * 3 = 11
+z = 11 - 5 = 6
+
+l = 10 + 2 * 6 = 22
+j = 11 + 2 * 5 = 21
+z = 21 - 11 = 10
+
+
+
+on veut savoir :
+- jj : l'indice du plus grand b à insérer
+- ll : la taille de a à utiliser pour la recherche
+
+jj = j - 1
+ll : l + j - 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`b0` a déjà été inséré à l'étape 3.
+
+on va faire des séries d'insertion d'éléments de `b` dans `a`. mais il ne faut pas juste les insérer dans l'ordre ! petit exemples pour comprendre pourquoi :
+
+
+
+
+
 
 
 
@@ -204,7 +292,6 @@ situation :
 <img src="img/hh.png" height="150px" />
 
 #### si on insère b1 puis b2
-
 
 on a un truc comme ça :
 
@@ -274,97 +361,6 @@ n | 2^(n + 1) | len_n | s_n | i_b + 1
 1 | 2 | 0 + 2 * 1 = 2 | 2 - 2 = 2 | 3 
 2 | 8 | 2 + 2 * 2 = 6 | 8 - 6 = 2 | 5 
 3 | 16 | 6 + 2 * 2 = 10 | 16 - 10 = 6 | 11
-
-# annexe : trouver l'indice d'insertion grâce à la recherche dichotomique
-
-(lire https://fr.wikipedia.org/wiki/Recherche_dichotomique avant, pour comprendre le principe d'une recherche dichotomique.)
-
-soit `T` = [`T[0]`, `T[1]`, `T[2]`, ..., `T[n - 1]`], un tableau **trié** de n nombres.
-
-on veut insérer un nombre `b` dans T. pour cela, on veut savoir l'indice de `T` auquel insérer `b`.
-
-il se trouve que cet indice n'est autre que le nombre d'éléments de `T` qui sont inférieurs à `b`.
-
-on pourrait parcourir `T` et compter le nombre d'éléments qui sont inférieurs à `b`, mais cela reviendrait à faire jusqu'à n comparaisons si `b` doit être inséré à la fin de `T`, par exemple.
-
-on peux faire mieux avec la recherche dichotomique, car `T` est trié, réduisant à log2(n) le nombre maximal de comparaisons.
-
-c'est un algorithme récursif. appelons-le `recherche_indice`. il prend en argument le sous tableau de `T` des éléments compris entre les indices `i` (inclus) et `j` exclu, que je vais noter `T[i:j]`, et notre élément `b`.
-
-- cas de base : `T[i:j]` est vide car `i == j`.
-  - on peut renvoyer `i`, c'est l'indice auquel il faut insérer `b`
-- pour un sous tableau `T[i:j]` de taille `j - i` > 0, on compare `b` à l'élément central de `T[i:j]`. appelons `c` l'indice de cet élément central. on l'obtient en faisant : `i + (j - i) / 2`.
-  - si `b` < `T[c]`, on renvoie `recherche_indice(T[i:c], b)` 
-  - si `b` > `T[c]`, on renvoie `recherche_indice(T[(c + 1):j], b)`
-
-## exemple simple
-
-T = [2, 9, 13, 21]
-
-```
-recherche_indice(T[0:4], 8)
-	taille de T[0:4] = 4 - 0 = 4
-	c = 0 + 4 / 2 = 2
-	T[2] = 13
-	8 < 13 donc on renvoie recherche_indice(T[0:2], 8)
-	recherche_indice(T[0:2], 8)
-		taille de T[0:2] = 2 - 0 = 2
-		c = 0 + 2 / 2 = 1
-		T[1] = 9
-		8 < 9 donc on renvoie recherche_indice(T[0:1], 8)
-		recherche_indice(T[0:1], 8)
-			taille de T[0:1] = 1
-			c = 0 + 1 / 2 = 0
-			T[0] = 2
-			8 > 2 donc on renvoie recherche_indice(T[1:1], 8)
-				recherche_indice(T[1:1], 8)
-					cas de base
-					on renvoie 1
-
-recherche_indice(T[0:4], 10)
-	taille de T[0:4] = 4
-	c = 2
-	T[2] = 13
-	10 < 13 donc on renvoie recherche_indice(T[0:2], 10)
-	recherche_indice(T[0:2], 10)
-		taille de T[0:2] = 2
-		c = 0 + 2 / 2 = 1
-		T[1] = 9
-		10 > 9 donc on renvoie recherche_indice(T[2:2], 10)
-			cas de base
-			on renvoie 2
-```
-
-
-### autre annexe : nombre de comparaisons d'une recherche dichotomique
-
-on cherche le nombre de comparaisons maximales nécessaires pour insérer une valeur `b` dans un tableau trié de n éléments. appelons ça cmp(n).
-
-petit récap de ce qu'on a vu + généralisation :
-
-n | cmp(n)
--- | --
-2 | 2
-3 | 2
-4 | 3
-5 | 3
-6 | 3
-7 | 3
-8 | 4
-9 | 4
-10 | 4
-11 | 4
-12 | 4
-13 | 4
-14 | 4
-15 | 4
-16 | 5
-17 | 5
-... | ...
-
-on remarque que cmp(n) change à chaque puissance de 2.
-
-on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
 
 
