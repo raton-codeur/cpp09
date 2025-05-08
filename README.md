@@ -159,7 +159,7 @@ on remarque que cmp(n) change à chaque puissance de 2.
 
 on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
-## définitions
+## étape 4
 
 on va insérer les éléments de `b` dans `a`. plus précisément, on ne va utiliser que le début de `a`, que l'on va appeler `c`.
 
@@ -169,7 +169,27 @@ comme on a déjà inséré b0 à l'étape 3, on a :
 
 ### si on insère d'abord b1 puis b2
 
-on a : 
+appelons `l` la longueur de `a` utilisée pour effectuée la recherche dichotomique.
+
+ici, on peut prendre l = 2, car on sait déjà que b1 sera inséré avant a1. on a : cmp(2) = 2.
+
+on obtient, au moment d'insérer b2 :
+
+<img src="img/a2.png" height="150px" />
+
+on peut prendre l = 4 et cmp(4) = 3.
+
+### si on insère b2 puis b1
+
+on prend l = 3 et on insère b2. cmp(3) = 2.
+
+on obtient l'un de ces cas :
+
+<img src="img/a3.png" height="150px" />
+
+
+
+
 
 
  série d'insertion
