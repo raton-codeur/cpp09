@@ -185,7 +185,7 @@ on prend l = 3 et on insère b2. cmp(3) = 2.
 
 on obtient l'un de ces cas :
 
-<img src="img/a3.png" height="150px" />
+<img src="img/a3.png" height="300px" />
 
 
 
