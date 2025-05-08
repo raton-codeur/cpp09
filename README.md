@@ -16,7 +16,7 @@ exemple :
 
 T = 4, 2, 6, 3, 5
 
-on peut voir T comme étant composé des paires suivantes : [4, 2], [6, 3], 5
+au premier niveau récursif, on peut voir T comme étant composé des paires suivantes : [4, 2], [6, 3], 5
 
 et si on ordonne les paires de T, on obtient : 2, 4, 3, 6, 5
 
@@ -38,7 +38,7 @@ cela se fait par récurrence, selon le même algorithme. on y reviendra mais pou
 
 on va obtenir un tableau : [b0, a0, b1, a1, b2, a2, ...]
 
-avec :
+avec les relations d'ordre suivants :
 
 <img src="img/g.png" height="150px" />
 
@@ -72,9 +72,9 @@ b = 2, 3, 5
 
 ## la recherche dichotomique
 
-la dernière étape consistera à insérer le reste des éléments de `b` dans `a`. mais avant cela, voici un petit rappel sur la recherche dichotomique.
+la dernière étape consiste à insérer le reste des éléments de `b` dans `a`. mais avant cela, il faut revoir la recherche dichotomique.
 
-le but d'une recherche dichotomique est de retrouver efficacement une valeur dans un tableau trié. à chaque étape, on compare la valeur recherchée à l'élément central du tableau et, si elle est <, on relance la recherche dans le sous-tableau inférieur, sinon on relance dans le sous-tableau supérieur. c'est un algorithme récursif. comme la taille du tableau est divisée par 2 à chaque étape, la complexité est en O(log2(n)).
+le but d'une recherche dichotomique est de retrouver efficacement une valeur dans un tableau trié. à chaque étape, on compare la valeur recherchée à l'élément central du tableau et, si elle est <, on relance la recherche dans la moitié inférieure du tableau, sinon on relance dans la recherche dans la moitié supérieur du tableau. c'est un algorithme récursif. comme la taille du tableau est divisée par 2 à chaque étape, la complexité est en O(log2(n)).
 
 nous, on va utiliser la recherche dichotomique pour savoir à quel indice de `a` il faut insérer un élément de `b`. insérer à l'indice 0 veut dire qu'on insère au début du tableau, c'est à dire, après 0 élément. insérer à l'indice 1 veut dire qu'on insère après le premier élément, etc.
 
@@ -87,11 +87,12 @@ appelons cet algorithme `findI`. il prend en arguments :
 - `i`
 - `j`
 - `b`
-`i` et `j` sont des indices de `a`. `a[i:j]` désigne le sous-tableau de `a` des éléments compris entre les indices `i` (inclus) et `j` exclu.
+
+`a[i:j]` désigne le sous-tableau de `a` des éléments compris entre les indices `i` (inclus) et `j` exclu.
 
 ```
 - cas de base : i == j
-  - renvoyer i : c'est l'indice recherché
+  - renvoyer i car c'est l'indice recherché
 - cas de propagation
   - on compare b à l'élément central de a[i:j]. appelons c l'indice de cet élément central. c = i + (j - i) / 2
     - si b < a[c] on renvoie findI(a, i, c, b)
@@ -157,6 +158,22 @@ n | cmp(n)
 on remarque que cmp(n) change à chaque puissance de 2.
 
 on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
+
+## définitions
+
+on va insérer les éléments de `b` dans `a`. plus précisément, on ne va utiliser que le début de `a`, que l'on va appeler `c`.
+
+comme on a déjà inséré b0 à l'étape 3, on a :
+
+<img src="a1.png" height="150px" />
+
+### si on insère d'abord b1 puis b2
+
+on a : 
+
+
+ série d'insertion
+
 
 ## étape 4 : insérer le reste des éléments de b dans a
 
