@@ -115,6 +115,23 @@ void initAB(const Vec& v, Vec& a, Vec& b, size_t iR, size_t n)
 	}
 }
 
+
+void binaryInsert(Vec& a, size_t i, size_t j, int b)
+{
+	if (i == j)
+		a.insert(a.begin() + i, b);
+	else
+	{
+		size_t c = i + (j - i) / 2;
+		if (b < a[c])
+			binaryInsert(a, i, c, b);
+		else
+			binaryInsert(a, c + 1, j, b);
+	}
+}
+
+
+
 void PmergeMe::main()
 {
 	Vec v = _v;
@@ -136,7 +153,13 @@ void PmergeMe::main()
 	else
 	{
 		initAB(v, a, b, iR, n);
+		std::cout << "a : ";
+		print(a, n);
+		std::cout << "b : ";
+		print(b, n);
+	
 		/**/
+		
 		
 		size_t jp, l, j, z, ip, ll, i, end, tmp;
 		jp = 1;
@@ -157,29 +180,25 @@ void PmergeMe::main()
 			}
 			while (i != ip)
 			{
-				// insérer bE[i] dans aE jusqu'à ll 
-				std::cout << "on va insérer b[" << i << "] dans avec ll = " << ll << std::endl;
+				if (end == 0)
+					binaryInsert(a, 0, ll, b[i * n]);
+				print(a, n);
 				i--;
 			}
 			ip = j - 1;
-			z = l;
+			tmp = l;
 			l += 2 * z;
+			z = tmp;
 			tmp = j;
 			j += 2 * jp;
 			jp = tmp;
 		}
-
-
-
 
 		/**/
 		for (size_t i = iR; i < v.size(); ++i)
 			a.push_back(v[i]);
 	}
 
-	std::cout << "a : ";
-	print(a, n);
-	std::cout << "b : ";
-	print(b, n);
 
 }
+
