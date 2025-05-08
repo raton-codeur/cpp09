@@ -165,7 +165,7 @@ on va insérer les éléments de `b` dans `a`. plus précisément, on ne va util
 
 comme on a déjà inséré b0 à l'étape 3, on a :
 
-<img src="a1.png" height="150px" />
+<img src="img/a1.png" height="150px" />
 
 ### si on insère d'abord b1 puis b2
 
