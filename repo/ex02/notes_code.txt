@@ -21,12 +21,16 @@ sizeS = 2
 last : l'indice du dernier veB qui a été inséré
 	jacobsthal_previous - 1
 
--
+k_max : indice du prochain veB théorique à insérer
+	jacobsthal_current - 1
+
+
 on veut insérer les elements de b dans a
 
-len += 2 * sizeS
-nbEB : nbE dans B
+nbEB
 
+k = k_max 
+	si veB 
 trouver le prochain veB[k] max
 	tant que k > last et k < nbEB 
 
