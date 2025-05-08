@@ -204,12 +204,19 @@ on veut savoir :
 - i : l'indice du plus grand b à insérer
   - c'est j - 1
 - ll : la taille de a à utiliser pour la recherche
-  - c'est l + j - 1
+  - c'est l + z - 1
 
 
 
 
-
+indice de S | l | j | z
+0
+1 | 2 | 3 | 2
+2 | 6 | 5 | 2
+3 | 10 | 11 | 6
+4 | 22 | 21 | 11
+5 | 42 | 43 | 21
+6 | 86 | 85 | 43
 
 
 

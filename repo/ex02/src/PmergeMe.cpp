@@ -138,18 +138,36 @@ void PmergeMe::main()
 		initAB(v, a, b, iR, n);
 		/**/
 		
-		size_t l, j, jp, z, jj, ll, ip;
+		size_t jp, l, j, z, ip, ll, i, end, tmp;
 		jp = 1;
 		l = 2;
 		j = 3;
 		z = 2;
 		ip = 0;
+		end = 0;
 
-		jj = j - 1;
-		ll = l + j - 1;
-		// si nbE de b < jj 
-		while (jj > )
-
+		while (end == 0)
+		{
+			i = j - 1;
+			ll = l + z - 1;
+			if (i >= iR)
+			{
+				i = iR - n;
+				end = 1;
+			}
+			while (i != ip)
+			{
+				// insérer bE[i] dans aE jusqu'à ll 
+				std::cout << "on va insérer b[" << i << "] dans avec ll = " << ll << std::endl;
+				i--;
+			}
+			ip = j - 1;
+			z = l;
+			l += 2 * z;
+			tmp = j;
+			j += 2 * jp;
+			jp = tmp;
+		}
 
 
 
