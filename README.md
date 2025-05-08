@@ -161,7 +161,7 @@ on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
 ## étape 4
 
-on va insérer les éléments de `b` dans `a`. plus précisément, on ne va utiliser que le début de `a`, que l'on va appeler `c`.
+on va insérer les éléments de `b` dans `a`. plus précisément, on ne va utiliser que le début de `a`, que l'on va appeler `c`. `nc` est la longueur de `c`.
 
 comme on a déjà inséré b0 à l'étape 3, on a :
 
@@ -169,31 +169,77 @@ comme on a déjà inséré b0 à l'étape 3, on a :
 
 ### si on insère d'abord b1 puis b2
 
-appelons `l` la longueur de `a` utilisée pour effectuée la recherche dichotomique.
+on sait déjà que b1 sera inséré avant a1 donc on peut restreindre la recherche dichotomique à c.
 
-ici, on peut prendre l = 2, car on sait déjà que b1 sera inséré avant a1. on a : cmp(2) = 2.
+on a : cmp(2) = 2.
 
 on obtient, au moment d'insérer b2 :
 
 <img src="img/a2.png" height="150px" />
 
-on peut prendre l = 4 et cmp(4) = 3.
+pareil, on peut chercher l'indice d'insertion de b2 dans `c` et on obtient cmp(4) = 3.
 
 ### si on insère b2 puis b1
 
-on prend l = 3 et on insère b2. cmp(3) = 2.
+on cherche où insérer b2 dans [b0, a0, a1], avec cmp(3) = 2.
 
 on obtient l'un de ces cas :
 
 <img src="img/a3.png" height="300px" />
 
+dans tous les cas, on peut utiliser le sous tableau des 3 premiers éléments de `a` pour insérer b1, donc cmp reste à 2.
 
+---
 
+sur ce même principe, le but sera d'insérer tous les `b` par série de même cmp. une série permet d'insérer au plus `z` éléments. `z` est la taille de la série.
 
+la première série est S0, puis on a : S1, S2, S3, …
 
+S0 a été réalisé à l'étape 3 en insérant b0 (elle était de taille 1).
 
- série d'insertion
+S1 consiste à insérer b2 puis b1 (donc elle est de taille 2).
 
+toute série consistera à insérer un premier élément de b dans le sous-tableau des x premiers éléments de a, puis son b d'indice précédent, en gardant toujours le même x et jusqu'à ce qu'on tombe sur un b ayant déjà été inséré.
+
+il apparait que `l` augmente d'une série à l'autre d'exactement 2 * `z`.
+
+on va utiliser la suite de jabosthal pour savoir à quel indice de `b` il faut commencer les séries.
+
+cette suite est définie par :
+
+0, 1, 1, 3, 5, 11, 21, 43, 85, …
+
+ie J(n) = J(n - 1) + 2 * J(n - 2)
+
+comme notre tableau commence à l'indice 0, il faudra en fait utiliser Jn - 1 à chaque fois.
+
+la taille d'une série est la différence entre deux termes de jabosthal.
+
+- S0 a inséré b0 (Jn = 1)
+- S1 a inséré b2 (Jn = 3) et b1
+- S2 va inséré b4 (Jn = 5) et b3 
+- S3 va inséré b10 (Jn = 11), b9, b8, b7, b6, b5 
+- S4 va inséré b20 (Jn  = 21), b19, b18, b17, b16, b15, b14, b13, b12, b11
+- …
+
+## récap
+
+- l : la taille de c
+- j : le nombre jacobsthal courant
+- z : la taille de la série
+
+série | l | j | z
+-- | -- | -- | --
+0 | 0 + 2 * 1 = 2 | 1 + 2 * 1 = 3 | 3 - 1 = 2
+1 | 2 + 2 * 2 = 6 | 3 + 2 * 1 = 5 | 5 - 3 = 2
+2 | 6 + 2 * 2 = 10 | 5 + 2 * 3 = 11 | 11 - 5 = 6
+3 | 10 + 2 * 6 = 22 | 11 + 2 * 5 = 21 | 21 - 11 = 10
+
+```
+l = lp + 2 * zp
+j = jp + 2 * jpp
+z = j - jp = lp
+```
 
 ## étape 4 : insérer le reste des éléments de b dans a
 
