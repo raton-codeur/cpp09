@@ -161,10 +161,11 @@ on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 ## étape 4 : insérer le reste des éléments de b dans a
 
 - `l` : la longueur de `c`
+- `j` : le nombre de jacobsthal courant
 - `z` : la taille de la série
 
-- `j` : le nombre de jacobsthal courant
 - `jp` : le nombre de jacobsthal précédent
+- `ip` : l'indice du dernier b inséré
 
 ```
 init 0 :
@@ -200,13 +201,13 @@ z = 21 - 11 = 10
 
 
 on veut savoir :
-- jj : l'indice du plus grand b à insérer
+- i : l'indice du plus grand b à insérer
   - c'est j - 1
 - ll : la taille de a à utiliser pour la recherche
   - c'est l + j - 1
 
-jj = j - 1
-ll : l + j - 1
+
+
 
 
 

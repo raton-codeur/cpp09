@@ -136,9 +136,25 @@ void PmergeMe::main()
 	else
 	{
 		initAB(v, a, b, iR, n);
+		/**/
+		
+		size_t l, j, jp, z, jj, ll, ip;
+		jp = 1;
+		l = 2;
+		j = 3;
+		z = 2;
+		ip = 0;
 
-		/* insertion ici */
+		jj = j - 1;
+		ll = l + j - 1;
+		// si nbE de b < jj 
+		while (jj > )
 
+
+
+
+
+		/**/
 		for (size_t i = iR; i < v.size(); ++i)
 			a.push_back(v[i]);
 	}
