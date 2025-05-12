@@ -8,26 +8,27 @@
 #include <list>
 #include <cerrno>
 #include <climits>
+#include <ctime>
 #define RED "\033[31m"
 #define RESET "\033[0m"
 
-typedef std::vector<int> Vec;
-#define getIH(i_e, n) (i_e)
+typedef std::vector<int> Vector;
 
 class PmergeMe
 {
 	private :
-		Vec		_v;
-
-					PmergeMe();
-					PmergeMe(const PmergeMe& other);
-		PmergeMe&	operator=(const PmergeMe& other);
-
+	
+	PmergeMe();
+	PmergeMe(const PmergeMe& other);
+	PmergeMe&	operator=(const PmergeMe& other);
+	
 	public :
+		Vector v;
+
 		PmergeMe(int argc, char** argv);
 		~PmergeMe();
 
-		void main();
+		Vector sort(Vector& v, size_t n);
 };
 
 #endif

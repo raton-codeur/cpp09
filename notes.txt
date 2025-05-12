@@ -329,3 +329,24 @@ quand on fait s.insert(x) ça renvoie un std::pair<iterator, bool>
 le premier élément est un itérateur vers l'élément inséré dans le set
 le second est à true si on a inséré l'élément, false sinon (car il y était déjà)
 -
+
+
+
+-
+chronométrer un code (en ms)
+
+clock_t start = clock();
+...
+clock_t end = clock();
+result = (end - start) / CLOCKS_PER_SEC;
+
+clock() renvoie le nombre de "ticks" processeur écoulés depuis le début du programme
+
+diviser le nombre de ticks par CLOCKS_PER_SEC donne un résultat en secondes. on peut le multiplier par 1000 pour obtenir un résultat en millisecondes par exemple.
+-
+
+
+-
+std::is_sorted(v.begin(), v.end())
+-
+

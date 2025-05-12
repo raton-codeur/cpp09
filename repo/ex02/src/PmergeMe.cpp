@@ -46,46 +46,20 @@ PmergeMe::PmergeMe(int argc, char** argv)
 	for (int i = 1; i < argc; ++i)
 	{
 		checkArg(argv[i]);
-		_v.push_back(std::atoi(argv[i]));
+		v.push_back(std::atoi(argv[i]));
 	}
-	std::unordered_set<int> set(_v.begin(), _v.end());
-	if (set.size() != _v.size())
+	std::unordered_set<int> set(v.begin(), v.end());
+	if (set.size() != v.size())
 		throw std::invalid_argument("duplicate values detected");
 }
 
-void print(Vec& v, size_t n)
-{
-	size_t iR;
-
-	iR = v.size() - v.size() % n;
-	for (size_t iE = 0; iE < iR; iE += n)
-	{
-		std::cout << "[";
-		for (size_t i = iE; i < iE + n; ++i)
-		{
-			std::cout << v[i];
-			if (i != iE + n - 1)
-				std::cout << " ";
-		}
-		// std::cout << std::endl;
-		std::cout << "]";
-	}
-	for (size_t i = iR; i < v.size(); ++i)
-	{
-		std::cout << v[i];
-		if (i != v.size() - 1)
-			std::cout << " ";
-	}
-	std::cout << std::endl;
-}
-
-void swapElements(Vec& v, size_t i, size_t j, size_t n)
+static void swapElements(Vector& v, size_t i, size_t j, size_t n)
 {
 	for (size_t k = 0; k < n; ++k)
 		std::swap(v[i + k], v[j + k]);
 }
 
-void checkPairs(Vec& v, size_t n)
+static void checkPairs(Vector& v, size_t n)
 {
 	size_t iR = v.size() - v.size() % (2 * n);
 	for (size_t iE = 0; iE + n < iR; iE += 2 * n)
@@ -95,7 +69,7 @@ void checkPairs(Vec& v, size_t n)
 	}
 }
 
-void initAB(const Vec& v, Vec& a, Vec& b, size_t iR, size_t n)
+static void initAB(const Vector& v, Vector& a, Vector& b, size_t iR, size_t n)
 {
 	for (size_t i = 0; i < n; ++i)
 		a.push_back(v[i]);
@@ -115,7 +89,7 @@ void initAB(const Vec& v, Vec& a, Vec& b, size_t iR, size_t n)
 	}
 }
 
-void insertE(Vec& a, const Vec& b, size_t iA, size_t iB, size_t n)
+static void insertE(Vector& a, const Vector& b, size_t iA, size_t iB, size_t n)
 {
 	iA *= n;
 	iB *= n;
@@ -123,9 +97,8 @@ void insertE(Vec& a, const Vec& b, size_t iA, size_t iB, size_t n)
 		a.insert(a.begin() + iA, b[iB + i]);
 }
 
-void binarySearchInsert(Vec& a, const Vec& b, size_t i, size_t j, size_t iB, size_t n)
+static void binarySearchInsert(Vector& a, const Vector& b, size_t i, size_t j, size_t iB, size_t n)
 {
-	// std::cout << "binary search avec size(a) = " << a.size() << ", i = " << i << ", j = " << j << std::endl;
 	if (i == j)
 		insertE(a, b, i, iB, n);
 	else
@@ -138,7 +111,7 @@ void binarySearchInsert(Vec& a, const Vec& b, size_t i, size_t j, size_t iB, siz
 	}
 }
 
-void insertAllB(Vec& a, Vec& b, size_t iR, size_t n)
+static void insertAllB(Vector& a, Vector& b, size_t iR, size_t n)
 {
 	size_t jp, l, j, z, iBp, iB, end, tmp, ll;
 	
@@ -149,7 +122,6 @@ void insertAllB(Vec& a, Vec& b, size_t iR, size_t n)
 	iBp = 0;
 	end = 0;
 	iR = b.size() / n;
-
 	while (end == 0)
 	{
 		iB = j - 1;
@@ -163,7 +135,6 @@ void insertAllB(Vec& a, Vec& b, size_t iR, size_t n)
 		while (iB != iBp)
 		{
 			binarySearchInsert(a, b, 0, ll, iB, n);
-			print(a, n);
 			iB--;
 		}
 		iBp = j - 1;
@@ -176,21 +147,16 @@ void insertAllB(Vec& a, Vec& b, size_t iR, size_t n)
 	}
 }
 
-Vec sort(Vec& v, size_t n)
+Vector PmergeMe::sort(Vector& v, size_t n)
 {
-	std::cout << "on trie ";
-	print(v, n);
 	checkPairs(v, n);
 
-	if (v.size() / 2 / n > 1)
+	if (v.size() / (2 * n) > 1)
 		v = sort(v, n * 2);
-	std::cout << "paires qui doivent être triées : ";
-	print(v, n * 2);
 
 	size_t iR = v.size() - v.size() % n;
-	size_t nbE = iR / n;
-	Vec a, b;
-	if (nbE <= 2)
+	Vector a, b;
+	if (iR / n <= 2)
 	{
 		for (size_t i = 0; i < v.size(); ++i)
 			a.push_back(v[i]);
@@ -198,27 +164,9 @@ Vec sort(Vec& v, size_t n)
 	else
 	{
 		initAB(v, a, b, iR, n);
-		std::cout << "a : ";
-		print(a, n);
-		std::cout << "b : ";
-		print(b, n);
-
 		insertAllB(a, b, iR, n);
-
 		for (size_t i = iR; i < v.size(); ++i)
 			a.push_back(v[i]);
 	}
-	std::cout << "on renvoie : ";
-	print(a, n);
 	return a;
-}
-
-void PmergeMe::main()
-{
-	// size_t n = 2;
-	Vec v = sort(_v, 1);
-	std::cout << "result : ";
-	print(v, 1);
-
-	std::is_sorted(v.begin(), v.end()) ? std::cout << GREEN << "tableau trié avec succès\n" << RESET : std::cout << "KO\n";
 }
