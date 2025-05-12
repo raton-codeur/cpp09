@@ -220,5 +220,5 @@ void PmergeMe::main()
 	std::cout << "result : ";
 	print(v, 1);
 
-	std::is_sorted(v.begin(), v.end()) ? std::cout << "OK\n" : std::cout << "KO\n";
+	std::is_sorted(v.begin(), v.end()) ? std::cout << GREEN << "tableau trié avec succès\n" << RESET : std::cout << "KO\n";
 }
