@@ -194,7 +194,9 @@ on obtient l'un de ces cas :
 
 <img src="img/a3.png" height="300px" />
 
-dans le premier cas, on pourra insérer b1 en gardant nc = 3. on pourrait même utiliser nc = 2 dans le deuxième cas, mais pour ne pas trop se compliquer la vie, on va utiliser nc = 3 dans tous les cas. ainsi, on garde un nombre maximal de comparaisons identiques pour insérer b1 et b2. c'est donc mieux d'insérer b2 puis b1.
+dans tous les cas, on pourra insérer b1 en gardant nc = 3. on pourrait même utiliser nc = 2 dans le deuxième cas mais on va pas se compliquer les choses.
+
+ainsi, insérer b2 puis b1 a permis de conserver la même valeur, minimale, pour cmp.
 
 ---
 
