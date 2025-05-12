@@ -194,9 +194,9 @@ on obtient l'un de ces cas :
 
 <img src="img/a3.png" height="300px" />
 
-dans tous les cas, on pourra insérer b1 en gardant nc = 3. on pourrait même utiliser nc = 2 dans le deuxième cas mais on va pas se compliquer les choses.
+dans tous les cas, on pourra insérer b1 en gardant nc = 3. on pourrait même utiliser nc = 2 dans le deuxième cas mais on va pas se compliquer trop les choses.
 
-ainsi, insérer b2 puis b1 a permis de conserver la même valeur, minimale, pour cmp.
+ainsi, insérer b2 puis b1 a permis de conserver la même valeur (minimale) de cmp.
 
 ---
 
@@ -208,17 +208,21 @@ S0 a été réalisé à l'étape 3 en insérant b0 (elle était de taille 1).
 
 S1 consiste à insérer b2 puis b1 (donc elle est de taille 2).
 
-toute série consistera à insérer un premier élément de `b` dans le sous-tableau des `x` premiers éléments de `a`, puis son `b` d'indice précédent, en gardant toujours le même `x` et jusqu'à ce qu'on tombe sur un `b` ayant déjà été inséré.
+toute série consistera à insérer un premier élément de `b` dans le sous-tableau des `x` premiers éléments de `a`, puis le `b` d'indice précédent, en gardant toujours le même `x` pour cmp et jusqu'à ce qu'on tombe sur un `b` ayant déjà été inséré.
 
-il apparait que `l` augmente d'une série à l'autre d'exactement 2 * `z`.
+il apparait que `nc` augmente d'une série à l'autre d'exactement 2 * `z`.
 
-on va utiliser la suite de jabosthal pour savoir à quel indice de `b` il faut commencer les séries.
+on utilise la suite de jabosthal, notée `J`, pour savoir à quel indice de `b` il faut commencer une série.
 
 cette suite est définie par :
 
-0, 1, 1, 3, 5, 11, 21, 43, 85, …
+```
+J(0) = 0
+J(1) = 1
+J(n) = J(n - 1) + 2 * J(n - 2)
+```
 
-ie J(n) = J(n - 1) + 2 * J(n - 2)
+ce qui donne : 0, 1, 1, 3, 5, 11, 21, 43, 85, …
 
 comme notre tableau commence à l'indice 0, il faudra en fait utiliser Jn - 1 à chaque fois.
 
