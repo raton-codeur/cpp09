@@ -160,7 +160,7 @@ on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
 on va insérer le reste des éléments de `b` dans `a`.
 
-j'appelle `c` les éléments de `a` qui servent à effectuer une recherche dichotomique. c'est le sous-tableau des `l` premiers éléments de `a`.
+appelons `c` les éléments indifférenciés de `a` qui serviront à effectuer la prochaine recherche dichotomique. c'est le sous-tableau des `l` premiers éléments de `a`.
 
 comme on a déjà inséré b0 à l'étape 3, on a :
 
@@ -262,13 +262,15 @@ série | `l` | `j` | `z`
 4 | 10 + 2 * 6 = 22 | 11 + 2 * 5 = 21 | 21 - 11 = 10
 … | … | … | …
 
+on remarque :
+
 ```
-l = lp + 2 * zp
+l = lp + 2 * zp = j + 1
 j = jp + 2 * jpp
 z = j - jp = lp
 ```
 
-taille de `a` à utiliser pour la recherche dichotomique : `l + z - 1`
+taille de `a` à utiliser pour la recherche dichotomique de la série : `l + z - 1`
 
 ### notations
 
@@ -276,6 +278,7 @@ taille de `a` à utiliser pour la recherche dichotomique : `l + z - 1`
 - `lp` : `l` précédent
 - `j` : nombre de jacobsthal courant
 - `jp` : `j` précédent
+- `jpp` : `jp` précédent
 - `z` : la taille de la série
 - `zp` : `z` précédent
 
