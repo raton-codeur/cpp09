@@ -265,12 +265,12 @@ série | `l` | `j` | `z`
 ### bilan
 
 ```
-l = lp + 2 * zp = j + 1
+l = lp + 2 * zp (= j + 1)
 j = jp + 2 * jpp
 z = j - jp = lp
 ```
 
-taille de `a` à utiliser pour la recherche dichotomique de la série : `l + z - 1`
+taille de `a` à utiliser pour faire une recherche dichotomique au cours de la série : `l + z - 1`
 
 ### notations
 
@@ -281,34 +281,6 @@ taille de `a` à utiliser pour la recherche dichotomique de la série : `l + z -
 - `jpp` : `jp` précédent
 - `z` : la taille de la série
 - `zp` : `z` précédent
-
----
-
-- l : la taille de c
-- j : le nombre jacobsthal courant
-- z : la taille de la série
-
-série | l | j | z
--- | -- | -- | --
-  | | | 1 | 
-0 | 0 | 1 | 1
-1 | 0 + 2 * 1 = 2 | 1 + 2 * 1 = 3 | 3 - 1 = 2
-2 | 2 + 2 * 2 = 6 | 3 + 2 * 1 = 5 | 5 - 3 = 2
-3 | 6 + 2 * 2 = 10 | 5 + 2 * 3 = 11 | 11 - 5 = 6
-4 | 10 + 2 * 6 = 22 | 11 + 2 * 5 = 21 | 21 - 11 = 10
-
-```
-l = lp + 2 * zp
-j = jp + 2 * jpp
-z = j - jp = lp
-```
-
-taille de `a` à utiliser pour la recherche dichotomique : `l + z - 1`
-
-
-
-
-
 
 # ancienne version
 
