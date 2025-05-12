@@ -130,7 +130,7 @@ findI(a, 0, 4, 10)
 
 ## le nombre de comparaisons d'une recherche dichotomique
 
-on cherche le nombre de comparaisons maximales nécessaires pour insérer une valeur `b` dans un tableau trié de n éléments. appelons ça cmp(n).
+on cherche le nombre de comparaisons maximales nécessaires pour insérer une valeur dans un tableau trié de n éléments. appelons ça cmp(n).
 
 n | cmp(n)
 -- | --
@@ -158,7 +158,9 @@ on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
 ## étape 4
 
-on va insérer les éléments de `b` dans `a`. plus précisément, on ne va utiliser que le début de `a`, que l'on va appeler `c`. `nc` est la longueur de `c`.
+on va insérer le reste des éléments de `b` dans `a`.
+
+j'appelle `c` les éléments de `a` qui servent à effectuer une recherche dichotomique. c'est le sous-tableau des `nc` premiers éléments de `a`.
 
 comme on a déjà inséré b0 à l'étape 3, on a :
 
@@ -166,15 +168,21 @@ comme on a déjà inséré b0 à l'étape 3, on a :
 
 ### si on insère d'abord b1 puis b2
 
-on sait déjà que b1 sera inséré avant a1 donc on peut restreindre la recherche dichotomique à c.
+on sait déjà que b1 sera inséré avant a1 donc on peut restreindre la recherche dichotomique à c = [b0, a0].
 
-on a : cmp(2) = 2.
+on a :
+- nc = 2
+- cmp(2) = 2
 
 on obtient, au moment d'insérer b2 :
 
 <img src="img/a2.png" height="150px" />
 
-pareil, on peut chercher l'indice d'insertion de b2 dans `c` et on obtient cmp(4) = 3.
+(c contient maintenant b1 et a1.)
+
+pour insérer de b2, on a :
+- nc = 4
+- cmp(4) = 3
 
 ### si on insère b2 puis b1
 
