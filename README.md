@@ -174,25 +174,27 @@ on a :
 - nc = 2
 - cmp(2) = 2
 
-on obtient, au moment d'insérer b2 :
+on insère b1 dans `a` et on obtient, au moment d'insérer b2 :
 
 <img src="img/a2.png" height="150px" />
 
-(c contient maintenant b1 et a1.)
+(`c` contient maintenant b1 et a1.)
 
-pour insérer de b2, on a :
+donc, pour insérer b2, on a :
 - nc = 4
 - cmp(4) = 3
 
 ### si on insère b2 puis b1
 
-on cherche où insérer b2 dans [b0, a0, a1], avec cmp(3) = 2.
+on cherche où insérer b2 dans [b0, a0, a1], donc on a :
+- nc = 3
+- cmp(3) = 2
 
 on obtient l'un de ces cas :
 
 <img src="img/a3.png" height="300px" />
 
-dans tous les cas, on peut utiliser le sous tableau des 3 premiers éléments de `a` pour insérer b1, donc cmp reste à 2.
+dans le premier cas, on pourra insérer b1 en gardant nc = 3. on pourra même utiliser nc = 2 dans le cas du dessous. pour ne pas se compliquer la vie, on peut utiliser nc = 3 dans tous les cas. ainsi, on garde un nombre maximal de comparaisons identiques pour insérer b2 et b1.
 
 ---
 
