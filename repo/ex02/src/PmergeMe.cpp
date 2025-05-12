@@ -149,12 +149,11 @@ void insertAllB(Vec& a, Vec& b, size_t iR, size_t n)
 	iBp = 0;
 	end = 0;
 	iR = b.size() / n;
-	iB = j - 1;
 
 	while (end == 0)
 	{
-		ll = l + z - 1;
 		iB = j - 1;
+		ll = l + z - 1;
 		if (iB >= iR)
 		{
 			iB = iR - 1;
@@ -182,10 +181,11 @@ Vec sort(Vec& v, size_t n)
 	std::cout << "on trie ";
 	print(v, n);
 	checkPairs(v, n);
-	std::cout << "paires triées : ";
-	print(v, n * 2);
 
-	/* ici : sort(v, n * 2) */
+	if (v.size() / 2 / n > 1)
+		v = sort(v, n * 2);
+	std::cout << "paires qui doivent être triées : ";
+	print(v, n * 2);
 
 	size_t iR = v.size() - v.size() % n;
 	size_t nbE = iR / n;
@@ -215,8 +215,10 @@ Vec sort(Vec& v, size_t n)
 
 void PmergeMe::main()
 {
-	size_t n = 1;
-	Vec v = sort(_v, n);
+	// size_t n = 2;
+	Vec v = sort(_v, 1);
 	std::cout << "result : ";
-	print(v, n);
+	print(v, 1);
+
+	std::is_sorted(v.begin(), v.end()) ? std::cout << "OK\n" : std::cout << "KO\n";
 }

@@ -7,8 +7,9 @@ changer le binary insert avec le paramètre iE pour indice de élément et n pou
 
 
 
+on peut lancer une récursion si il y a au moins 2 éléments à swap
 
-
+nombres d'éléments dans le prochains niveau récursif : v_size / (2 * n)
 
 
 
