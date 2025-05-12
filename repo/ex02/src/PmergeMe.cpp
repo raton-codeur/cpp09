@@ -53,7 +53,6 @@ PmergeMe::PmergeMe(int argc, char** argv)
 		throw std::invalid_argument("duplicate values detected");
 }
 
-
 void print(Vec& v, size_t n)
 {
 	size_t iR;
@@ -68,6 +67,7 @@ void print(Vec& v, size_t n)
 			if (i != iE + n - 1)
 				std::cout << " ";
 		}
+		// std::cout << std::endl;
 		std::cout << "]";
 	}
 	for (size_t i = iR; i < v.size(); ++i)
@@ -115,20 +115,17 @@ void initAB(const Vec& v, Vec& a, Vec& b, size_t iR, size_t n)
 	}
 }
 
-
-
 void insertE(Vec& a, const Vec& b, size_t iA, size_t iB, size_t n)
 {
 	iA *= n;
 	iB *= n;
 	for (int i = n - 1; i >= 0; --i)
-	{
 		a.insert(a.begin() + iA, b[iB + i]);
-	}
 }
 
 void binarySearchInsert(Vec& a, const Vec& b, size_t i, size_t j, size_t iB, size_t n)
 {
+	// std::cout << "binary search avec size(a) = " << a.size() << ", i = " << i << ", j = " << j << std::endl;
 	if (i == j)
 		insertE(a, b, i, iB, n);
 	else
@@ -141,17 +138,55 @@ void binarySearchInsert(Vec& a, const Vec& b, size_t i, size_t j, size_t iB, siz
 	}
 }
 
-
-void PmergeMe::main()
+void insertAllB(Vec& a, Vec& b, size_t iR, size_t n)
 {
-	Vec v = _v;
-	size_t n = 1;
-
-	checkPairs(v, n);
-	print(v, n);
-
-	/* appel rec sur (v, n * 2) ici */
+	size_t jp, l, j, z, iBp, iB, end, tmp, ll;
 	
+	l = 2;
+	jp = 1;
+	j = 3;
+	z = 2;
+	iBp = 0;
+	end = 0;
+	iR = b.size() / n;
+	iB = j - 1;
+
+	while (end == 0)
+	{
+		ll = l + z - 1;
+		iB = j - 1;
+		if (iB >= iR)
+		{
+			iB = iR - 1;
+			ll = a.size() / n;
+			end = 1;
+		}
+		while (iB != iBp)
+		{
+			binarySearchInsert(a, b, 0, ll, iB, n);
+			print(a, n);
+			iB--;
+		}
+		iBp = j - 1;
+		tmp = l;
+		l += 2 * z;
+		z = tmp;
+		tmp = j;
+		j += 2 * jp;
+		jp = tmp;
+	}
+}
+
+Vec sort(Vec& v, size_t n)
+{
+	std::cout << "on trie ";
+	print(v, n);
+	checkPairs(v, n);
+	std::cout << "paires triées : ";
+	print(v, n * 2);
+
+	/* ici : sort(v, n * 2) */
+
 	size_t iR = v.size() - v.size() % n;
 	size_t nbE = iR / n;
 	Vec a, b;
@@ -167,49 +202,21 @@ void PmergeMe::main()
 		print(a, n);
 		std::cout << "b : ";
 		print(b, n);
-	
-		size_t jp, l, j, z, ip, i, end, tmp, ll;
-		
-		l = 2;
-		jp = 1;
-		j = 3;
-		z = 2;
-		ip = 0;
-		end = 0;
-		iR = b.size() / n;
 
-		while (end == 0)
-		{
-			std::cout << "l = " << l << ", j = " << j << ", z = " << z << std::endl;
-			std::cout << "recherche sur len(a) = " << l + z - 1 << std::endl;
-			i = j - 1;
-			if (i >= iR)
-			{
-				i = iR - n;
-				end = 1;
-			}
-			ll = l + z - 1;
-			while (i != ip)
-			{
-				binarySearchInsert(a, b, 0, ll, i, n);
-				// print(a, n);
-				i--;
-			}
-			ip = j - 1;
-			tmp = l;
-			l += 2 * z;
-			z = tmp;
-			tmp = j;
-			j += 2 * jp;
-			jp = tmp;
-		}
+		insertAllB(a, b, iR, n);
 
 		for (size_t i = iR; i < v.size(); ++i)
 			a.push_back(v[i]);
-		
-		print(a, n);
 	}
-
-
+	std::cout << "on renvoie : ";
+	print(a, n);
+	return a;
 }
 
+void PmergeMe::main()
+{
+	size_t n = 1;
+	Vec v = sort(_v, n);
+	std::cout << "result : ";
+	print(v, n);
+}

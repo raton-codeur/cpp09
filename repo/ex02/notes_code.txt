@@ -19,8 +19,6 @@ changer le binary insert avec le paramètre iE pour indice de élément et n pou
 
 
 
-
-
 -
 les variables
 
