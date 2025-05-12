@@ -160,7 +160,7 @@ on trouve que `cmp(n) = floor ( log2 (n) ) + 1`.
 
 on va insérer le reste des éléments de `b` dans `a`.
 
-j'appelle `c` les éléments de `a` qui servent à effectuer une recherche dichotomique. c'est le sous-tableau des `nc` premiers éléments de `a`.
+j'appelle `c` les éléments de `a` qui servent à effectuer une recherche dichotomique. c'est le sous-tableau des `l` premiers éléments de `a`.
 
 comme on a déjà inséré b0 à l'étape 3, on a :
 
@@ -171,7 +171,7 @@ comme on a déjà inséré b0 à l'étape 3, on a :
 on sait déjà que b1 sera inséré avant a1 donc on peut restreindre la recherche dichotomique à c = [b0, a0].
 
 on a :
-- nc = 2
+- l = 2
 - cmp(2) = 2
 
 on insère b1 dans `a` et on obtient, au moment d'insérer b2 :
@@ -181,20 +181,20 @@ on insère b1 dans `a` et on obtient, au moment d'insérer b2 :
 (`c` contient maintenant b1 et a1.)
 
 donc, pour insérer b2, on a :
-- nc = 4
+- l = 4
 - cmp(4) = 3
 
 ### si on insère b2 puis b1
 
 on cherche où insérer b2 dans [b0, a0, a1], donc on a :
-- nc = 3
+- l = 3
 - cmp(3) = 2
 
 on obtient l'un de ces cas :
 
 <img src="img/a3.png" height="300px" />
 
-dans tous les cas, on pourra insérer b1 en gardant nc = 3. on pourrait même utiliser nc = 2 dans le deuxième cas mais on va pas se compliquer trop les choses.
+dans tous les cas, on pourra insérer b1 en gardant l = 3. on pourrait même utiliser l = 2 dans le deuxième cas mais on va pas se compliquer trop les choses.
 
 ainsi, insérer b2 puis b1 a permis de conserver la même valeur (minimale) de cmp.
 
@@ -208,9 +208,9 @@ S0 a été réalisé à l'étape 3 en insérant b0 (elle était de taille 1).
 
 S1 consiste à insérer b2 puis b1 (donc elle est de taille 2).
 
-toute série consistera à insérer un premier élément de `b` dans le sous-tableau des `x` premiers éléments de `a`, puis le `b` d'indice précédent, en gardant toujours le même `x` pour cmp et jusqu'à ce qu'on tombe sur un `b` ayant déjà été inséré.
+toute série consistera à insérer un premier élément de `b` dans le sous-tableau des `x` premiers éléments de `a`, puis le `b` d'indice précédent, puis son précédent, etc, en gardant toujours le même `x` pour cmp et jusqu'à ce qu'on retombe sur un `b` ayant déjà été inséré.
 
-il apparait que `nc` augmente d'une série à l'autre d'exactement 2 * `z`.
+il apparait que `l` augmente d'une série à l'autre d'exactement 2 * `z`.
 
 on utilise la suite de jacobsthal, notée `J`, pour savoir à quel indice de `b` il faut commencer une série.
 
@@ -253,7 +253,7 @@ S4 | 6 | 21 | b[20], b[19], b[18], b[17], b[16], b[15], b[14], b[13], b[12], b[1
 ## récap
 
 
-série | nc | j | z
+série | l | j | z
 -- | -- | -- | --
   | | | 1 | 
 0 | 0 | 1 | 1
@@ -263,17 +263,17 @@ série | nc | j | z
 4 | 10 + 2 * 6 = 22 | 11 + 2 * 5 = 21 | 21 - 11 = 10
 
 ```
-nc = ncp + 2 * zp
+l = lp + 2 * zp
 j = jp + 2 * jpp
-z = j - jp = ncp
+z = j - jp = lp
 ```
 
 taille de `a` à utiliser pour la recherche dichotomique : `l + z - 1`
 
 ### notations
 
-- `nc` : longueur de `c` au début d'une série d'insertion
-- `ncp` : `nc` précédent
+- `l` : longueur de `c` au début d'une série d'insertion
+- `lp` : `l` précédent
 - `j` : nombre de jacobsthal courant
 - `jp` : `j` précédent
 - `z` : la taille de la série
