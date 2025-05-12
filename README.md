@@ -248,15 +248,38 @@ S1 | 3 | 3 | b[2], b[1]
 S2 | 4 | 5 | b[4], b[3]
 S3 | 5 | 11 | b[10], b[9], b[8], b[7], b[6], b[5]
 S4 | 6 | 21 | b[20], b[19], b[18], b[17], b[16], b[15], b[14], b[13], b[12], b[11]
-
-- S0 insère b0 (J(2) = 1)
-- S1 a inséré b2 (J(3) = 3) et b1
-- S2 va inséré b4 (Jn = 5) et b3 
-- S3 va inséré b10 (Jn = 11), b9, b8, b7, b6, b5 
-- S4 va inséré b20 (Jn  = 21), b19, b18, b17, b16, b15, b14, b13, b12, b11
-- …
+… | … | … | …
 
 ## récap
+
+
+série | nc | j | z
+-- | -- | -- | --
+  | | | 1 | 
+0 | 0 | 1 | 1
+1 | 0 + 2 * 1 = 2 | 1 + 2 * 1 = 3 | 3 - 1 = 2
+2 | 2 + 2 * 2 = 6 | 3 + 2 * 1 = 5 | 5 - 3 = 2
+3 | 6 + 2 * 2 = 10 | 5 + 2 * 3 = 11 | 11 - 5 = 6
+4 | 10 + 2 * 6 = 22 | 11 + 2 * 5 = 21 | 21 - 11 = 10
+
+```
+nc = ncp + 2 * zp
+j = jp + 2 * jpp
+z = j - jp = ncp
+```
+
+taille de `a` à utiliser pour la recherche dichotomique : `l + z - 1`
+
+### notations
+
+- `nc` : longueur de `c` au début d'une série d'insertion
+- `ncp` : `nc` précédent
+- `j` : nombre de jacobsthal courant
+- `jp` : `j` précédent
+- `z` : la taille de la série
+- `zp` : `z` précédent
+
+---
 
 - l : la taille de c
 - j : le nombre jacobsthal courant
