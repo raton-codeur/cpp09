@@ -28,23 +28,21 @@ dans une paire donnée, on dit qu'on a (d'abord) un "petit" et (puis) un "grand"
 
 ### notation
 
-`i -> j` signifie que i < j.
-
-donc, pour la paire d'indice i, on a : `b_i -> a_i`
+pour deux nombres `a` et `b`, `b -> a` signifie que b < a.
 
 ## étape 2 : trier les paires par ordre croissant selon les grands
 
-cela se fait par récurrence, selon le même algorithme. on y reviendra mais pour l'instant on va admettre que ça marche.
+cela se fait par récurrence, selon le même algorithme. en ce sens, dans un niveau récursif plus profond, ce ne sera plus des nombres qu'il faudra trier mais des paires de nombres, des paires de paires de nombres, etc. on y reviendra. pour l'instant, on va admettre que ça marche et qu'on est remonté au premier niveau récursif.
 
-on va obtenir un tableau : [b0, a0, b1, a1, b2, a2, ...]
+on va obtenir un tableau de nombres : [b0, a0, b1, a1, b2, a2, ...]
 
-avec les relations d'ordre suivants :
+avec les relations d'ordre suivantes :
 
 <img src="img/g.png" height="150px" />
 
 ## étape 3 : initialiser a et b
 
-`a` et `b` désignent maintenant deux nouveaux tableaux.
+`a` et `b` désignent maintenant deux tableaux.
 
 on initialise :
 - a = [T[0], T[1], T[3], T[5], T[7], ...]
@@ -56,9 +54,7 @@ c'est à dire :
 
 `a` est forcément toujours trié. c'est là-dedans qu'on va construire notre résultat.
 
-on a rajouté b0 au début de `a` pour gagner du temps sur l'étape suivante.
-
-`b` fait la liste des petits. on va juste y accéder en lecture.
+on a rajouté b0 au début de `a` pour gagner du temps sur l'étape suivante. à part ça, `a` fait la liste des grands et `b` fait la liste des petits.
 
 exemple (issu de l'étape précédente) :
 
@@ -68,17 +64,17 @@ a = 2, 4, 6
 
 b = 2, 3, 5
 
-(si il reste un nombre solo on le met dans b)
+(si il reste un nombre solo, on le met dans b.)
 
 ## la recherche dichotomique
 
-la dernière étape consiste à insérer le reste des éléments de `b` dans `a`. mais avant cela, il faut revoir la recherche dichotomique.
+la dernière étape consiste à insérer le reste des éléments de `b` dans `a`. mais avant cela, il faut être à l'aise avec la recherche dichotomique.
 
-le but d'une recherche dichotomique est de retrouver efficacement une valeur dans un tableau trié. à chaque étape, on compare la valeur recherchée à l'élément central du tableau et, si elle est <, on relance la recherche dans la moitié inférieure du tableau, sinon on relance dans la recherche dans la moitié supérieur du tableau. c'est un algorithme récursif. comme la taille du tableau est divisée par 2 à chaque étape, la complexité est en O(log2(n)).
+le but d'une recherche dichotomique est de retrouver efficacement une valeur dans un tableau trié. à chaque étape, on compare la valeur recherchée à l'élément central du tableau et, si elle est <, on relance la recherche dans la moitié inférieure du tableau, sinon on relance dans la recherche dans la moitié supérieur du tableau. c'est un algorithme récursif. comme la taille du tableau est divisée par 2 à chaque étape, la complexité de cet algorithme est en O(log2(n)).
 
 nous, on va utiliser la recherche dichotomique pour savoir à quel indice de `a` il faut insérer un élément de `b`. insérer à l'indice 0 veut dire qu'on insère au début du tableau, c'est à dire, après 0 élément. insérer à l'indice 1 veut dire qu'on insère après le premier élément, etc.
 
-pour a = [a[0], a[1], a[2], a[3], ..., a[n - 1]], l'indice auquel il faut insérer `b` n'est autre que le nombre d'éléments de `a` qui sont inférieurs à `b`.
+pour a = [a[0], a[1], a[2], a[3], ..., a[n - 1]], l'indice auquel il faut insérer un nombre `b` n'est autre que le nombre d'éléments de `a` qui sont inférieurs à `b`.
 
 on pourrait parcourir `a` et compter le nombre d'éléments qui sont inférieurs à `b`, mais cela reviendrait à faire jusqu'à n comparaisons (dans le cas où `b` doit être inséré à la fin de `a`). avec une recherche dichotomique, on fera seulement log2(n) comparaisons maximum.
 
@@ -91,12 +87,13 @@ appelons cet algorithme `findI`. il prend en arguments :
 `a[i:j]` désigne le sous-tableau de `a` des éléments compris entre les indices `i` (inclus) et `j` exclu.
 
 ```
-- cas de base : i == j
-  - renvoyer i car c'est l'indice recherché
-- cas de propagation
-  - on compare b à l'élément central de a[i:j]. appelons c l'indice de cet élément central. c = i + (j - i) / 2
-    - si b < a[c] on renvoie findI(a, i, c, b)
-    - si b > a[c] on renvoie findI(a, c + 1, j, b)
+cas de base : i == j
+	on renvoie i car c'est l'indice recherché
+cas de propagation
+	on compare b à l'élément central de a[i:j]. appelons c l'indice de cet élément central.
+	c = i + (j - i) / 2
+	si b < a[c] on renvoie findI(a, i, c, b)
+	si b > a[c] on renvoie findI(a, c + 1, j, b)
 ```
 
 ### exemple simple
