@@ -194,19 +194,19 @@ on obtient l'un de ces cas :
 
 <img src="img/a3.png" height="300px" />
 
-dans le premier cas, on pourra insérer b1 en gardant nc = 3. on pourra même utiliser nc = 2 dans le cas du dessous. pour ne pas se compliquer la vie, on peut utiliser nc = 3 dans tous les cas. ainsi, on garde un nombre maximal de comparaisons identiques pour insérer b2 et b1.
+dans le premier cas, on pourra insérer b1 en gardant nc = 3. on pourrait même utiliser nc = 2 dans le deuxième cas, mais pour ne pas trop se compliquer la vie, on va utiliser nc = 3 dans tous les cas. ainsi, on garde un nombre maximal de comparaisons identiques pour insérer b1 et b2. c'est donc mieux d'insérer b2 puis b1.
 
 ---
 
 sur ce même principe, le but sera d'insérer tous les `b` par série de même cmp. une série permet d'insérer au plus `z` éléments. `z` est la taille de la série.
 
-la première série est S0, puis on a : S1, S2, S3, …
+j'appelle la première série S0, puis S1, S2, S3, …
 
 S0 a été réalisé à l'étape 3 en insérant b0 (elle était de taille 1).
 
 S1 consiste à insérer b2 puis b1 (donc elle est de taille 2).
 
-toute série consistera à insérer un premier élément de b dans le sous-tableau des x premiers éléments de a, puis son b d'indice précédent, en gardant toujours le même x et jusqu'à ce qu'on tombe sur un b ayant déjà été inséré.
+toute série consistera à insérer un premier élément de `b` dans le sous-tableau des `x` premiers éléments de `a`, puis son `b` d'indice précédent, en gardant toujours le même `x` et jusqu'à ce qu'on tombe sur un `b` ayant déjà été inséré.
 
 il apparait que `l` augmente d'une série à l'autre d'exactement 2 * `z`.
 
