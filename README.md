@@ -212,7 +212,7 @@ toute série consistera à insérer un premier élément de `b` dans le sous-tab
 
 il apparait que `nc` augmente d'une série à l'autre d'exactement 2 * `z`.
 
-on utilise la suite de jabosthal, notée `J`, pour savoir à quel indice de `b` il faut commencer une série.
+on utilise la suite de jacobsthal, notée `J`, pour savoir à quel indice de `b` il faut commencer une série.
 
 cette suite est définie par :
 
@@ -222,14 +222,35 @@ J(1) = 1
 J(n) = J(n - 1) + 2 * J(n - 2)
 ```
 
-ce qui donne : 0, 1, 1, 3, 5, 11, 21, 43, 85, …
+d'où :
 
-comme notre tableau commence à l'indice 0, il faudra en fait utiliser Jn - 1 à chaque fois.
+n | J(n)
+-- | --
+0 | 0
+1 | 1
+2 | 1
+3 | 3
+4 | 5
+5 | 11
+6 | 21
+7 | 43
+8 | 85
+... | ...
 
-la taille d'une série est la différence entre deux termes de jabosthal.
+pour la série `Sn`, il faudra commencer par insérer l'élément de `b` d'indice `J(n + 2) - 1`.
 
-- S0 a inséré b0 (Jn = 1)
-- S1 a inséré b2 (Jn = 3) et b1
+la taille de la série `Sn` est `J(n + 2) - J(n + 1)`.
+
+série | n | J(n) | éléments insérés
+-- | -- | -- | --
+S0 | 2 | 1 | b[0]
+S1 | 3 | 3 | b[2], b[1]
+S2 | 4 | 5 | b[4], b[3]
+S3 | 5 | 11 | b[10], b[9], b[8], b[7], b[6], b[5]
+S4 | 6 | 21 | b[20], b[19], b[18], b[17], b[16], b[15], b[14], b[13], b[12], b[11]
+
+- S0 insère b0 (J(2) = 1)
+- S1 a inséré b2 (J(3) = 3) et b1
 - S2 va inséré b4 (Jn = 5) et b3 
 - S3 va inséré b10 (Jn = 11), b9, b8, b7, b6, b5 
 - S4 va inséré b20 (Jn  = 21), b19, b18, b17, b16, b15, b14, b13, b12, b11
