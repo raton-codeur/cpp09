@@ -151,9 +151,9 @@ n | note | cmp(n)
 15 | … | 4
 16 | … | 5
 17 | … | 5
-… | …
+… | … | …
 
-dans `note`, je numérote toutes les comparaisons associées aux éléments du tableau. par exemple pour n = 2, la première comparaison est avec le 2e élément, puis avec le premier. pour n = 3, la première comparaison est avec l'élément central, et la deuxième est soit avec la première valeur, soit avec la dernière. cmp(n) est la plus haute valeur listée dans `note`.
+dans `note`, je numérote toutes les comparaisons associées aux éléments du tableau. par exemple pour n = 2, la première comparaison est avec le 2e élément, puis avec le premier. pour n = 3, la première comparaison est avec l'élément central, et la deuxième est soit avec le premier élément, soit avec le dernier. cmp(n) est la plus haute valeur listée dans `note`.
 
 on remarque que cmp(n) change à chaque puissance de 2.
 
@@ -213,7 +213,7 @@ S1 consiste à insérer b2 puis b1 (donc elle est de taille 2).
 
 toute série consistera à insérer un premier élément de `b` dans le sous-tableau des `x` premiers éléments de `a`, puis le `b` d'indice précédent, puis son précédent, etc, en gardant toujours le même `x` pour cmp et jusqu'à ce qu'on retombe sur un `b` ayant déjà été inséré.
 
-il apparait que `l` augmente d'une série à l'autre d'exactement 2 * `z`.
+il apparait que `l` augmente d'une série à l'autre d'exactement 2 * `z` (on insère un `b` "et son `a`").
 
 on utilise la suite de jacobsthal, notée `J`, pour savoir à quel indice de `b` il faut commencer une série.
 
@@ -224,8 +224,6 @@ J(0) = 0
 J(1) = 1
 J(n) = J(n - 1) + 2 * J(n - 2)
 ```
-
-d'où :
 
 n | J(n)
 -- | --
@@ -287,11 +285,11 @@ ll = l + z - 1
 
 # notes pour les récursions
 
-à chaque appel récursif, on lance l'algorithme sur un tableau en précisant la taille de son élément unitaire et indivisible. appelons cette taille `n`.
+à chaque appel récursif, on lance l'algorithme sur un tableau en précisant la taille de son élément unitaire. appelons cette taille `n`.
 
-au début, on lance l'algorithme avec n = 1. un élément a donc une taille de 1, c'est à dire que c'est un unique nombre.
+au début, on lance l'algorithme avec n = 1. un élément a donc une taille de 1 (c'est un unique nombre).
 
-au début de l'étape 2, il faut relancer l'algorithme en doublant `n`. ainsi, au deuxième niveau récursif, un élément unitaire sera composé de 2 nombres. les nombres qui composent un élément sont inséparables, ils bougent tous ensemble à chaque fois.
+au début de l'étape 2, il faut relancer l'algorithme en doublant `n`. ainsi, au deuxième niveau récursif, un élément unitaire sera composé de 2 nombres. les nombres qui composent un élément sont inséparables, ils bougent tous ensemble (dans le cas où on veut insérer l'élément par exemple).
 
 ainsi, pour itérer sur les éléments d'un tableau, il faut avancer de `n` cases à chaque fois. et pour un élément d'indice `iE`, la valeur qu'il faut utiliser pour le tri (que j'appelle la valeur de tête) se situe à `iE + n - 1` (c'est la valeur du grand, donc elle est à la fin de l'élément).
 
