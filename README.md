@@ -20,7 +20,7 @@ et si on ordonne les paires de T, on obtient : 2, 4, 3, 6, 5
 
 (on ordonne juste les éléments qui composent chaque paire, mais pas encore les paires entre elles.)
 
-(on ne touche pas aux éléments solos à la fin de T.)
+(on ne touche pas aux nombres solos à la fin de T.)
 
 ### définition
 
@@ -64,7 +64,7 @@ a = 2, 4, 6
 
 b = 2, 3, 5
 
-(si il restait un nombre qui n'est sont pas des paires, comme c'est un petit, il sera à la fin de b.)
+(si il reste un élément qui n'est pas appairé, on considère que c'est un petit et on le met dans `b`.)
 
 ## la recherche dichotomique
 
