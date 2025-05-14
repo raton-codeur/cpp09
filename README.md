@@ -78,7 +78,7 @@ pour a = [a[0], a[1], a[2], a[3], ..., a[n - 1]], l'indice auquel il faut insér
 
 on pourrait parcourir `a` et compter le nombre d'éléments qui sont inférieurs à `b`, mais cela reviendrait à faire jusqu'à n comparaisons (dans le cas où `b` doit être inséré à la fin de `a`). avec une recherche dichotomique, on fera seulement log2(n) comparaisons maximum.
 
-appelons cet algorithme `findI`. il prend en arguments :
+appelons cet algorithme `find`. il prend en arguments :
 - `a`
 - `i`
 - `j`
@@ -92,8 +92,8 @@ cas de base : i == j
 cas de propagation
 	on compare b à l'élément central de a[i:j]. appelons c l'indice de cet élément central.
 	c = i + (j - i) / 2
-	si b < a[c] on renvoie findI(a, i, c, b)
-	si b > a[c] on renvoie findI(a, c + 1, j, b)
+	si b < a[c] on renvoie find(a, i, c, b)
+	si b > a[c] on renvoie find(a, c + 1, j, b)
 ```
 
 ### exemple simple
@@ -101,30 +101,30 @@ cas de propagation
 a = [2, 9, 13, 21]
 
 ```
-findI(a, 0, 4, 8)
+find(a, 0, 4, 8)
 	taille de a[0:4] = 4 - 0 = 4
 	c = 0 + 4 / 2 = 2
 	a[2] = 13
-	8 < 13 donc on renvoie findI(a, 0, 2, 8)
+	8 < 13 donc on renvoie find(a, 0, 2, 8)
 		taille de a[0:2] = 2 - 0 = 2
 		c = 0 + 2 / 2 = 1
 		a[1] = 9
-		8 < 9 donc on renvoie findI(a, 0, 1, 8)
+		8 < 9 donc on renvoie find(a, 0, 1, 8)
 			taille de a[0:1] = 1
 			c = 0 + 1 / 2 = 0
 			a[0] = 2
-			8 > 2 donc on renvoie findI(a, 1, 1, 8)
+			8 > 2 donc on renvoie find(a, 1, 1, 8)
 					cas de base donc on renvoie 1
 
-findI(a, 0, 4, 10)
+find(a, 0, 4, 10)
 	taille de a[0:4] = 4
 	c = 2
 	a[2] = 13
-	10 < 13 donc on renvoie findI(a, 0, 2, 10)
+	10 < 13 donc on renvoie find(a, 0, 2, 10)
 		taille de a[0:2] = 2
 		c = 0 + 2 / 2 = 1
 		a[1] = 9
-		10 > 9 donc on renvoie findI(a, 2, 2, 10)
+		10 > 9 donc on renvoie find(a, 2, 2, 10)
 			cas de base donc on renvoie 2
 ```
 
