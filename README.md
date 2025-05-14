@@ -1,8 +1,6 @@
 # comprendre le tri par fusion-insertion
 
-ceci est une section en travaux car j'ai fait une petite erreur de logique :/
-
-voir la version précédente plus bas !
+j'avais fait une petite erreur de logique et c'était plus abstrait mais vous pouvez encore lire la première version plus bas 😉
 
 ---
 
