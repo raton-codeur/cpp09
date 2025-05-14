@@ -59,7 +59,7 @@ PmergeMe::PmergeMe(int argc, char** argv)
 		checkArg(argv[i]);
 		_arg.push_back(std::atoi(argv[i]));
 	}
-	if has_duplicates(_arg);
+	if (has_duplicates(_arg))
 		throw std::invalid_argument("duplicate values detected");
 }
 

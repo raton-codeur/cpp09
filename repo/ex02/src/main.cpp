@@ -2,9 +2,9 @@
 
 bool isSorted(const Vector& v)
 {
-    for (size_t i = 0; i < vec.size() - 1; ++i)
+    for (size_t i = 0; i < v.size() - 1; ++i)
 	{
-        if (vec[i + 1] < vec[i])
+        if (v[i + 1] < v[i])
             return false;
     }
     return true;
@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 		print(v);
 		std::cout << "time to process a range of " << v.size() << " elements with std::vector<int> : " << time1 << " us" << std::endl;
 		std::cout << "time to process a range of " << d.size() << " elements with std::deque<int> : " << time2 << " us" << std::endl;
-		if (isSorted(v.begin(), v.end()) && isSorted(d.begin(), d.end()))
+		if (isSorted(v))
 			std::cout << "okkkkkkkkk" << std::endl;
 
 	}
