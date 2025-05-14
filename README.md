@@ -291,7 +291,7 @@ au début, on lance l'algorithme avec n = 1. un élément a donc une taille de 1
 
 au début de l'étape 2, il faut relancer l'algorithme en doublant `n`. ainsi, au deuxième niveau récursif, un élément unitaire sera composé de 2 nombres. les nombres qui composent un élément sont inséparables, ils bougent tous ensemble (dans le cas où on veut insérer l'élément par exemple).
 
-ainsi, pour itérer sur les éléments d'un tableau, il faut avancer de `n` cases à chaque fois. et pour un élément d'indice `iE`, la valeur qu'il faut utiliser pour le tri (que j'appelle la valeur de tête) se situe à `iE + n - 1` (c'est la valeur du grand, donc elle est à la fin de l'élément).
+ainsi, pour itérer sur les éléments d'un tableau, il faut avancer avec un pas de `n`. et pour un élément d'indice `iE`, la valeur qu'il faut utiliser pour le tri (que j'appelle la valeur de tête) se situe à `iE + n - 1` (c'est la valeur du grand précédent, donc elle est à la fin de l'élément).
 
 un niveau récursif s'occupe de trier tous les éléments qui composent le début du tableau, qu'ils soient tous appairés ou qu'il y en ait un en plus qui ira dans `b` et qui sera inséré aussi. par contre, tout ce qui n'a pas assez de nombres pour former un élément doit rester tel quel à la fin du tableau !
 
