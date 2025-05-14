@@ -1,5 +1,3 @@
-#include "PmergeMe.hpp"
-
 template <typename T>
 void print(T& t, size_t n)
 {
@@ -31,40 +29,40 @@ void print(T& t, size_t n)
 }
 
 template <typename T>
-static void swapElements(T& v, size_t i, size_t j, size_t n)
+static void swapElements(T& t, size_t i, size_t j, size_t n)
 {
 	for (size_t k = 0; k < n; ++k)
-		std::swap(v[i + k], v[j + k]);
+		std::swap(t[i + k], t[j + k]);
 }
 
 template <typename T>
-static void checkPairs(T& v, size_t n)
+static void checkPairs(T& t, size_t n)
 {
-	size_t iR = v.size() - v.size() % (2 * n);
+	size_t iR = t.size() - t.size() % (2 * n);
 	for (size_t iE = 0; iE + n < iR; iE += 2 * n)
 	{
-		if (v[iE + n - 1] > v[iE + 2 * n - 1])
-			swapElements(v, iE, iE + n, n);
+		if (t[iE + n - 1] > t[iE + 2 * n - 1])
+			swapElements(t, iE, iE + n, n);
 	}
 }
 
 template <typename T>
-static void initAB(const T& v, T& a, T& b, size_t iR, size_t n)
+static void initAB(const T& t, T& a, T& b, size_t iR, size_t n)
 {
 	for (size_t i = 0; i < n; ++i)
-		a.push_back(v[i]);
+		a.push_back(t[i]);
 	
 	for (size_t iE = 0, k = 0; iE < iR; iE += n, ++k)
 	{
 		if (k % 2)
 		{
 			for (size_t j = 0; j < n; ++j)
-				a.push_back(v[iE + j]);
+				a.push_back(t[iE + j]);
 		}
 		else
 		{
 			for (size_t j = 0; j < n; ++j)
-				b.push_back(v[iE + j]);
+				b.push_back(t[iE + j]);
 		}
 	}
 }
@@ -131,27 +129,22 @@ static void insertAllB(T& a, T& b, size_t iR, size_t n)
 }
 
 template <typename T>
-T sort(T& v, size_t n)
+T sort(T& t, size_t n)
 {
-	checkPairs(v, n);
+	checkPairs(t, n);
 
-	if (v.size() / (2 * n) > 1)
-		v = sort(v, n * 2);
+	if (t.size() / (2 * n) > 1)
+		t = sort(t, n * 2);
 
-	size_t iR = v.size() - v.size() % n;
+	size_t iR = t.size() - t.size() % n;
+
+	if (t.size() / n <= 2)
+		return t;
+
 	T a, b;
-	if (iR / n <= 2)
-	{
-		for (size_t i = 0; i < v.size(); ++i)
-			a.push_back(v[i]);
-	}
-	else
-	{
-		initAB(v, a, b, iR, n);
-		insertAllB(a, b, iR, n);
-		for (size_t i = iR; i < v.size(); ++i)
-			a.push_back(v[i]);
-	}
-
+	initAB(t, a, b, iR, n);
+	insertAllB(a, b, iR, n);
+	for (size_t i = iR; i < t.size(); ++i)
+		a.push_back(t[i]);
 	return a;
 }

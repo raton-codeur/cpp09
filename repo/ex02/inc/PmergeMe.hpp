@@ -23,7 +23,7 @@ class PmergeMe
 				PmergeMe();
 				PmergeMe(const PmergeMe& other);
 	PmergeMe&	operator=(const PmergeMe& other);
-	
+
 	public :
 		PmergeMe(int argc, char** argv);
 		~PmergeMe();

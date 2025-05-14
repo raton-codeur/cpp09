@@ -1,7 +1,5 @@
 #include "PmergeMe.hpp"
 
-
-
 int main(int argc, char** argv)
 {
 	clock_t	start, end;
@@ -25,8 +23,8 @@ int main(int argc, char** argv)
 		p.printArg();
 		std::cout << "after : ";
 		print(v);
-		std::cout << "time to process a range of " << v.size() << " elements with std::vector : " << time1 << " us" << std::endl;
-		std::cout << "time to process a range of " << d.size() << " elements with std::deque : " << time2 << " us" << std::endl;
+		std::cout << "time to process a range of " << v.size() << " elements with std::vector<int> : " << time1 << " us" << std::endl;
+		std::cout << "time to process a range of " << d.size() << " elements with std::deque<int> : " << time2 << " us" << std::endl;
 	}
 	catch (const std::exception& e)
 	{
