@@ -18,19 +18,21 @@ au premier niveau récursif, on peut voir T comme étant composé des paires sui
 
 et si on ordonne les paires de T, on obtient : 2, 4, 3, 6, 5
 
-(on ne touche pas aux éléments solos à la fin de T)
+(on ordonne juste les éléments qui composent chaque paire, mais pas encore les paires entre elles.)
+
+(on ne touche pas aux éléments solos à la fin de T.)
 
 ### définition
 
 dans une paire donnée, on dit qu'on a (d'abord) un "petit" et (puis) un "grand". à ce stade, je les appelle aussi `b` pour le petit et `a` pour le grand.
 
-### notation
+### notation pour les schémas
 
 pour deux nombres `a` et `b`, `b -> a` signifie que b < a.
 
 ## étape 2 : trier les paires par ordre croissant selon les grands
 
-cela se fait par récurrence, selon le même algorithme. en ce sens, dans un niveau récursif plus profond, ce ne sera plus des nombres qu'il faudra trier mais des paires de nombres, des paires de paires de nombres, etc. on y reviendra. pour l'instant, on va admettre que ça marche et qu'on est remonté au premier niveau récursif.
+cela se fait par récurrence, selon le même algorithme. en ce sens, dans un niveau récursif plus profond, ce ne sera plus des nombres qu'il faudra trier mais des paires de nombres, des paires de paires de nombres, etc. pour l'instant, on va admettre que ça marche et qu'on est remonté au premier niveau récursif.
 
 on va obtenir un tableau de nombres : [b0, a0, b1, a1, b2, a2, ...]
 
@@ -40,7 +42,7 @@ avec les relations d'ordre suivantes :
 
 ## étape 3 : initialiser a et b
 
-`a` et `b` désignent maintenant deux tableaux.
+`a` et `b` désignent maintenant deux nouveaux tableaux.
 
 on initialise :
 - a = [T[0], T[1], T[3], T[5], T[7], ...]
@@ -62,7 +64,7 @@ a = 2, 4, 6
 
 b = 2, 3, 5
 
-(si il reste un nombre solo, on le met dans b.)
+(si il restait un nombre qui n'est sont pas des paires, comme c'est un petit, il sera à la fin de b.)
 
 ## la recherche dichotomique
 
@@ -279,6 +281,22 @@ ll = l + z - 1
 - `z` : la taille de la série
 - `zp` : `z` précédent
 - `ll` : taille de `a` à utiliser pour faire les recherches dichotomiques au cours de la série
+
+# notes pour les récursions
+
+à chaque appel récursif, on lance l'algorithme sur un tableau en précisant la taille de son élément unitaire et indivisible. appelons cette taille `n`.
+
+au début, on lance l'algorithme avec n = 1. un élément a donc une taille de 1, c'est à dire que c'est un unique nombre.
+
+au début de l'étape 2, il faut relancer l'algorithme en doublant `n`. ainsi, au deuxième niveau récursif, un élément unitaire sera composé de 2 nombres. les nombres qui composent un élément sont inséparables, ils bougent tous ensemble à chaque fois.
+
+ainsi, pour itérer sur les éléments d'un tableau, il faut avancer de `n` cases à chaque fois. et pour un élément d'indice `iE`, la valeur qu'il faut utiliser pour le tri (que j'appelle la valeur de tête) se situe à `iE + n - 1` (c'est la valeur du grand, donc elle est à la fin de l'élément).
+
+un niveau récursif s'occupe de trier tous les éléments qui composent le début du tableau, qu'ils soient tous appairés ou qu'il y en ait un en plus qui ira dans `b` et qui sera inséré aussi. par contre, tout ce qui n'a pas assez de nombres pour former un élément doit rester tel quel à la fin du tableau !
+
+exemple avec 6 nombres (éléments entourés et flèche sur la valeur de tête) :
+
+<img src="img/a4.png" height="300px" />
 
 # ancienne version
 
