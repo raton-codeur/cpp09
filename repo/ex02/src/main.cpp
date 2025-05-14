@@ -25,6 +25,9 @@ int main(int argc, char** argv)
 		print(v);
 		std::cout << "time to process a range of " << v.size() << " elements with std::vector<int> : " << time1 << " us" << std::endl;
 		std::cout << "time to process a range of " << d.size() << " elements with std::deque<int> : " << time2 << " us" << std::endl;
+		if (std::is_sorted(v.begin(), v.end()) && std::is_sorted(d.begin(), d.end()))
+			std::cout << "okkkkkkkkk" << std::endl;
+
 	}
 	catch (const std::exception& e)
 	{

@@ -39,6 +39,17 @@ static void checkArg(const char* s)
 		throw std::invalid_argument("\"" + std::string(s) + "\" : int overflow");
 }
 
+static bool has_duplicates(Vector v)
+{
+	std::sort(v.begin(), v.end());
+	for (size_t i = 0; i < v.size() - 1; ++i)
+	{
+		if (v[i] == v[i + 1])
+			return true;
+	}
+	return false;
+}
+
 PmergeMe::PmergeMe(int argc, char** argv)
 {
 	if (argc == 1)
@@ -48,8 +59,7 @@ PmergeMe::PmergeMe(int argc, char** argv)
 		checkArg(argv[i]);
 		_arg.push_back(std::atoi(argv[i]));
 	}
-	std::unordered_set<int> set(_arg.begin(), _arg.end());
-	if (set.size() != _arg.size())
+	if has_duplicates(_arg);
 		throw std::invalid_argument("duplicate values detected");
 }
 
