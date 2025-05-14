@@ -132,25 +132,28 @@ find(a, 0, 4, 10)
 
 on cherche le nombre de comparaisons maximales nécessaires pour insérer une valeur dans un tableau trié de n éléments. appelons ça cmp(n).
 
-n | cmp(n)
--- | --
-2 | 2
-3 | 2
-4 | 3
-5 | 3
-6 | 3
-7 | 3
-8 | 4
-9 | 4
-10 | 4
-11 | 4
-12 | 4
-13 | 4
-14 | 4
-15 | 4
-16 | 5
-17 | 5
-... | ...
+n | note | cmp(n)
+-- | -- | --
+1 | 1 | 1
+2 | 2 1 | 2
+3 | 2 1 2 | 2
+4 | 3 2 1 2 | 3
+5 | 3 2 1 3 2 | 3
+6 | 3 2 3 1 3 2 | 3
+7 | 3 2 3 1 3 2 3 | 3
+8 | 4 3 2 3 1 3 2 3 | 4
+9 | 4 3 2 3 1 4 3 2 3 | 4
+10 | 4 3 2 4 3 1 4 3 2 3 | 4
+11 | … | 4
+12 | … | 4
+13 | … | 4
+14 | … | 4
+15 | … | 4
+16 | … | 5
+17 | … | 5
+… | …
+
+dans `note`, je numérote toutes les comparaisons associées aux éléments du tableau. par exemple pour n = 2, la première comparaison est avec le 2e élément, puis avec le premier. pour n = 3, la première comparaison est avec l'élément central, et la deuxième est soit avec la première valeur, soit avec la dernière. cmp(n) est la plus haute valeur listée dans `note`.
 
 on remarque que cmp(n) change à chaque puissance de 2.
 
