@@ -123,7 +123,6 @@ void BitcoinExchange::parseInput()
 	}
 	if (line != "date | value")
 		throw std::invalid_argument("wrong header in input file : expecting \"date | value\"");
-
 	while (std::getline(_inputStream, line))
 	{
 		if (line.empty())

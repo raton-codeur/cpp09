@@ -1,15 +1,5 @@
 #include "PmergeMe.hpp"
 
-bool isSorted(const Vector& v)
-{
-	for (size_t i = 0; i < v.size() - 1; ++i)
-	{
-		if (v[i + 1] < v[i])
-			return false;
-	}
-	return true;
-}
-
 int main(int argc, char** argv)
 {
 	clock_t	start, end;

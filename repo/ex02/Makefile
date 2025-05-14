@@ -1,5 +1,5 @@
 NAME = PmergeMe
-FLAGS = -Wall -Wextra -Werror -std=c++98 -Iinc -fsanitize=address -g3
+FLAGS = -Wall -Wextra -Werror -std=c++98 -Iinc
 SRCS = $(addprefix src/, \
 	main.cpp \
 	PmergeMe.cpp \
